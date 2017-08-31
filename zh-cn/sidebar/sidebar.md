@@ -1,14 +1,15 @@
 
 - **关于作者**
-     - [个人基本信息](/use/home)
+     - [个人信息](/use/home)
 - **知识体系**     
-    - **Web**
+    - [**Web**](/information/web)
     - **Java**
-      - Java基础
+      - [**Java基础**](/information/java/java_base)
       - Spring应用
     - **数据处理**  
-      - 数据库 
-       - **中间件**
+       - **数据库**
+          - [**Mysql**](/information/database/mysql) 
+    - **中间件**
     - **服务相关** 
       - Docker
       - Jenkins  
