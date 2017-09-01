@@ -1,4 +1,4 @@
-package com.runcoding;
+package com.runcoding.handler.configurer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
