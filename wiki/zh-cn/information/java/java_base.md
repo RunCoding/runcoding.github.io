@@ -188,5 +188,8 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
  - <a href='/#/information/java/java_thread?id=%e7%ba%bf%e7%a8%8b%e7%9a%845%e7%a7%8d%e7%8a%b6%e6%80%81'>`线程的5种状态`</a>
  - <a href='/#/information/java/java_thread?id=%e5%90%8c%e6%ad%a5%e6%93%8d%e4%bd%9c'>`同步操作`</a>
  - <a href='/#/information/java/java_thread?id=interrupt%e7%9b%b8%e5%85%b3'>`interrupt相关`</a>
+ 
 ### 算法
-
+<a href='https://itimetraveler.github.io/2017/07/18/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B8%8Ejava%E5%AE%9E%E7%8E%B0/'>
+**`八大排序算法总结与java实现`**
+</a>

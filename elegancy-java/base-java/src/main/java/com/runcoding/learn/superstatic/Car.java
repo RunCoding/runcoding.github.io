@@ -1,4 +1,4 @@
-package com.runcoding.base.superstatic;
+package com.runcoding.learn.superstatic;
 
 public class Car {
 
