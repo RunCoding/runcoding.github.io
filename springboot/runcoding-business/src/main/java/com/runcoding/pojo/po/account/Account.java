@@ -2,10 +2,12 @@ package com.runcoding.pojo.po.account;
 
 import java.io.Serializable;
 
+
 /**
  * @desc 账号
  */
 public class Account implements Serializable {
+
 
     private Long id;
 
