@@ -10,4 +10,4 @@
  
 ### 联系方式
 
-<img  src="dist/use/wechat.jpeg" style="max-width: 300px;">
+<img  src="wiki/dist/use/wechat.jpeg" style="max-width: 300px;">

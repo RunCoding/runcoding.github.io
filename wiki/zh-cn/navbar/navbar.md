@@ -1,3 +1,3 @@
 - 更多
   - [新浪博客](http://blog.sina.com.cn/u/1803968562)  
-  - [微信](https://runcoding.github.io/dist/use/wechat.jpg) 
+  - [微信](https://runcoding.github.io/wiki/dist/use/wechat.jpg) 
