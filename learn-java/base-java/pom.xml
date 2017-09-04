@@ -6,6 +6,18 @@
     <groupId>com.runcoding</groupId>
     <artifactId>base-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <name>runcoding-base-java</name>
 
@@ -13,6 +25,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
         <com.alibaba.fastjson.version>1.2.32</com.alibaba.fastjson.version>
+        <!-- slf4j -->
+        <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
     <dependencies>
@@ -31,6 +45,12 @@
             <version>${junit.version}</version>
         </dependency>
 
+        <!--slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
 
     </dependencies>
 </project>

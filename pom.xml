@@ -11,12 +11,12 @@
 	<modules>
 
 		<!-- Java 基础Demo -->
-		<module>elegancy-java/base-java</module>
+		<module>learn-java/base-java</module>
 
 		<!-- Spring Boot 集成 restful -->
-		<module>springboot/restful</module>
-		<module>springboot/runcoding-core</module>
-		<module>springboot/runcoding-business</module>
+		<module>learn-java/springboot/restful</module>
+		<module>learn-java/springboot/runcoding-core</module>
+		<module>learn-java/springboot/runcoding-business</module>
 
 
 

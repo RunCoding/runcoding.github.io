@@ -5,6 +5,7 @@
     - [**Web**](/information/web)
     - **Java**
       - [**Java基础**](/information/java/java_base)
+      - [**Java8**](/information/java/java8)
       - Spring应用
     - **数据处理**  
        - **数据库**
