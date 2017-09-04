@@ -6,6 +6,7 @@
     - **Java**
       - [**Java基础**](/information/java/java_base)
       - [**Java集合**](/information/java/java_collection)
+      - [**Java8重新认识HashMap**](/information/java/java8_hashmap)
       - [**Java8**](/information/java/java8)
       - Spring应用
     - **数据处理**  

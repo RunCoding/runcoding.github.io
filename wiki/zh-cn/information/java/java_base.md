@@ -38,6 +38,54 @@
 **`大小：`**1MB=1024KB=1024×1024B=1048576B(字节)
 2^10 Byte = 1024 Byte = 1KB<br>
 2^30 Byte = (2^10)^3 Byte = 1024 * 1024 * 1024 Byte = 1GB
+
+##### Integer变量相等 == 
+```java
+public  class TestIntegerCache {
+    public static void main(String[] args){
+        Integer i1 = Integer.valueOf(100);//Integer i3 = 100;
+        Integer i2 = Integer.valueOf(100);//Integer i4 = 100;
+        System.out.println(i1 == i2); //true
+        Integer i3 = Integer.valueOf(1000);//Integer i5 = 1000;
+        Integer i4 = Integer.valueOf(1000);//Integer i6 = 1000;
+        System.out.println(i3 == i4); //false
+        /**
+         Integer 在valueOf时缓存了[-128~127]
+         public static Integer valueOf(int i) {
+            if (i >= IntegerCache.low && i <= IntegerCache.high)
+                return IntegerCache.cache[i + (-IntegerCache.low)];
+            return new Integer(i);
+         }
+         * */
+    }
+}
+```
+##### String常量相等（==）
+```java
+ public class TestString {
+     public static void main(String[] args) {
+         String s3 = "s";
+         String s4 = "s";
+         System.out.println(s3==s4); //true
+ 
+         String s5 = "RunningCoding";
+         String s6 = "Running"+"Coding";
+         System.out.println(s5==s6); //true
+ 
+         String s1 = new String("s");
+         String s2 = new String("s");
+         System.out.println(s1==s2); //false
+         System.out.println(s1.intern()==s2.intern()); //true
+ 
+         /***
+          * String s = “s” 是常量池中创建一个对象”s”，所以是true。
+          * 而String s = new String（”s”）在堆上面分配内存创建一个String对象，栈放了对象引用。
+          */
+     }
+ }
+```
+<img src='http://img.blog.csdn.net/20170615170007540'>
+
 #### 修饰符
 - 访问限定修饰符
 
@@ -231,7 +279,7 @@ Java中有三种移位运算符
 Java语言中类的加载、连接和初始化过程都是在程序运行期间完成的，领Java具备高度的灵活性。<br>
 
 _类加载的过程_：`加载、连接（验证、准备、解析）、初始化`。<br>
-
+<a href='https://itimetraveler.github.io/2017/06/02/%E8%AF%A6%E8%A7%A3Java%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/'>详细介绍</a>
 `加载`： 通过一个类的名字获取此类的二进制字节流（PS：不限于从文件中读取）；<br>
         将这个字节流代表的静态存储结构转换为方法区的运行时结构（由具体的虚拟机自己定义）；<br>
        在内存中生成一个java.lang.Class对象，作为方法区这个类的各种数据结构的访问入口。<br>
