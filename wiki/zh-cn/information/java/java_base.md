@@ -191,7 +191,8 @@ public class Bus extends  Car {
   
 #### 面向对象的三大特性
 `封装`、`继承`、`多态`
-*封装**：
+
+**封装**：
 
 1.概念：就是把对象的属性和操作（或服务）结合为一个独立的整体，并尽可能隐藏对象的内部实现细节。
 
@@ -218,6 +219,77 @@ public class Bus extends  Car {
 1. Java通过方法重写和方法重载实现多态 
 2. 方法重写是指子类重写了父类的同名方法 
 3. 方法重载是指在同一个类中，方法的名字相同，但是参数列表不同   
+
+#### PECS原则(泛型中 extends 和 super 的区别)
+<a href='https://itimetraveler.github.io/2016/12/27/%E3%80%90Java%E3%80%91%E6%B3%9B%E5%9E%8B%E4%B8%AD%20extends%20%E5%92%8C%20super%20%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F/'>来源：泛型中 extends 和 super 的区别</a>
+- <? extends T>：是指 “上界通配符（Upper Bounds Wildcards）”
+- <? super T>：是指 “下界通配符（Lower Bounds Wildcards）”
+
+##### 什么是PECS（Producer Extends Consumer Super）原则
+  频繁往外读取内容的，适合用上界Extends。
+  经常往里插入的，适合用下界Super。
+##### 例子
+- Plate<？ extends Fruit> 覆盖下图中蓝色的区域.
+- Plate<？ super Fruit>覆盖下图中红色的区域
+<img src='https://itimetraveler.github.io/gallery/java-genericity/lowerBounds.png'>
+<img src='https://itimetraveler.github.io/gallery/java-genericity/upperBounds.png'>
+
+```` java
+//Lev 1
+class Food{}
+//Lev 2
+class Fruit extends Food{} 
+//Lev 3
+class Apple extends Fruit{}
+class Banana extends Fruit{} 
+//Lev 4
+class RedApple extends Apple{}
+class GreenApple extends Apple{}
+
+public class Plate<T> {
+
+    private T item;
+
+    public Plate(T t){
+        item=t;
+    }
+
+    public T getItem() {
+        return item;
+    }
+
+    public void setItem(T item) {
+        this.item = item;
+    }
+    public static void main(String[] args) {
+            /**1. 上界<? extends T>不能往里存，只能往外取*/
+            Plate<? extends Fruit> p = new Plate<Apple>(new Apple());
+    
+            //不能存入任何元素
+            p.setItem(new Fruit());    //Error
+            p.setItem(new Apple());    //Error
+    
+            //读取出来的东西只能存放在Fruit或它的基类里。
+            Object obj   = p.getItem(); //顶级父类(超类)
+            Food  food   = p.getItem(); //父类
+            Fruit fruit  = p.getItem(); //上界类
+            Apple apple  = p.getItem(); //本类Error
+    
+    
+            /**2. 下界<? super T>不影响往里存，但往外取只能放在Object对象里*/
+            Plate<? super Fruit> pSuper = new Plate<Fruit>(new Fruit());
+            //存入元素正常
+            pSuper.setItem(new Fruit());
+            pSuper.setItem(new Apple());
+    
+            //读取出来的东西只能存放在Object类里。
+            Apple appleS  = pSuper.getItem();    //Error
+            Fruit fruitS  = pSuper.getItem();    //Error
+            Object objS = p.getItem();
+    }
+}
+
+````
   
 #### Java 对象引用
 
@@ -344,6 +416,20 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 第一点：可变和适用范围。String对象是不可变的，而StringBuffer和StringBuilder是可变字符序列。每次对String的操作相当于生成一个新的String对象，而对StringBuffer和StringBuilder的操作是对对象本身的操作，而不会生成新的对象，所以对于频繁改变内容的字符串避免使用String，因为频繁的生成对象将会对系统性能产生影响。
 
 第二点：线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。
+
+####  受检查异常和运行时异常**
+![](http://uploadfiles.nowcoder.com/images/20151010/214250_1444467985224_6A144C1382BBEF1BE30E9B91BC2973C8)
+
+- 粉红色的是受检查的异常(checked exceptions),其必须被try...catch语句块所捕获, 或者在方法签名里通过throws子句声明。受检查的异常必须在编译时被捕捉处理,命名为Checked Exception是因为Java编译器要进行检查, Java虚拟机也要进行检查, 以确保这个规则得到遵守。 
+
+常见的checked exception：ClassNotFoundException IOException FileNotFoundException EOFException
+
+- 绿色的异常是运行时异常(runtime exceptions), 需要程序员自己分析代码决定是否捕获和处理,比如空指针,被0除... 
+
+- 常见的runtime exception：NullPointerException ArithmeticException ClassCastException IllegalArgumentException IllegalStateException IndexOutOfBoundsException NoSuchElementException 
+
+- 而声明为Error的，则属于严重错误，如系统崩溃、虚拟机错误、动态链接失败等，这些错误无法恢复或者不可能捕捉，将导致应用程序中断，Error不需要捕获。 
+
 
 ### 集合
  - <a href='/#/information/java/java_collection'>`Java集合`</a>

@@ -8,10 +8,9 @@
       - [**Java集合**](/information/java/java_collection)
       - [**Java8重新认识HashMap**](/information/java/java8_hashmap)
       - [**Java8**](/information/java/java8)
-      - Spring应用
-    - **数据处理**  
-       - **数据库**
-          - [**Mysql**](/information/database/mysql) 
+      - [**Spring应用**](/information/spring/spring_info)
+    - **数据处理**   
+      - [**Mysql**](/information/database/mysql) 
     - **中间件**
     - **服务相关** 
       - Docker
