@@ -432,7 +432,7 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 
 
 ### 集合
- - <a href='/learn-java/wiki/index.html/#/information/java/java_collection'>`Java集合`</a>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_collection'>`Java集合`</a>
  
 ### GC
  - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=jvm%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b'>`JVM内存模型`</a>
@@ -444,8 +444,10 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
  - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=gc%e5%ae%89%e5%85%a8%e7%82%b9gc%e4%bc%9a%e4%ba%a7%e7%94%9f%e5%81%9c%e9%a1%bf'>
  `GC安全点(GC会产生停顿)`
  </a>
+ 
 ### 设计模式
-
+  - <a href='/learn-java/wiki/index.html#/information/java/design_pattern'>`Java设计模式`</a>
+  
 ### 线程&并发 
 
 #### 创建线程
