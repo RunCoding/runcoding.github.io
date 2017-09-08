@@ -432,28 +432,50 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 
 
 ### 集合
- - <a href='/#/information/java/java_collection'>`Java集合`</a>
+ - <a href='/learn-java/wiki/index.html/#/information/java/java_collection'>`Java集合`</a>
  
 ### GC
- - <a href='/#/information/java/java_gc?id=jvm%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b'>`JVM内存模型`</a>
- - <a href='/#/information/java/java_gc?id=java%e8%bf%90%e8%a1%8c%e6%97%b6%e6%95%b0%e6%8d%ae%e5%8c%ba'>`Java运行时数据区`</a>
- - <a href='/#/information/java/java_gc?id=%e5%9e%83%e5%9c%be%e6%94%b6%e9%9b%86%e7%ae%97%e6%b3%95'>`垃圾收集算法`</a>
- - <a href='/#/information/java/java_gc?id=%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%8f%82%e6%95%b0%e8%ae%be%e7%bd%ae'>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=jvm%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b'>`JVM内存模型`</a>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=java%e8%bf%90%e8%a1%8c%e6%97%b6%e6%95%b0%e6%8d%ae%e5%8c%ba'>`Java运行时数据区`</a>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=%e5%9e%83%e5%9c%be%e6%94%b6%e9%9b%86%e7%ae%97%e6%b3%95'>`垃圾收集算法`</a>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%8f%82%e6%95%b0%e8%ae%be%e7%bd%ae'>
  `虚拟机参数设置`
  </a>
- - <a href='/#/information/java/java_gc?id=gc%e5%ae%89%e5%85%a8%e7%82%b9gc%e4%bc%9a%e4%ba%a7%e7%94%9f%e5%81%9c%e9%a1%bf'>
+ - <a href='/learn-java/wiki/index.html#/information/java/java_gc?id=gc%e5%ae%89%e5%85%a8%e7%82%b9gc%e4%bc%9a%e4%ba%a7%e7%94%9f%e5%81%9c%e9%a1%bf'>
  `GC安全点(GC会产生停顿)`
  </a>
 ### 设计模式
 
-### 线程&并发
- - <a href='/#/information/java/java_thread?id=%e5%88%9b%e5%bb%ba%e7%ba%bf%e7%a8%8b'>`创建线程`</a>
- - <a href='/#/information/java/java_thread?id=%e7%ba%bf%e7%a8%8b%e7%9a%845%e7%a7%8d%e7%8a%b6%e6%80%81'>`线程的5种状态`</a>
- - <a href='/#/information/java/java_thread?id=%e5%90%8c%e6%ad%a5%e6%93%8d%e4%bd%9c'>`同步操作`</a>
- - <a href='/#/information/java/java_thread?id=interrupt%e7%9b%b8%e5%85%b3'>`interrupt相关`</a>
- 
+### 线程&并发 
+
+#### 创建线程
+
+-   继承Thread类,并重写了 run() 方法。
+-   实现Runnable接口,并重写了 run() 方法。
+#### 线程的5种状态
+- 新建状态（New）:线程对象被创建后，就进入了新建状态。eg，Thread = new Thread();
+- 就绪状态（Runnable）:又称可执行状态。线程对象创建后调用了start() 方法启动线程
+- 运行状态（Running）:线程获取CPU进行执行。只能从就绪状态进入运行状态。
+- 阻塞状态（Blocked）:因某种原因放弃CPU使用权，暂时停止运行。原因有三种：<br>
+等待阻塞 --> 通过调用线程的wait()或sleep()或join()方法，让线程等待某工作完成。<br>
+同步阻塞 --> 线程在获取synchronized同步锁失败（被其他线程占用）<br>
+其他阻塞 --> 通过调用线程的发出了I/O请求时，线程会进入同步阻塞状态<br>
+- 死亡状态（Dead）:线程执行完了或异常退出了run()方法。结束生命周期<br>
+<img src="/dist/java/thread_run.png" >
+
+#### 同步操作
+- CountDownLatch 通常用来使主线程等待其他线程执行完再执行所用到
+- ReentrantLock 并发时，它增加了一些synchronized没有的方法，更方便管理
+- Synchronized 简单的同步就用这个吧
+
+#### interrupt相关
+- 当某个线程调用了interrupt()方法后，相当于给该线程打上了一个中断标志，如果线程正好处于阻塞状态，会直接抛出InterruptedException 异常
+- interrupted()方法用来检测“当前线程”的中断状态，且会将中断状态标志清除。
+- isInterrupted()方法用来检测“this”的中断状态，且不会改变线程的状态标志。<br>
+
+ 获取线程终端状态 要用Thread.currentThread().isInterrupted() 比较标准
 ### 算法
-- <a href='/#/information/java/java_algorithm.md'>
+- <a href='/learn-java/wiki/index.html#/information/java/java_algorithm.md'>
 **`算法整理`**
 </a>
 -  <a href='https://itimetraveler.github.io/2017/07/18/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%E4%B8%8Ejava%E5%AE%9E%E7%8E%B0/'>

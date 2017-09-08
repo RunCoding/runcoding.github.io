@@ -17,6 +17,8 @@
 		<module>learn-java/springboot/restful</module>
 		<module>learn-java/springboot/runcoding-core</module>
 		<module>learn-java/springboot/runcoding-business</module>
+		<!-- 当当分库分表插件 -->
+		<module>learn-java/spring-mvc/runcoding-shardingjdbc</module>
 
 
 
