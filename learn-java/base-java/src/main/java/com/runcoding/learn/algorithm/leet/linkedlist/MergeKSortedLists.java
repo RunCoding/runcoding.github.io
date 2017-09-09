@@ -1,4 +1,5 @@
-package com.runcoding.learn.algorithm.leet.linkedlist;// Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+package com.runcoding.learn.algorithm.leet.linkedlist;
+// Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
 import com.runcoding.learn.algorithm.leet.ListNode;
 
@@ -19,16 +20,13 @@ public class MergeKSortedLists {
 
         if (lists==null||lists.length==0) return null;
         
-        PriorityQueue<ListNode> queue= new PriorityQueue<ListNode>(lists.length,new Comparator<ListNode>(){
-            @Override
-            public int compare(ListNode o1,ListNode o2){
-                if (o1.val<o2.val)
-                    return -1;
-                else if (o1.val==o2.val)
-                    return 0;
-                else 
-                    return 1;
-            }
+        PriorityQueue<ListNode> queue= new PriorityQueue<>(lists.length, (o1, o2) -> {
+            if (o1.val<o2.val)
+                return -1;
+            else if (o1.val==o2.val)
+                return 0;
+            else
+                return 1;
         });
         
         ListNode dummy = new ListNode(0);

@@ -18,7 +18,7 @@ public class PalindromeLinkedList {
         
         if(head == null || head.next == null) return true;
         
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
         
         ListNode fast = head;
         ListNode slow = head;

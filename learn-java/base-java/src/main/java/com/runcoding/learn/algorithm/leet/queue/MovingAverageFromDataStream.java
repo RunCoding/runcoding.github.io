@@ -26,7 +26,7 @@ public class MovingAverageFromDataStream {
     public MovingAverageFromDataStream(int size) {
         
         this.maxSize = size;
-        window = new LinkedList<Integer>();
+        window = new LinkedList<>();
  
     }
     
