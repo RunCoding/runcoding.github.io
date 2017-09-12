@@ -1,0 +1,5 @@
+- resolver    分解器
+- handler     处理器
+- dispatcher  分配器、调度器
+- adapter     适配器
+- repository  容器、仓库

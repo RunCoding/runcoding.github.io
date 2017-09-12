@@ -3,6 +3,8 @@
      - [个人信息](/use/home)
 - **知识体系**     
     - [认识java](/information/learning)
+    - [人丑多读书](/information/books)
+    - [技术牛人](/information/oxen)
 - **意识篇**
    - 思维模式
    - 团队建设

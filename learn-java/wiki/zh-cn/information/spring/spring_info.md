@@ -1,4 +1,4 @@
-## **Spring 事务管理分为编码式和声明式的两种方式**
+ ## **Spring 事务管理分为编码式和声明式的两种方式**
 @参考来源：https://www.ibm.com/developerworks/cn/java/j-master-spring-transactional-use/index.html
 - **事务**：一组业务操作，要么全部成功，要么全部失败
 
@@ -328,8 +328,8 @@ public class TestCGlibProxy {
 ```
 
 ### Spring AOP中的关键字
-1.Joinpoint
-2.Pointcut 
+- 1.Joinpoint
+- 2.Pointcut 
 <a href='http://www.jianshu.com/p/f142b69e3823'>详细介绍</a>
  
  
