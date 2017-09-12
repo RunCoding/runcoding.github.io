@@ -13,7 +13,6 @@ public class Java8DateUtils {
 
     private static Logger  logger = LoggerFactory.getLogger(Java8DateUtils.class);
 
-
     public static void main(String[] args) {
         /**显示日期*/
         Java8DateUtils.localDate();

@@ -62,15 +62,22 @@
  -XX:NewSize=1536m    设置年轻代大小
  -XX:MaxNewSize=1536m 设置年轻代最大大小
  -XX:SurvivorRatio=22 Eden区与Survivor区的大小比值
-
--XX:+PrintGCTimeStamps 改成-XX:+PrintGCDateStamps 将相对时间改成绝对时间
--XX:-HeapDumpOnOutOfMemoryError改成-XX:+HeapDumpOnOutOfMemoryError    OOM自动导出dump信息
-
+ -XX:+PrintGCTimeStamps 改成-XX:+PrintGCDateStamps 将相对时间改成绝对时间
+ -XX:-HeapDumpOnOutOfMemoryError改成-XX:+HeapDumpOnOutOfMemoryError    OOM自动导出dump信息
  -XX:-OmitStackTraceInFastThrow  关闭此项优化可以强制打印堆栈。解决NPE没有堆栈信息问题
+ -Xloggc:/data/applogs/heap_trace.txt    GClog位置,可以使用在线工具分析  http://gceasy.io/
+                                         http://fastthread.io/   线程分析
 
--Xloggc:/data/applogs/heap_trace.txt    GClog位置,可以使用在线工具分析  http://gceasy.io/
-                                        http://fastthread.io/   线程分析
-
+-Xms / -Xmx — 堆的初始大小 / 堆的最大大小
+-Xmn — 堆中年轻代的大小
+-XX:-DisableExplicitGC — 让System.gc()不产生任何作用
+-XX:+PrintGCDetails — 打印GC的细节
+-XX:+PrintGCDateStamps — 打印GC操作的时间戳
+-XX:NewSize / XX:MaxNewSize — 设置新生代大小/新生代最大大小
+-XX:NewRatio — 可以设置老生代和新生代的比例
+-XX:PrintTenuringDistribution — 设置每次新生代GC后输出幸存者乐园中对象年龄的分布
+-XX:InitialTenuringThreshold / -XX:MaxTenuringThreshold：设置老年代阀值的初始值和最大值
+-XX:TargetSurvivorRatio：设置幸存区的目标使用率
 
 ###  GC安全点(GC会产生停顿)
 - GC会产生停顿(Sun也叫它 "Stop The World"),OoMap 存放着GC Roots,不是每条指令都生成一个。 不是任何时都能停下来进行 GC ,只有在 "特定的位置" 才可以GC 这个位置也叫安全点(Safepoint) 安全点的选定基本上是以程序"是否具有让程序长时间执行的特征"为标准选定的
