@@ -30,7 +30,7 @@
         executeScript: true,    //执行文档里的 script 标签里的脚本，只执行第一个 script (demo)。 如果 Vue 存在，则自动开启。
         noEmoji: true,          //禁用 emoji 解析。禁止后不能插入表情😊
         mergeNavbar: true,      //小屏设备下合并导航栏到侧边栏。
-        formatUpdated: '{MM}/{DD} {HH}:{mm}',//显示文档更新日期
+        formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',//显示文档更新日期
         externalLinkTarget: '_self', // default: '_blank'
         markdown: {             //markdown语法
             renderer: {
@@ -65,12 +65,15 @@
 
                 hook.beforeEach(function(md) {
                     // 每次开始解析 Markdown 内容时调用
-                    var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file
-                    var editUrl = '[编辑本章节](' + url + ')\n'
+                    var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
+                    var editUrl = '[编辑](' + url + ')\n';
+
+                    var author = '  @[联系作者](https://runcoding.github.io)';
                     return md
-                        + '\n'
+                        + '\n\n'
                         + '<br>最后更新 {docsify-updated} '
-                        + editUrl;
+                        + editUrl
+                        + author;
                 })
 
                 hook.afterEach(function(html, next) {
