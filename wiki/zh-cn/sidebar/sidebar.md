@@ -2,8 +2,9 @@
 - **关于作者**
      - [个人信息](/use/home)
 - **知识体系**     
-    - [认识java](/information/learning)
+    - [认识java](https://runcoding.github.io/learn-java/wiki/index.html)
     - [计数机网络](/information/web)
+    - [版本控制](/information/version)
     - [人丑多读书](/information/books)
     - [技术牛人](/information/oxen)
 - **意识篇**
