@@ -16,3 +16,5 @@
 - exchange    交换
 - transport   运输、传输
 - serialize   序列化
+- merger      合并
+- compiler    编译器、扩展点
