@@ -7,13 +7,20 @@
      - [Java8重新认识HashMap](/information/java/java8_hashmap)
   - Spring
      - [Spring应用](/information/spring/spring_info)
-     - [Spring MVC](/information/spring/spring_mvc)
-  
-  - [Netty应用](/information/netty/netty_info)
+     - [Spring MVC](/information/spring/spring_mvc) 
+
 - [Web](/information/web)
-- 数据处理   
+- 数据持久化   
   - [Mysql](/information/database/mysql) 
 - 中间件
+  - RPC
+    - [Netty](/information/middleware/netty/netty_info)
+    - [Dubbo](/information/middleware/dubbo/dubbo_info)
+  - 缓存
+     - [Redis](/information/cache/redis)
+     - [Memcached](/information/cache/memcached)
+- 测试
+  - [全链路压测](http://jm.taobao.org/2017/08/09/post-2017080902/)     
 - 服务相关 
   - Docker
   - Jenkins 

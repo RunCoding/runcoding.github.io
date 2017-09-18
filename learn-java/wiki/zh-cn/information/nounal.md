@@ -3,3 +3,16 @@
 - dispatcher  分配器、调度器
 - adapter     适配器
 - repository  容器、仓库
+- config      配置
+- proxy       代理
+- registry    注册
+- cluster     群集、路由
+- monitor     监控
+- protocol    协议、远程调用
+- invoker     请求
+- invocation  调用 
+- exporter    出口
+- result      结果
+- exchange    交换
+- transport   运输、传输
+- serialize   序列化
