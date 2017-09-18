@@ -19,3 +19,11 @@
 - merger      合并
 - compiler    编译器、扩展点
 - future      将来的、异步编排(java)
+- decoder     解码器
+- encoder     编码器
+- promise     预示、约定、答应
+- bootstrap   引导程序
+- block       阻塞物  
+- priority    优先权、优先顺序
+- compare     对比、比较
+- delay       延期、推迟
