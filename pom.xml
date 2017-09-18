@@ -12,6 +12,8 @@
 
 		<!-- Java 基础Demo -->
 		<module>learn-java/base-java</module>
+		<!--  Netty 4 demo -->
+		<module>learn-java/netty</module>
 
 		<!-- Spring Boot 集成 restful -->
 		<module>learn-java/springboot/restful</module>

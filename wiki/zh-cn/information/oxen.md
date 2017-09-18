@@ -2,3 +2,4 @@
 - Xurtle🐂人：https://hanxlinsist.github.io
 -  美团团队: https://tech.meituan.com
 - 笔试面试知识整理 https://hit-alibaba.github.io/interview/
+- 翻译书籍牛人：https://waylau.com/books/
