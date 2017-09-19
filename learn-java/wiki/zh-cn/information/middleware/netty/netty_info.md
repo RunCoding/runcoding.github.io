@@ -7,6 +7,6 @@
 当然最主要的原因还是Netty有许多好处,比如对非阻塞IO（NIO）的支持,比如在链上传递时最大程度的减少buffer的copy（高性能）.
 
 ### Netty查看文档
-《Netty 实战(精髓)》： https://waylau.gitbooks.io/essential-netty-in-action
-《Netty 4.x 用户指南》 https://waylau.com/netty-4-user-guide/ (https://github.com/waylau/netty-4-user-guide)
- Netty学习：https://github.com/code4craft/netty-learning
+- 《Netty 实战(精髓)》： https://waylau.gitbooks.io/essential-netty-in-action
+- 《Netty 4.x 用户指南》 https://waylau.com/netty-4-user-guide/ (https://github.com/waylau/netty-4-user-guide)
+-  Netty学习：https://github.com/code4craft/netty-learning

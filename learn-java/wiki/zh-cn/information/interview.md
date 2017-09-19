@@ -57,10 +57,10 @@ _对象直接比较_ , `对象`==`对象`,代码可以这么写，但是一般�
 #### _RPC_
 #####  Netty的工作原理
 #####  Dubbo的工作原理
-https://dubbo.gitbooks.io/dubbo-dev-book/
-https://dubbo.gitbooks.io/dubbo-user-book/
-https://dubbo.gitbooks.io/dubbo-admin-book/ 
-http://dubbo.io
+- https://dubbo.gitbooks.io/dubbo-dev-book/
+- https://dubbo.gitbooks.io/dubbo-user-book/
+- https://dubbo.gitbooks.io/dubbo-admin-book/ 
+- http://dubbo.io
 
 ### **缓存**
 #### _Redis的理解_
