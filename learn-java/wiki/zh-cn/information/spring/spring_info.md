@@ -383,6 +383,9 @@ public class TestCGlibProxy {
 - 2.Pointcut 
 <a href='http://www.jianshu.com/p/f142b69e3823'>详细介绍</a>
  
+### Spring-bean 初始化过程
+- https://zhuxingsheng.github.io/2017/05/24/spring-bean-initialization-proces/
+- https://zhuxingsheng.github.io/2017/05/24/spring-bean初始化过程/ 
  
  
  
