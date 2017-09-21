@@ -8,3 +8,4 @@ Dubbo是阿里公司开发的分布式服务RPC框架,本身使用 Dubbo 协议�
 - dubbo开发者 https://dubbo.gitbooks.io/dubbo-dev-book/
 - dubbo维护   https://dubbo.gitbooks.io/dubbo-admin-book/
 - dubbo官网   http://dubbo.io
+- dubbo序列化  https://dangdangdotcom.github.io/dubbox/serialization.html
