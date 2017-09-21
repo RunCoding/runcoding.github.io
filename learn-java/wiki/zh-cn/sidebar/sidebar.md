@@ -9,6 +9,8 @@
   - Spring
      - [Spring应用](/information/spring/spring_info)
      - [Spring MVC](/information/spring/spring_mvc) 
+  
+  - [分布式锁](http://www.jianshu.com/p/535efcab356d) 
 
 - [Web](/information/web)
 - 数据持久化   
