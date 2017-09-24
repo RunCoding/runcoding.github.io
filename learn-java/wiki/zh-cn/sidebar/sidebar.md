@@ -15,6 +15,7 @@
 - [Web](/information/web)
 - 数据持久化   
   - [Mysql](/information/database/mysql) 
+  - [Mybatis](/information/database/mybatis) 
 - 中间件
   - RPC
     - [Netty](/information/middleware/netty/netty_info)
