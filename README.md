@@ -29,3 +29,11 @@
 ###  访问项目
  localhost:3000
  
+## ***部署简单远程服务*
+### 使用heroku服务商部署
+https://dashboard.heroku.com
+### 项目
+https://github.com/runcoding/runcoding-heroku
+### 中间件
+- redis   https://app.redislabs.com
+- mongodb https://mongolab.com
