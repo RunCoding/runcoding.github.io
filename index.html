@@ -12,6 +12,7 @@
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
 </body>
 <script>
+
     window.$docsify = {
         el: '#app',                //初始化的挂载元素
         name: 'RunningGhost的历炼',//文档标题，会显示在侧边栏顶部。
@@ -67,7 +68,17 @@
                     // 每次开始解析 Markdown 内容时调用
                     var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
                     var editUrl = '[编辑](' + url + ')\n';
+                    var hrefUrl = window.location.href;
 
+                    fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer='+hrefUrl, {
+                        credentials: 'include'
+                    }) .then(function(response) {
+                        return response.json()
+                    }).then(function(json) {
+                        console.log('parsed json', json)
+                    }).catch(function(ex) {
+                        console.log('parsing failed', ex)
+                    })
                     var author = '  @[联系作者](https://runcoding.github.io)';
                     return md
                         + '\n\n'
@@ -113,6 +124,7 @@
 <script type="text/javascript" src="wiki/dist/docsify/plugins/zoom-image.js"></script>
 <!-- 代码高亮.默认支持 CSS、JavaScript 和 HTML.其他扩展 -->
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-java.min.js"></script>
+<script type="text/javascript" src="wiki/dist/fetch/fetch.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-markdown.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-sql.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-bash.min.js"></script>
