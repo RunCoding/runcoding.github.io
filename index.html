@@ -13,6 +13,22 @@
 </body>
 <script>
 
+   var runcodingBrowse =  function (dateTime) {
+        var hrefUrl = window.location.href;
+        fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + hrefUrl, {
+            credentials: 'include'
+        }).then(function (response) {
+            return response.json()
+        }).then(function (json) {
+            console.log('parsed json', json);
+            if (json.code == 0) {
+                document.getElementsByClassName('run_coding_browse_' + dateTime)[0].innerHTML = json.result;
+            }
+        }).catch(function (ex) {
+            console.log('parsing failed')
+        })
+    }
+
     window.$docsify = {
         el: '#app',                //初始化的挂载元素
         name: 'RunningGhost的历炼',//文档标题，会显示在侧边栏顶部。
@@ -68,23 +84,20 @@
                     // 每次开始解析 Markdown 内容时调用
                     var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
                     var editUrl = '[编辑](' + url + ')\n';
-                    var hrefUrl = window.location.href;
-
-                    fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer='+hrefUrl, {
-                        credentials: 'include'
-                    }) .then(function(response) {
-                        return response.json()
-                    }).then(function(json) {
-                        console.log('parsed json', json)
-                    }).catch(function(ex) {
-                        console.log('parsing failed', ex)
-                    })
                     var author = '  @[联系作者](https://runcoding.github.io)';
+                    var dateTime = new Date().getTime();
+                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">0</span>次';
+
+
+
+                    runcodingBrowse(dateTime);
+
                     return md
                         + '\n\n'
                         + '<br>最后更新 {docsify-updated} '
                         + editUrl
-                        + author;
+                        + author
+                        + browse;
                 })
 
                 hook.afterEach(function(html, next) {
