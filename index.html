@@ -15,7 +15,7 @@
 
    var runcodingBrowse =  function (dateTime) {
         var hrefUrl = window.location.href;
-        fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + hrefUrl, {
+        fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + encodeURIComponent(hrefUrl), {
             credentials: 'include'
         }).then(function (response) {
             return response.json()
