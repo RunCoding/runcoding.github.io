@@ -12,6 +12,23 @@
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
 </body>
 <script>
+
+   var runcodingBrowse =  function (dateTime) {
+        var hrefUrl = window.location.href;
+        fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + encodeURIComponent(hrefUrl), {
+            credentials: 'include'
+        }).then(function (response) {
+            return response.json()
+        }).then(function (json) {
+            console.log('parsed json', json);
+            if (json.code == 0) {
+                document.getElementsByClassName('run_coding_browse_' + dateTime)[0].innerHTML = json.result;
+            }
+        }).catch(function (ex) {
+            console.log('parsing failed')
+        })
+    }
+
     window.$docsify = {
         el: '#app',                //初始化的挂载元素
         name: 'RunningGhost的历炼',//文档标题，会显示在侧边栏顶部。
@@ -32,6 +49,7 @@
         mergeNavbar: true,      //小屏设备下合并导航栏到侧边栏。
         formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',//显示文档更新日期
         externalLinkTarget: '_self', // default: '_blank'
+        ga: 'UA-107590401-1',
         markdown: {             //markdown语法
             renderer: {
                 code: function(code, lang) {
@@ -67,13 +85,20 @@
                     // 每次开始解析 Markdown 内容时调用
                     var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
                     var editUrl = '[编辑](' + url + ')\n';
-
                     var author = '  @[联系作者](https://runcoding.github.io)';
+                    var dateTime = new Date().getTime();
+                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">0</span>次';
+
+
+
+                    runcodingBrowse(dateTime);
+
                     return md
                         + '\n\n'
                         + '<br>最后更新 {docsify-updated} '
                         + editUrl
-                        + author;
+                        + author
+                        + browse;
                 })
 
                 hook.afterEach(function(html, next) {
@@ -113,6 +138,7 @@
 <script type="text/javascript" src="wiki/dist/docsify/plugins/zoom-image.js"></script>
 <!-- 代码高亮.默认支持 CSS、JavaScript 和 HTML.其他扩展 -->
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-java.min.js"></script>
+<script type="text/javascript" src="wiki/dist/fetch/fetch.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-markdown.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-sql.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-bash.min.js"></script>
@@ -123,4 +149,13 @@
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-nginx.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-docker.min.js"></script>
 -->
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107590401-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-107590401-1');
+</script>
 </html>
