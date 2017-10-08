@@ -2,7 +2,8 @@
 - **关于作者**
      - [个人信息](/use/home)
 - **知识体系**     
-    - [认识java](https://runcoding.github.io/learn-java/wiki/index.html)
+    - [java系统](https://runcoding.github.io/learn-java/wiki/index.html)
+    - [javascript系统](https://runcoding.github.io/learn-js/wiki/index.html)
     - [计数机网络](/information/web)
     - 大数据
       - [HDFS](/information/massive_data/hadoop/hdfs)
