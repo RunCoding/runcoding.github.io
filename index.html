@@ -10,10 +10,15 @@
 </head>
 <body>
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
-</body>
+
+<!-- 甘特图
+ https://mermaidjs.github.io/flowchart.html
+ -->
+<script type="text/javascript" src="wiki/dist/mermaid/mermaid.js" ></script>
 <script>
 
    var runcodingBrowse =  function (dateTime) {
+       return;
         var hrefUrl = window.location.href;
         fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + encodeURIComponent(hrefUrl), {
             credentials: 'include'
@@ -54,8 +59,13 @@
             renderer: {
                 code: function(code, lang) {
                     var html = '';
-                    if(code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/)){
-                        html = '<div class="mermaid">' + code + '</div>';
+                    if(code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/) ||  code.match(/^mermaid/) ){
+                        var cb = function(svgGraph) {
+                            //console.log(svgGraph)
+                            code = svgGraph;
+                        }
+                        mermaid.render('mermaid_'+new Date().getTime(),code,cb)
+                        return '<div class="mermaid" >' + code + '</div>';
                     }
                     var hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup)
                     return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang + '">' + hl + '</code></pre>'
@@ -89,8 +99,6 @@
                     var dateTime = new Date().getTime();
                     var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">0</span>次';
 
-
-
                     runcodingBrowse(dateTime);
 
                     return md
@@ -110,7 +118,7 @@
 
                 hook.doneEach(function() {
                     // 每次路由切换时数据全部加载完成后调用，没有参数。
-                    // ...
+
                 })
 
                 hook.mounted(function() {
@@ -127,6 +135,7 @@
         navigator.serviceWorker.register('wiki/dist/docsify/sw.js')
     }
 </script>
+<script src="wiki/dist/zepto/zepto.min.js" ></script>
 <script src="wiki/dist/docsify/docsify.js" ></script>
 <!-- 增加文档查询 -->
 <script type="text/javascript" src="wiki/dist/docsify/plugins/search.min.js"></script>
@@ -149,13 +158,16 @@
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-nginx.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-docker.min.js"></script>
 -->
-<!-- Global Site Tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107590401-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'UA-107590401-1');
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'forest',
+        flowchart:{
+            useMaxWidth:true,
+            htmlLabels:true
+        }
+    });
 </script>
+</body>
 </html>

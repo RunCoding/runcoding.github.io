@@ -1,9 +1,11 @@
 
-- **关于作者**
-     - [个人信息](/use/home)
-- **知识体系**     
-    - [java系统](https://runcoding.github.io/learn-java/wiki/index.html)
-    - [javascript系统](https://runcoding.github.io/learn-js/wiki/index.html)
+- **关于**
+     - [个人简介](/use/home)
+     - [版本更新](/docs/changelog)
+
+- **知识体系**
+    - [Java体系](https://runcoding.github.io/learn-java/wiki/index.html)
+    - [JavaScript体系](https://runcoding.github.io/learn-js/wiki/index.html)
     - [计数机网络](/information/web)
     - 大数据
       - [HDFS](/information/massive_data/hadoop/hdfs)
@@ -15,8 +17,7 @@
     - [版本控制](/information/version)
     - [人丑多读书](/information/books)
     - [技术牛人](/information/oxen)
-- **意识篇**
+
+- **意识体系**
    - 思维模式
    - 团队建设
-- **版本更新**
-  - [版本更新](/docs/changelog)
