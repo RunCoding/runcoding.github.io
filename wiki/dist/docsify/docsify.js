@@ -463,7 +463,6 @@
 
                         var domain = window.location.protocol +"//"+window.location.host
                             content = content.replaceAll('{{baseDomain}}',domain);
-                        console.log("result.content="+content);
                         success(content, result.opt);
                     }
                 });

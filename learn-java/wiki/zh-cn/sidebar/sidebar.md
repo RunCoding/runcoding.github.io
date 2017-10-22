@@ -9,6 +9,7 @@
   - Spring
      - [Spring应用](/information/spring/spring_info)
      - [Spring MVC](/information/spring/spring_mvc) 
+     - [Spring Cloud]({{baseDomain}}/learn-java/learn-spring-cloud/wiki/index.html) 
   
   - [分布式锁](http://www.jianshu.com/p/535efcab356d) 
 
