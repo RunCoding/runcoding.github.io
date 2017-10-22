@@ -12,6 +12,10 @@
 
 		<!-- Java 基础Demo -->
 		<module>learn-java/base-java</module>
+
+		<!-- spring-cloud-microservice -->
+		<module>learn-java/learn-spring-cloud</module>
+
 		<!--  Netty 4 demo -->
 		<module>learn-java/netty</module>
 

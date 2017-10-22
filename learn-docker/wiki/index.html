@@ -11,7 +11,27 @@
 <body>
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
 </body>
+
+<!-- 甘特图
+ https://mermaidjs.github.io/flowchart.html
+ -->
+<script type="text/javascript" src="wiki/dist/mermaid/mermaid.js" ></script>
 <script>
+    var runcodingBrowse =  function (dateTime) {
+        var hrefUrl = window.location.href;
+        fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + encodeURIComponent(hrefUrl), {
+            credentials: 'include'
+        }).then(function (response) {
+            return response.json()
+        }).then(function (json) {
+            console.log('parsed json', json);
+            if (json.code == 0) {
+                document.getElementsByClassName('run_coding_browse_' + dateTime)[0].innerHTML = json.result;
+            }
+        }).catch(function (ex) {
+            console.log('parsing failed')
+        })
+    }
     window.$docsify = {
         el: '#app',                //初始化的挂载元素
         name: 'RunningGhost的历炼',//文档标题，会显示在侧边栏顶部。
@@ -67,13 +87,18 @@
                     // 每次开始解析 Markdown 内容时调用
                     var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
                     var editUrl = '[编辑](' + url + ')\n';
-
                     var author = '  @[联系作者](https://runcoding.github.io)';
+                    var dateTime = new Date().getTime();
+                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">0</span>次';
+
+                    runcodingBrowse(dateTime);
+
                     return md
                         + '\n\n'
                         + '<br>最后更新 {docsify-updated} '
                         + editUrl
-                        + author;
+                        + author
+                        + browse;
                 })
 
                 hook.afterEach(function(html, next) {
@@ -123,4 +148,14 @@
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-nginx.min.js"></script>
 <script type="text/javascript" src="wiki/dist/docsify/plugins/prismjs/components/prism-docker.min.js"></script>
 -->
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'forest',
+        flowchart:{
+            useMaxWidth:true,
+            htmlLabels:true
+        }
+    });
+</script>
 </html>
