@@ -3,7 +3,9 @@
  */
 (function () {
     'use strict';
-
+    String.prototype.replaceAll = function(s1,s2){
+        return this.replace(new RegExp(s1,"gm"),s2);
+    }
     /**
      * Create a cached version of a pure function.
      */
@@ -173,7 +175,6 @@
             }
             el = noCache ? find(el) : (cacheNode[el] || (cacheNode[el] = find(el)));
         }
-
         return el
     }
 
@@ -457,8 +458,13 @@
                                 updatedAt: xhr.getResponseHeader('last-modified')
                             }
                         };
+                        var content = result.content ;
+                        var port = window.location.port;
 
-                        success(result.content, result.opt);
+                        var domain = window.location.protocol +"//"+window.location.host
+                            content = content.replaceAll('{{baseDomain}}',domain);
+                        console.log("result.content="+content);
+                        success(content, result.opt);
                     }
                 });
             },
@@ -3050,10 +3056,12 @@
         }
     }
 
+
+
     function scrollActiveSidebar (router) {
         if (isMobile) { return }
-
         var sidebar = getNode('.sidebar');
+
         var lis = findAll(sidebar, 'li');
 
         for (var i = 0, len = lis.length; i < len; i += 1) {
@@ -3065,7 +3073,6 @@
             if (href !== '/') {
                 href = router.parse(href).query.id;
             }
-
             nav[decodeURIComponent(href)] = li;
         }
 

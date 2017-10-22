@@ -4,8 +4,8 @@
      - [版本更新](/docs/changelog)
 
 - **知识体系**
-    - [Java体系](https://runcoding.github.io/learn-java/wiki/index.html)
-    - [JavaScript体系](https://runcoding.github.io/learn-js/wiki/index.html)
+    - [Java体系]({{baseDomain}}/learn-java/wiki/index.html)
+    - [JavaScript体系]({{baseDomain}}/learn-js/wiki/index.html)
     - [计数机网络](/information/web)
     - 大数据
       - [HDFS](/information/massive_data/hadoop/hdfs)
