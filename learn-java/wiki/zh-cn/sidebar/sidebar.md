@@ -32,5 +32,6 @@
   - 服务监控
    - [Grafana](https://kibana.logstash.es/content/elasticsearch/other/grafana.html)
    - [Kibana](http://www.cnblogs.com/hanyifeng/p/5860731.html)
+   - [JVM GC](http://blog.csdn.net/wwd0501/article/details/78404105)
 - [面试经](/information/interview)    
 - [名称解释](/information/nounal)    

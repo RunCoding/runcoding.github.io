@@ -1,6 +1,6 @@
 package com.spartajet.shardingboot.sharding;
 
-import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
+ximport com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
