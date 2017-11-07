@@ -10,6 +10,7 @@
      - [Spring应用](/information/spring/spring_info)
      - [Spring MVC](/information/spring/spring_mvc) 
      - [Spring Cloud]({{baseDomain}}/learn-java/learn-spring-cloud/wiki/index.html) 
+     - [Spring Boot](https://doc.yonyoucloud.com/doc/Spring-Boot-Reference-Guide/I.%20Spring%20Boot%20Documentation/index.html) 
   
   - [分布式锁](http://www.jianshu.com/p/535efcab356d) 
 
