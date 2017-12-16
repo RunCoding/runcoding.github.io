@@ -1,0 +1,12 @@
+'use strict';
+
+var express = require('express');
+var path = require('path');
+var PORT = 3001;
+
+var app = express();
+
+app.use(express.static(path.join(__dirname, '../../')));
+
+app.listen(PORT);
+console.log('Running Wiki on http://localhost:' + PORT);
