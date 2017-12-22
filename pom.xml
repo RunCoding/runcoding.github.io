@@ -21,6 +21,7 @@
 
 		<!-- Spring Boot 集成 restful -->
 		<module>learn-java/springboot/restful</module>
+		<module>learn-java/springboot/restful-simple</module>
 		<module>learn-java/springboot/runcoding-core</module>
 		<module>learn-java/springboot/runcoding-business</module>
 		<!-- 当当分库分表插件 -->
