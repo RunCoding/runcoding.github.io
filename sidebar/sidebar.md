@@ -4,6 +4,7 @@
 
 - **知识体系**
     - [Java体系]({{baseDomain}}?sidebar=java/java)
+    - [Java体系]({{baseDomain}}?sidebar=js)
     - [Docker体系]({{baseDomain}}?sidebar=docker)
     - [计数机网络](/wiki/information/web)
     - 大数据
