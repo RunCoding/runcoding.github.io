@@ -2,6 +2,7 @@
   - [Java基础](learn-java/wiki/information/java/java_base)
   - [Java集合](learn-java/wiki/information/java/java_collection)
   - [Java算法](learn-java/wiki/information/java/java_algorithm)
+  - [Java设计模式](https://www.cnblogs.com/foryang/p/5849402.html)
   - [Java中的阻塞队列](learn-java/wiki/information/java/java_blocking_queue)
   - Java8
      - [Java8基础](learn-java/wiki/information/java/java8)

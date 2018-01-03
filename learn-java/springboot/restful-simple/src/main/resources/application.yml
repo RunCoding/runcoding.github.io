@@ -55,24 +55,10 @@ spring:
            expose-session-attributes: true
            request-context-attribute: request
            suffix: .ftl
-eureka:
-      instance:
-              hostname: localhost
-      client:
-             register-with-eureka: false #是否禁用本服务，注册成客户端
-             fetch-registry: false       #是否禁用本服务，注册成客户端
-             serviceUrl:
-                     defaultZone: http://localhost:${server.port}/eureka/
 
-sanji:
-  config:
-#  显示异常
-    show-exception: true
-    
-## Mybatis 配置
-mybatis:
-       typeAliasesPackage : com.runcoding.pojo.po
-       mapperLocations    : classpath:mapper/*.xml
+
+
+
 
 logging:
        level:
