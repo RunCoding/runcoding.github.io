@@ -13,7 +13,7 @@
 
 ### 联系方式
 
-<img  src="main/dist/use/wechat.jpeg" style="max-width: 300px;">
+<img  src="main/dist/use/wechat.jpg" style="max-width: 300px;">
 
 ### 版权
 知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议进行许可(https://creativecommons.org/licenses/by-nc-sa/4.0/)
