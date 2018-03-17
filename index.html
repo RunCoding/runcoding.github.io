@@ -10,15 +10,15 @@
 </head>
 <body>
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
-
-<!-- 甘特图
- https://mermaidjs.github.io/flowchart.html
- -->
 <script type="text/javascript" src="main/dist/mermaid/mermaid.js" ></script>
 <script>
 
    var runcodingBrowse =  function (dateTime) {
         var hrefUrl = window.location.href;
+        if(window.location.host.indexOf("localhost") >-1){
+            console.log("本地不统计");
+            return;
+        }
         fetch('https://runcoding.herokuapp.com/github/runcoding/browse?referer=' + encodeURIComponent(hrefUrl), {
             credentials: 'include'
         }).then(function (response) {
@@ -46,19 +46,25 @@
        }
        return theRequest;
    }
+   var  modelSidebar = getQueryParam().sidebar || null;
+   var sidebar  =  "wiki/sidebar";
+   var homepage =  "wiki/home.md";
+   if(modelSidebar){
+       sidebar   = modelSidebar + "/" + sidebar;
+       homepage  = modelSidebar + "/" + homepage;
+   }
 
-   var sidebar = getQueryParam().sidebar || "sidebar";
     window.$docsify = {
         el: '#app',                //初始化的挂载元素
         name: 'RunningGhost的历炼',//文档标题，会显示在侧边栏顶部。
         nameLink: '/',         //点击文档标题后跳转的链接地址。{nameLink:{'/zh-cn/':'/zh-cn/','/':'/'}}
-        loadSidebar: "sidebar/"+sidebar,      //加载自定义侧边栏， loadSidebar:true时，默认加载_sidebar.md(指定加载 loadSidebar:summary.md)
+        loadSidebar: sidebar,      //加载自定义侧边栏， loadSidebar:true时，默认加载_sidebar.md(指定加载 loadSidebar:summary.md)
         subMaxLevel: 8,         //自定义侧边栏后默认不会再生成目录，你也可以通过设置生成目录的最大层级开启这个功能。默认subMaxLevel: 0
         loadNavbar: false,       //加载自定义导航栏, loadNavbar: true时，默认加载 _navbar.md(或指定文件加载loadNavbar: 'nav.md')
         maxLevel: 8,            //默认情况下会抓取文档中所有标题渲染成目录，可配置最大支持渲染的标题层级。
         // coverpage: "cover/cover_page.md",        //开启文档封面页，默认加载 _coverpage.md 文件，可coverpage: 'cover.md'指定具体文件。
         auto2top: true,         //切换页面后是否自动跳转到页面顶部。默认值: false
-        homepage: '/wiki/use/home.md',    //项目入口地址。默认README.md，
+        homepage: homepage,    //项目入口地址。默认README.md，
         basePath: '/',    //文档加载的根路径，可以是二级路径或者是其他域名的路径。
         repo: '',               //显示gihub开源项目地址。
         // themeColor: '#3F51B5',  //替换主题色。利用 CSS3 支持变量的特性，对于老的浏览器有 polyfill 处理。
@@ -111,7 +117,7 @@
                     var editUrl = '[编辑](' + url + ')\n';
                     var author = '  @[联系作者](https://runcoding.github.io)';
                     var dateTime = new Date().getTime();
-                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">0</span>次';
+                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">'+Math.floor(Math.random()*10000)+' 🕶️</span>次';
 
                     runcodingBrowse(dateTime);
 

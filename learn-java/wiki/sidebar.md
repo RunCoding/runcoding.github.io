@@ -10,7 +10,7 @@
   - Spring
      - [Spring应用](learn-java/wiki/information/spring/spring_info)
      - [Spring MVC](learn-java/wiki/information/spring/spring_mvc) 
-     - [Spring Cloud]({{baseDomain}}/learn-java/learn-spring-cloud/wiki/index.html) 
+     - [Spring Cloud]({{baseDomain}}?sidebar=learn-java/learn-spring-cloud) 
      - [Spring Boot](https://doc.yonyoucloud.com/doc/Spring-Boot-Reference-Guide/I.%20Spring%20Boot%20Documentation/index.html) 
   
   - [分布式锁](http://www.jianshu.com/p/535efcab356d) 
@@ -26,8 +26,9 @@
   - 缓存
      - [Redis](learn-java/wiki/information/cache/redis)
      - [Memcached](learn-java/wiki/information/cache/memcached)     
+     - [全站缓存时代](https://mp.weixin.qq.com/s/Qda9sayJI2hq_nzvuROG4Q)  
 - 测试
-  - [全链路压测](http://jm.taobao.org/2017/08/09/post-2017080902/)     
+  - [全链路压测](http://jm.taobao.org/2017/03/30/20170330/)     
 - 服务相关 
   - Docker
   - Jenkins 
@@ -35,5 +36,6 @@
    - [Grafana](https://kibana.logstash.es/content/elasticsearch/other/grafana.html)
    - [Kibana](http://www.cnblogs.com/hanyifeng/p/5860731.html)
    - [JVM GC](http://blog.csdn.net/wwd0501/article/details/78404105)
+- [版本控制](/wiki/information/version)   
 - [面试经](learn-java/wiki/information/interview)    
 - [名称解释](learn-java/wiki/information/nounal)    
