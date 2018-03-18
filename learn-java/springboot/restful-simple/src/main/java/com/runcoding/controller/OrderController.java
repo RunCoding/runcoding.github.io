@@ -1,5 +1,6 @@
 package com.runcoding.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.runcoding.model.po.order.OrderPo;
 import com.runcoding.service.support.OrderSupportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class OrderController {
     @PostMapping(value = "/add")
     @ResponseBody
     public OrderPo createOrder(@RequestBody OrderPo order){
-        orderSupportService.createOrder(order);
+
+        //orderSupportService.createOrder(order);
         return order;
     }
 

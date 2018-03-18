@@ -36,6 +36,7 @@
    - [Grafana](https://kibana.logstash.es/content/elasticsearch/other/grafana.html)
    - [Kibana](http://www.cnblogs.com/hanyifeng/p/5860731.html)
    - [JVM GC](http://blog.csdn.net/wwd0501/article/details/78404105)
+   - [性能分析](learn-java/wiki/information/performance/performance)
 - [版本控制](/wiki/information/version)   
 - [面试经](learn-java/wiki/information/interview)    
 - [名称解释](learn-java/wiki/information/nounal)    

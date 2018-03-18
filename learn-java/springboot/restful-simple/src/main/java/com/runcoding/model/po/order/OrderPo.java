@@ -3,11 +3,7 @@ package com.runcoding.model.po.order;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 
 /**
  * @author xukai
@@ -15,6 +11,7 @@ import lombok.Builder;
  */
 @Getter
 @Setter
+@ToString
 public class OrderPo {
 
     @ApiModelProperty( "")
