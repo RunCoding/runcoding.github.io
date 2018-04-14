@@ -15,7 +15,8 @@ public class LinkedTransferQueueTest {
     public static void main(String[] args) {
         TransferQueue<String> queue = new LinkedTransferQueue<String>();
         Thread producer = new Thread(new Producer(queue));
-        producer.setDaemon(true); //设置为守护进程使得线程执行结束后程序自动结束运行
+        //设置为守护进程使得线程执行结束后程序自动结束运行
+        producer.setDaemon(true);
         producer.start();
         for (int i = 0; i < 10; i++) {
             Thread consumer = new Thread(new Consumer(queue));

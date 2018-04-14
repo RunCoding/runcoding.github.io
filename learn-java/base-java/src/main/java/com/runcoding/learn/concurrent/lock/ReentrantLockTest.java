@@ -1,4 +1,4 @@
-package com.runcoding.learn.lock;
+package com.runcoding.learn.concurrent.lock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
