@@ -15,13 +15,58 @@ $ jps -l
 
 ## jstat（虚拟机运行监控）
 例如:（jstat -gcutil ）gc的统计新老代
+
+参数	作用
+-gc	GC堆状态
+-gcutil	GC统计汇总
+-class	类加载器
+-compiler	JIT
+-gccapacity	各区大小
+-gccause	最近一次GC统计和原因
+-gcnew	新区统计
+-gcnewcapacity	新区大小
+-gcold	老区统计
+-gcoldcapacity	老区大小
+-gcpermcapacity	永久区大小
+-printcompilation	HotSpot编译统计
+
 ```bash
 $ jstat -gcutil 1965
   S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   
  95.22   0.00  99.08  36.97  97.84  95.59     18    0.285     2    0.104    0.389
- /** YGC (Minor gc Young GC) 18次，总耗时 0.285s*/
- /** FGC (Full GC) 2次，总耗时 0.104 s*/
- /* GCt 总耗时*/
+    S0：幸存1区当前使用比例
+    S1：幸存2区当前使用比例
+    E：伊甸园区使用比例
+    O：老年代使用比例
+    M：元数据区使用比例
+    CCS：压缩使用比例
+    YGC：年轻代垃圾回收次数
+    FGC：老年代垃圾回收次数
+    FGCT：老年代垃圾回收消耗时间
+    GCT：垃圾回收消耗总时间
+```
+
+```bash
+jstat -gc 1
+ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
+6144.0 6144.0  0.0    0.0   336896.0 61118.8   699392.0   25590.4   49792.0 48637.0 6016.0 5672.6     52    0.559   3      0.289    0.849
+    S0C：第一个幸存区的大小
+    S1C：第二个幸存区的大小
+    S0U：第一个幸存区的使用大小
+    S1U：第二个幸存区的使用大小
+    EC：伊甸园区的大小
+    EU：伊甸园区的使用大小
+    OC：老年代大小
+    OU：老年代使用大小
+    MC：方法区大小
+    MU：方法区使用大小
+    CCSC:压缩类空间大小
+    CCSU:压缩类空间使用大小
+    YGC：年轻代垃圾回收次数
+    YGCT：年轻代垃圾回收消耗时间
+    FGC：老年代垃圾回收次数
+    FGCT：老年代垃圾回收消耗时间
+    GCT：垃圾回收消耗总时间
 ```
 
 ## jinfo (java 配置信息工具)
@@ -100,12 +145,78 @@ Command line:  -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:55835,suspen
 ```
 
 ## jmap(生产堆快照文件)
+
 ```bash
 $ jmap -dump:format=b,file=/Users/runningghost/Downloads/rundump.bin 1965
 Dumping heap to /Users/runningghost/Downloads/rundump.bin ...
 Heap dump file created
+```
+### 打印对象占用情况
+```bash
+$ jmap -histo 1 > histo.log
+$ head -n 10 histo.log
+num     #instances         #bytes  class name
+----------------------------------------------
+   1:        267917       25833816  [C
+   2:        161730       18944352  [B
+   3:        340711       10902752  java.util.Hashtable$Entry
+   4:         49730        6911024  [I
+   5:         11329        5806208  [Ljava.util.Hashtable$Entry;
+   6:        124306        4505880  [Ljava.lang.Object;
+   7:        179739        4313736  java.lang.String
+   8:         86947        4173456  java.util.HashMap
+   9:        127507        4080224  java.util.HashMap$Node
+  10:         27536        2524424  [Ljava.util.HashMap$Node;
+```
+### 查看堆heap占用情况
+
+```bash
+$ jmap -heap 1
+
+using thread-local object allocation.
+Parallel GC with 4 thread(s) #垃圾回收的方式
+
+Heap Configuration:
+   MinHeapFreeRatio         = 0
+   MaxHeapFreeRatio         = 100
+   MaxHeapSize              = 1073741824 (1024.0MB)
+   NewSize                  = 357564416 (341.0MB)
+   MaxNewSize               = 357564416 (341.0MB)
+   OldSize                  = 716177408 (683.0MB)
+   NewRatio                 = 2
+   SurvivorRatio            = 8
+   MetaspaceSize            = 21807104 (20.796875MB)
+   CompressedClassSpaceSize = 1073741824 (1024.0MB)
+   MaxMetaspaceSize         = 17592186044415 MB
+   G1HeapRegionSize         = 0 (0.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+   capacity = 344981504 (329.0MB)
+   used     = 16880448 (16.09844970703125MB)
+   free     = 328101056 (312.90155029296875MB)
+   4.893145807608283% used
+From Space:
+   capacity = 6291456 (6.0MB)
+   used     = 0 (0.0MB)
+   free     = 6291456 (6.0MB)
+   0.0% used
+To Space:
+   capacity = 6291456 (6.0MB)
+   used     = 0 (0.0MB)
+   free     = 6291456 (6.0MB)
+   0.0% used
+PS Old Generation
+   capacity = 716177408 (683.0MB)
+   used     = 26204584 (24.990638732910156MB)
+   free     = 689972824 (658.0093612670898MB)
+   3.658951498229891% used
+
+23148 interned Strings occupying 2882888 bytes.
 
 ```
+
 
 ## jstack（用来生成虚拟机线程快照信息，分析线程死锁停顿等）
 例如: jstack 2419 
