@@ -1,4 +1,4 @@
-package com.runcoding.learn.queue.block;
+package com.runcoding.learn.concurrent.block;
 
 
 import java.text.DateFormat;
@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
  * @author: xukai
  * @email: runcoding@163.com
  * @created Time: 2018/4/1 17:02
- * @description 队列中的元素必须实现Delayed接口，在创建元素时可以指定多久才能从队列中获取当前元素。 只有在延迟期满时才能从队列中提取元素
+ * @description 队列中的元素必须实现Delayed接口，在创建元素时可以指定多久才能从队列中获取当前元素。
+ * 只有在延迟期满时才能从队列中提取元素
  * Copyright (C), 2017-2018,
  **/
 public class DelayQueueTest {
