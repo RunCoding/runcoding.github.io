@@ -22,7 +22,7 @@ public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String>
 	public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {  // (2)
+    public void handlerAdded(ChannelHandlerContext ctx) {  // (2)
         Channel incoming = ctx.channel();
         
         // Broadcast a message to multiple Channels
@@ -32,7 +32,7 @@ public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String>
     }
 
     @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {  // (3)
+    public void handlerRemoved(ChannelHandlerContext ctx) {  // (3)
         Channel incoming = ctx.channel();
         
         // Broadcast a message to multiple Channels
@@ -42,7 +42,7 @@ public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String>
         // so there is no need to do "channels.remove(ctx.channel());"
     }
     @Override
-	protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception { // (4)
+	protected void channelRead0(ChannelHandlerContext ctx, String s) { // (4)
 		Channel incoming = ctx.channel();
 		for (Channel channel : channels) {
             if (channel != incoming){
@@ -54,13 +54,13 @@ public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String>
 	}
   
 	@Override
-	public void channelActive(ChannelHandlerContext ctx) throws Exception { // (5)
+	public void channelActive(ChannelHandlerContext ctx) { // (5)
         Channel incoming = ctx.channel();
 		System.out.println("SimpleChatClient:"+incoming.remoteAddress()+"在线");
 	}
 	
 	@Override
-	public void channelInactive(ChannelHandlerContext ctx) throws Exception { // (6)
+	public void channelInactive(ChannelHandlerContext ctx) { // (6)
         Channel incoming = ctx.channel();
 		System.out.println("SimpleChatClient:"+incoming.remoteAddress()+"掉线");
 	}

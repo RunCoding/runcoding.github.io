@@ -40,13 +40,13 @@ public class ProtocolClient {
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 		try {
-			Bootstrap b = new Bootstrap(); // (1)
-			b.group(workerGroup); // (2)
-			b.channel(NioSocketChannel.class); // (3)
-			b.option(ChannelOption.SO_KEEPALIVE, true); // (4)
+			Bootstrap b = new Bootstrap();
+			b.group(workerGroup);
+			b.channel(NioSocketChannel.class);
+			b.option(ChannelOption.SO_KEEPALIVE, true);
 			b.handler(new ChannelInitializer<SocketChannel>() {
 				@Override
-				public void initChannel(SocketChannel ch) throws Exception {
+				public void initChannel(SocketChannel ch) {
 					ch.pipeline().addLast(
 							"decoder",
 							new ProtocolDecoder(MAX_FRAME_LENGTH,
@@ -59,7 +59,7 @@ public class ProtocolClient {
 			});
 
 			// 启动客户端
-			ChannelFuture f = b.connect(host, port).sync(); // (5)
+			ChannelFuture f = b.connect(host, port).sync();
 
 			while (true) {
 

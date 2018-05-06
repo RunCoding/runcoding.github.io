@@ -13,7 +13,7 @@ import java.util.concurrent.TransferQueue;
 public class LinkedTransferQueueTest {
 
     public static void main(String[] args) {
-        TransferQueue<String> queue = new LinkedTransferQueue<String>();
+        TransferQueue<String> queue = new LinkedTransferQueue<>();
         Thread producer = new Thread(new Producer(queue));
         //设置为守护进程使得线程执行结束后程序自动结束运行
         producer.setDaemon(true);
