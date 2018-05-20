@@ -12,8 +12,8 @@
 
 ## **最后我成了这样**
 
-- 1. 进入首页<a href='https://runcoding.github.io'>runcoding.github.io</a>
-- 2. 进入<a href='https://runcoding.github.io/learn-java/wiki/index.html'>Java世界</a>
+- <a href='https://runcoding.github.io'>runcoding.github.io</a>
+
 
 ## **本地启动服务**
 ### 安装node

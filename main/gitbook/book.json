@@ -1,0 +1,37 @@
+{
+  "title": "RunCoding GitBook",
+  "author": "RunningGhost <runcoding@163.com>",
+  "description": "This is a RunCoding book",
+  "extension": null,
+  "generator": "site",
+  "links": {
+    "sharing": {
+      "all": null,
+      "facebook": null,
+      "google": null,
+      "twitter": null,
+      "weibo": null
+    },
+    "sidebar": {
+      "首页": "https://runcoding.github.io"
+    }
+  },
+  "styles": {
+    "website": "styles/website.css"
+  },
+  "plugins": [
+    "addcssjs",
+    "richquotes"
+  ],
+  "pluginsConfig": {
+    "addcssjs": {
+      "js": [
+        "scripts/mermaid.min.js"
+      ],
+      "css": [
+
+      ]
+    }
+  },
+  "variables": {}
+}
