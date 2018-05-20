@@ -26,6 +26,7 @@
   "pluginsConfig": {
     "addcssjs": {
       "js": [
+        "scripts/index.js",
         "scripts/mermaid.min.js"
       ],
       "css": [
