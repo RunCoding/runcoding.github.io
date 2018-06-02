@@ -1,6 +1,6 @@
 
 #### 集合框架体系如图：
-<img src='//p9on00i25.bkt.clouddn.com/learn-java/java/java-coll.png'>
+<img src='http://p9on00i25.bkt.clouddn.com/learn-java/java/java-coll.png'>
 ```
 Collection - List - ArrayList
 Collection - List - LinkedList
