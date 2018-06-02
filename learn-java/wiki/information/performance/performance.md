@@ -237,27 +237,45 @@ Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.111-b14 mixed mode):
  
 ## 类加载冲突（在JVM 启动时加上-verbose:class 可以看到class是从哪个jar中引进来的）
 
-### BTrace
- @see http://calvin1978.blogcn.com/articles/btrace1.html
+### BTrace 
+### 地址
+ - 官网地址: https://github.com/btraceio/btrace
+ - 教程:    https://www.jianshu.com/p/ee6b5c13c45b
+### 安装
+ - 下载地址：https://github.com/btraceio/btrace/releases/tag/v1.3.11
+
 ```java
-/* BTrace Script Template */
 import com.sun.btrace.annotations.*;
 import static com.sun.btrace.BTraceUtils.*;
-
-@BTrace
+import com.sun.btrace.BTraceUtils;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import com.alibaba.fastjson.JSON;
+@BTrace(unsafe = true) // 表示这是一个BTrace跟踪脚本，并启用unsafe模式(因为使用了BTraceUtils以外的方法，即String.valueOf(obj))
 public class TracingScript {
     
     @TLS 
     static long beginTime;  
     
-    @OnMethod(clazz="com.runcoding.controller.OrderController",method="createOrder",location=@Location(Kind.RETURN))
-	public static void func(com.runcoding.model.po.order.OrderPo order , @Return com.runcoding.model.po.order.OrderPo result
-                        ,@Duration long durationL ){
-        println(strcat(strcat("方法执行时间s:",str(timeMillis()-beginTime)),"ms"));  
+     @OnMethod(clazz="com.run.center.order.web.controller.cart.CartController", //跟踪指定的类
+              method="incrementCart",//跟踪的方法
+              location=@Location(Kind.RETURN))// 表示跟踪某个类的某个方法，位置为方法返回处
+    public static void incrementCartfunc(@Self Object self ,
+                                         Object param , //请求参数列表(多个参数用多个)
+                                         @Return Object result, 
+                                         @Duration long durationL ){
+        println(strcat(strcat("方法执行时间s:",str(timeMillis()-beginTime)),"ms"));
+        println(strcat("当前执行线程名称:", Threads.name(currentThread()))); 
+        println(strcat("请求参数:", str(JSON.toJSONString(param))));
+        println(strcat("返回结果:", str(JSON.toJSONString(result))));
         println(strcat("方法执行时间:", str(durationL)));
-        println(strcat("当前执行线程名称:", Threads.name(currentThread())));
-        println(strcat("方法请求:", str(order)));
-        println(strcat("方法结果:", str(result)));
-    }
+        println("=================================");
+    } 
 }
 ```

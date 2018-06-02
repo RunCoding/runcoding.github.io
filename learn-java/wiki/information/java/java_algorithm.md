@@ -54,7 +54,7 @@
   * 删除: `O(log(n))`
 
 <img src="https://tech.meituan.com/img/redblack-tree/tree-all.png" alt="Binary Search Tree" >
-<img src="dist/java/algorithm/BST.png" alt="Binary Search Tree" width="400" height="500">
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/BST.png" alt="Binary Search Tree" width="400" height="500">
 
 #### BST的查找操作
 
@@ -410,7 +410,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 ### Trie
 * 字典树，又称基数树或者前缀树，能够用于存储键为字符串的动态集合或者关联数组的搜索树。树中的节点并没有直接存储关联键值，而是该节点在树中的挂载位置决定了其关联键值。某个节点的所有子节点都拥有相同的前缀，整棵树的根节点则是空字符串。
 
-![Alt text](/dist/java/algorithm/trie.png "Trie")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/trie.png "Trie")
 
 ### Fenwick Tree
 * 树状数组又称 Binary Indexed Tree，其表现形式为树，不过本质上是以数组实现。数组中的下标代表着树中的顶点，每个顶点的父节点或者子节点的下标能够通过位运算获得。数组中的每个元素包含了预计算的区间值之和，在整棵树更新的过程中同样会更新这些预计算的值。
@@ -418,7 +418,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 区间求值: `O(log(n))`
   * 更新: `O(log(n))`
 
-![Alt text](/dist/java/algorithm/fenwickTree.png "Fenwick Tree")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/fenwickTree.png "Fenwick Tree")
 
 ### Segment Tree
 * 线段树是用于存放间隔或者线段的树形数据结构，它允许快速的查找某一个节点在若干条线段中出现的次数.
@@ -426,7 +426,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 区间查询: `O(log(n))`
   * 更新: `O(log(n))`
 
-![Alt text](/dist/java/algorithm/segmentTree.png "Segment Tree")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/segmentTree.png "Segment Tree")
 
 ### Heap
 * 堆是一种特殊的基于树的满足某些特性的数据结构，整个堆中的所有父子节点的键值都会满足相同的排序条件。堆更准确地可以分为最大堆与最小堆，在最大堆中，父节点的键值永远大于或者等于子节点的值，并且整个堆中的最大值存储于根节点；而最小堆中，父节点的键值永远小于或者等于其子节点的键值，并且整个堆中的最小值存储于根节点。
@@ -437,7 +437,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 移除: `O(log(n))`
   * 移除最大值 / 最小值: `O(1)`
 
-<img src="dist/java/algorithm/heap.png" alt="Max Heap" width="400" height="500">
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/heap.png" alt="Max Heap" width="400" height="500">
 
 
 ### Hashing
@@ -447,14 +447,14 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * **链地址法（Separate Chaining）**: 链地址法中，每个桶是相互独立的，包含了一系列索引的列表。搜索操作的时间复杂度即是搜索桶的时间（固定时间）与遍历列表的时间之和。
   * **开地址法（Open Addressing）**: 在开地址法中，当插入新值时，会判断该值对应的哈希桶是否存在，如果存在则根据某种算法依次选择下一个可能的位置，直到找到一个尚未被占用的地址。所谓开地址法也是指某个元素的位置并不永远由其哈希值决定。
 
-![Alt text](/dist/java/algorithm/hash.png "Hashing")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/hash.png "Hashing")
 
 ### Graph
 * 图是一种数据元素间为多对多关系的数据结构，加上一组基本操作构成的抽象数据类型。
     * **无向图（Undirected Graph）**: 无向图具有对称的邻接矩阵，因此如果存在某条从节点 u 到节点 v 的边，反之从 v 到 u 的边也存在。
     * **有向图（Directed Graph）**: 有向图的邻接矩阵是非对称的，即如果存在从 u 到 v 的边并不意味着一定存在从 v 到 u 的边。
 
-<img src="dist/java/algorithm/graph.png" alt="Graph" width="400" height="500">
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/graph.png" alt="Graph" width="400" height="500">
 
 ## 算法
 
@@ -467,7 +467,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 最坏时间: `O(n^2)`
   * 平均时间: `O(nlog(n))`
 
-![Alt text](/dist/java/algorithm/quicksort.gif "Quicksort")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/quicksort.gif "Quicksort")
 
 #### 归并排序
 * 归并排序是典型的分治算法，它不断地将某个数组分为两个部分，分别对左子数组与右子数组进行排序，然后将两个数组合并为新的有序数组。
@@ -477,7 +477,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 最坏时间: `O(nlog(n))`
   * 平均时间: `O(nlog(n))`
 
-![Alt text](/dist/java/algorithm/mergesort.gif "Mergesort")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/mergesort.gif "Mergesort")
 
 #### 桶排序
 * 桶排序将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。
@@ -487,7 +487,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 平均时间:`Θ(n + k)`
 
 
-![Alt text](/dist/java/algorithm/bucketsort.png "Bucket Sort")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/bucketsort.png "Bucket Sort")
 
 #### 基数排序
 * 基数排序类似于桶排序，将数组分割到有限数目的桶中；不过其在分割之后并没有让每个桶单独地进行排序，而是直接进行了合并操作。
@@ -502,13 +502,13 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 * 深度优先算法是一种优先遍历子节点而不是回溯的算法。
 * 时间复杂度: `O(|V| + |E|)`
 
-![Alt text](/dist/java/algorithm/dfsbfs.gif "DFS / BFS Traversal")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/dfsbfs.gif "DFS / BFS Traversal")
 
 #### 广度优先搜索
 * 广度优先搜索是优先遍历邻居节点而不是子节点的图遍历算法。
 * 时间复杂度: `O(|V| + |E|)`
 
-![Alt text](/dist/java/algorithm/dfsbfs.gif "DFS / BFS Traversal")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/dfsbfs.gif "DFS / BFS Traversal")
 
 #### 拓扑排序
 * 拓扑排序是对于有向图节点的线性排序，如果存在某条从 u 到 v 的边，则认为 u 的下标先于 v。
@@ -518,7 +518,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 * **Dijkstra 算法** 用于计算有向图中单源最短路径问题。
 * 时间复杂度: `O(|V|^2)`
 
-![Alt text](/dist/java/algorithm/dijkstra.gif "Dijkstra's")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/dijkstra.gif "Dijkstra's")
 
 #### Bellman-Ford 算法
 * **Bellman-Ford 算法**是在带权图中计算从单一源点出发到其他节点的最短路径的算法。
@@ -527,7 +527,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
   * 最优时间: `O(|E|)`
   - 最坏时间: `O(|V||E|)`
 
-![Alt text](/dist/java/algorithm/bellman-ford.gif "Bellman-Ford")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/bellman-ford.gif "Bellman-Ford")
 
 #### Floyd-Warshall 算法
 * **Floyd-Warshall 算法** 能够用于在无环带权图中寻找任意节点的最短路径。
@@ -540,13 +540,13 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 * **Prim 算法**是用于在带权无向图中计算最小生成树的贪婪算法。换言之，Prim 算法能够在图中抽取出连接所有节点的边的最小代价子集。
 * 时间复杂度: `O(|V|^2)`
 
-![Alt text](/dist/java/algorithm/prim.gif "Prim's Algorithm")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/prim.gif "Prim's Algorithm")
 
 #### Kruskal 算法
 * **Kruskal 算法**同样是计算图的最小生成树的算法，与 Prim 的区别在于并不需要图是连通的。
 * 时间复杂度: `O(|E|log|V|)`
 
-![Alt text](/dist/java/algorithm/kruskal.gif "Kruskal's Algorithm")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/kruskal.gif "Kruskal's Algorithm")
 
 ## 位运算
 * 位运算即是在位级别进行操作的技术，合适的位运算能够帮助我们得到更快地运算速度与更小的内存使用。
@@ -574,7 +574,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 #### 大 O 表示
 * **大 O 表示** 用于表示某个算法的上限，往往用于描述最坏的情况。
 
-![Alt text](/dist/java/algorithm/bigO.png "Theta Notation")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/bigO.png "Theta Notation")
 
 #### 小 O 表示
 * **小 O 表示**用于描述某个算法的渐进上界，不过二者要更为紧密。
@@ -582,7 +582,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 #### 大 Ω 表示
 * **大 Ω 表示**用于描述某个算法的渐进下界。
 
-![Alt text](/dist/java/algorithm/bigOmega.png "Theta Notation")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/bigOmega.png "Theta Notation")
 
 #### 小 ω 表示
 * **Little Omega Notation**用于描述某个特定算法的下界，不过不一定很靠近。
@@ -590,7 +590,7 @@ AVL树由于实现比较复杂，而且插入和删除性能差，在实际环�
 #### Theta Θ 表示
 * **Theta Notation**用于描述某个确定算法的确界。
 
-![Alt text](/dist/java/algorithm/theta.png "Theta Notation")
+![Alt text](http://p9on00i25.bkt.clouddn.com/learn-java/java/algorithm/theta.png "Theta Notation")
 
 
 

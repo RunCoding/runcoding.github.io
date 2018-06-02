@@ -7,7 +7,7 @@
 学一门新的知识，首先要大致了解它的全貌，然后在深入自己感兴趣的细节。
 那么在这一小节中，我不会去深入具体的细节了解spring MVC，而是去了解它大致的流程，它是如何工作起来的。<br>
 首先，让我们先看看下面这张流程图。
-<img src="learn-java/wiki/dist/java/spring-mvc/1st.png" >
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/spring-mvc/1st.png" >
 
 相信用过spring MVC的人都知道，客户端的请求要通过前端控制器(DispatcherServlet)，然后前端控制器去找到请求相应的Controller。<br>
 因此我们可以猜到前端控制器一定要在Servlet容器启动时被实例化，所以我们需要把DispatcherServlet配置到web.xml文件中，部分配置如下：
@@ -49,10 +49,10 @@ static {
 当一个类被JVM加载、链接过后，JVM会调用类构造器会初始化一些静态域对象。<br>
 因此上面的静态代码块会被执行，其中的代码只有一个目的，那就是从属性文件中加载默认的strategy实现，最后赋值给defaultStrategies 变量。<br>
 上面的注释也说明了属性文件的位置，大家可以用解压工具把spring-webmvc jar包用解压工具打开。我打开结果如下图：<br>
-<img src="learn-java/wiki/dist/java/spring-mvc/2nd.png" > 
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/spring-mvc/2nd.png" > 
 
 大家可以打开DispatcherServlet.properties 文件，可以看到如下内容：
-<img src="learn-java/wiki/dist/java/spring-mvc/dispatcherservlet.png" > 
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/spring-mvc/dispatcherservlet.png" > 
 
 在context成功的refresh过后，onRefresh 方法就会被调用，然后它会调用initStrategies 方法。<br>
 下面让我们来看看initStrategies 方法具体都初始化哪些strategy对象。<br>
@@ -476,5 +476,5 @@ catch (Exception ex) {
 至此，我已经把Spring MVC工作的细节以源码的形式说完了。如果Spring MVC是个黒盒，那么这篇文章已经为大家打开了盒子并看到了里面主要的一些东西。<br>
 这篇文章也为大家探索Spring MVC开了个好头，它让我们的开发者更进一步地了解了Spring MVC，而不仅仅是单纯地使用它。<br>
 Spring MVC还有很多细节、优秀地设计思想以及漂亮地编码风格值得我们去探索和学习。下图是我Google一张关于Spring MVC的流程图，画得很详细，供大家参考。<br>
-<img src="learn-java/wiki/dist/java/spring-mvc/3rd.png" >
+<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/spring-mvc/3rd.png" >
  

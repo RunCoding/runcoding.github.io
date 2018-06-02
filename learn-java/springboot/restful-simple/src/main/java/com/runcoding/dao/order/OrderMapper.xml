@@ -20,20 +20,7 @@
 
     <update id="update" parameterType="com.runcoding.model.po.order.OrderPo">
         update `order`
-        <set>
-            <if test=" != null">
-                id = #{id},
-            </if>
-            <if test=" != null">
-                order_number = #{orderNumber},
-            </if>
-            <if test=" != null">
-                user_id = #{userId},
-            </if>
-            <if test=" != null">
-                create_time = #{createTime},
-            </if>
-            update_time = now()
+        <set> order_number = #{orderNumber}
         </set>
          where id = #{id}
     </update>

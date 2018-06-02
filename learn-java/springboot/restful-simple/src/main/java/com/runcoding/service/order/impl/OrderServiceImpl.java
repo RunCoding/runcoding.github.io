@@ -5,6 +5,8 @@ import com.runcoding.model.po.order.OrderPo;
 import com.runcoding.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -38,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
      * @Date 2018-01-02 17:23:57
      */
     @Override
+    @Transactional()
     public int insert(OrderPo po) {
         return orderMapper.insert(po);
     }

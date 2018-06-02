@@ -20,21 +20,7 @@
     <update id="update" parameterType="com.runcoding.model.po.account.AccountPo">
         update account
         <set>
-            <if test=" != null">
-                id = #{id},
-            </if>
-            <if test=" != null">
-                username = #{username},
-            </if>
-            <if test=" != null">
-                created_time = #{createdTime},
-            </if>
-            <if test=" != null">
-                updated_time = #{updatedTime},
-            </if>
-            <if test=" != null">
-                is_discarded = #{isDiscarded},
-            </if>
+              username = #{username}
         </set>
          where id = #{id}
     </update>

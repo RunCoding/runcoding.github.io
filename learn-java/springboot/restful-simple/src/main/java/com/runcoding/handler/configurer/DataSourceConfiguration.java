@@ -1,5 +1,7 @@
 package com.runcoding.handler.configurer;
 
+import com.runcoding.handler.interceptors.SqlLogInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -48,11 +50,7 @@ public class DataSourceConfiguration {
             throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(mainDataSource);
-        Properties properties = new Properties();
-        properties.setProperty("dialect", "mysql");
-        properties.setProperty("reasonable", "false");
-        properties.setProperty("pageSizeZero", "true");
-        properties.setProperty("param", "pageNum=start;pageSize=limit");
+        sessionFactory.setPlugins(new Interceptor[]{ new SqlLogInterceptor()});
         return sessionFactory.getObject();
     }
 }
