@@ -84,7 +84,7 @@ public  class TestIntegerCache {
      }
  }
 ```
-<img src='http://img.blog.csdn.net/20170615170007540'>
+<img src='//img.blog.csdn.net/20170615170007540'>
 
 #### 修饰符
 - 访问限定修饰符
@@ -418,7 +418,7 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 第二点：线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。
 
 ####  受检查异常和运行时异常**
-![](http://uploadfiles.nowcoder.com/images/20151010/214250_1444467985224_6A144C1382BBEF1BE30E9B91BC2973C8)
+![](//uploadfiles.nowcoder.com/images/20151010/214250_1444467985224_6A144C1382BBEF1BE30E9B91BC2973C8)
 
 - 粉红色的是受检查的异常(checked exceptions),其必须被try...catch语句块所捕获, 或者在方法签名里通过throws子句声明。受检查的异常必须在编译时被捕捉处理,命名为Checked Exception是因为Java编译器要进行检查, Java虚拟机也要进行检查, 以确保这个规则得到遵守。 
 
@@ -463,7 +463,7 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 同步阻塞 --> 线程在获取synchronized同步锁失败（被其他线程占用）<br>
 其他阻塞 --> 通过调用线程的发出了I/O请求时，线程会进入同步阻塞状态<br>
 - 死亡状态（Dead）:线程执行完了或异常退出了run()方法。结束生命周期<br>
-<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/thread_run.png" >
+<img src="//p9on00i25.bkt.clouddn.com/learn-java/java/thread_run.png" >
 
 #### 同步操作
 - CountDownLatch 通常用来使主线程等待其他线程执行完再执行所用到

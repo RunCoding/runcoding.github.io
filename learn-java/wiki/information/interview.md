@@ -45,14 +45,14 @@ _对象直接比较_ , `对象`==`对象`,代码可以这么写，但是一般�
 #### _Spring MVC 框架理解(源代码)_
 
 ### **IO**
-#### [OIO、NIO、AIO差异](http://www.ylzx8.cn/zhuantikaifa/ai/1014032.html)
+#### [OIO、NIO、AIO差异](//www.ylzx8.cn/zhuantikaifa/ai/1014032.html)
 
 ### **中间件**
 #### _MQ的理解_
 ##### _RocketMQ的原理与实践_
-  - 原理与实践：http://www.jianshu.com/p/453c6e7ff81c
-  - RocketMQ原理解析：http://blog.csdn.net/column/details/learningrocketmq.html
-  - 阿里中间件团队博客：http://jm.taobao.org/2017/01/12/rocketmq-quick-start-in-10-minutes/
+  - 原理与实践：//www.jianshu.com/p/453c6e7ff81c
+  - RocketMQ原理解析：//blog.csdn.net/column/details/learningrocketmq.html
+  - 阿里中间件团队博客：//jm.taobao.org/2017/01/12/rocketmq-quick-start-in-10-minutes/
   
 #### _RPC_
 #####  Netty的工作原理
@@ -60,7 +60,7 @@ _对象直接比较_ , `对象`==`对象`,代码可以这么写，但是一般�
 - https://dubbo.gitbooks.io/dubbo-dev-book/
 - https://dubbo.gitbooks.io/dubbo-user-book/
 - https://dubbo.gitbooks.io/dubbo-admin-book/ 
-- http://dubbo.io
+- //dubbo.io
 
 ### **缓存**
 #### _Redis的理解_
@@ -297,9 +297,9 @@ ConcurrentHashMap允许多个修改操作并发进行，其关键在于使用了
 
 详细参考：
 
-[http:\/\/www.cnblogs.com\/ITtangtang\/p\/3948786.html](http://www.cnblogs.com/ITtangtang/p/3948786.html)
+[http:\/\/www.cnblogs.com\/ITtangtang\/p\/3948786.html](//www.cnblogs.com/ITtangtang/p/3948786.html)
 
-[http:\/\/qifuguang.me\/2015\/09\/10\/\[Java并发包学习八\]深度剖析ConcurrentHashMap\/](http://qifuguang.me/2015/09/10/[Java%E5%B9%B6%E5%8F%91%E5%8C%85%E5%AD%A6%E4%B9%A0%E5%85%AB]%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90ConcurrentHashMap/)
+[http:\/\/qifuguang.me\/2015\/09\/10\/\[Java并发包学习八\]深度剖析ConcurrentHashMap\/](//qifuguang.me/2015/09/10/[Java%E5%B9%B6%E5%8F%91%E5%8C%85%E5%AD%A6%E4%B9%A0%E5%85%AB]%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90ConcurrentHashMap/)
 
 JDK 1.8：
 

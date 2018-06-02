@@ -1,7 +1,7 @@
-参考文献：http://www.infoq.com/cn/articles/java-blocking-queue
+参考文献：//www.infoq.com/cn/articles/java-blocking-queue
 ### 阻塞队列应用场景？
    多线程环境中，通过队列可以很容易实现数据共享，比如经典的“生产者”和“消费者”模型中，通过队列可以很便利地实现两者之间的数据共享。(如：Netty) 
-   - http://www.cnblogs.com/jackyuj/archive/2010/11/24/1886553.html
+   - //www.cnblogs.com/jackyuj/archive/2010/11/24/1886553.html
 ### 1. 什么是阻塞队列？
 
 阻塞队列（BlockingQueue）是一个支持两个附加操作的队列。这两个附加的操作是：在队列为空时，获取元素的线程会等待队列变为非空。当队列满时，存储元素的线程会等待队列可用。阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。

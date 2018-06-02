@@ -1,5 +1,5 @@
 ## Mybaits提供一级缓存，和二级缓存
-@See http://blog.csdn.net/u012373815/article/details/47069223
+@See //blog.csdn.net/u012373815/article/details/47069223
 
 ### **一级缓存是SqlSession级别的缓存**。
 
@@ -16,11 +16,11 @@
  Mybatis默认没有开启二级缓存需要在setting全局参数中配置开启二级缓存。如果缓存中有数据就不用从数据库中获取，大大提高系统性能。
  
  ### Mybatis二级缓存原理
- @See http://www.jianshu.com/p/5ff874fa696f 
+ @See //www.jianshu.com/p/5ff874fa696f 
  <ul>
  <li>学会对Mybatis配置二级缓存</li>
  <li>学会Mybatis二级缓存的实现方式</li>
- <li>学会整合外部缓存框架(如:<a href="http://www.ehcache.org/" target="_blank"><em>Ehcache</em></a>)</li>
+ <li>学会整合外部缓存框架(如:<a href="//www.ehcache.org/" target="_blank"><em>Ehcache</em></a>)</li>
  <li>学会自定义二级缓存</li>
  </ul>
  
@@ -71,7 +71,7 @@
 #### 2. Mybatis内部二级缓存的设计及工作模式
 
  <div class="image-package">
- <img src="http://upload-images.jianshu.io/upload_images/3167863-62a2bf5438197d58.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3167863-62a2bf5438197d58.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
+ <img src="//upload-images.jianshu.io/upload_images/3167863-62a2bf5438197d58.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="//upload-images.jianshu.io/upload_images/3167863-62a2bf5438197d58.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
  </div><p><br>首先我们要知道，mybatis的二级缓存是通过CacheExecutor实现的。CacheExecutor其实是Executor的代理对象。所有的查询操作，在CacheExecutor中都会先匹配缓存中是否存在，不存在则查询数据库。</p>
   
 #### 3. 内部二级缓存的实现详解
@@ -95,7 +95,7 @@
     executor = (Executor) interceptorChain.pluginAll(executor);
     return executor;
  }</code></pre>
- <p>重点在cacheEnabled这个参数。如果你看了我的文章[<a href="http://www.jianshu.com/p/82f0875ac22f" target="_blank">Mybatis配置文件解析过程详解</a>]，就应该知道了怎么设置cacheEnabled。对，就是此文章第一点说的开启Mybatis的全局配置项。我们继续看下CachingExecutor具体怎么实现的。</p>
+ <p>重点在cacheEnabled这个参数。如果你看了我的文章[<a href="//www.jianshu.com/p/82f0875ac22f" target="_blank">Mybatis配置文件解析过程详解</a>]，就应该知道了怎么设置cacheEnabled。对，就是此文章第一点说的开启Mybatis的全局配置项。我们继续看下CachingExecutor具体怎么实现的。</p>
  <pre class="hljs undefined"><code>public class CachingExecutor implements Executor {
      private Executor delegate;
      public CachingExecutor(Executor delegate) {
@@ -142,7 +142,7 @@
      return delegate.&lt;E&gt;query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
  }</code></pre>
  <p>如果MappedStatement中对应的Cache存在，并且对于的查询开启了二级缓存(useCache="true")，那么在CachingExecutor中会先从缓存中根据CacheKey获取数据，如果缓存中不存在则从数据库获取。这里的代码很简单，很容易理解。<br>说到缓存，有效期和缓存策略不得不提。在Mybatis中二级缓存也实现了有效期的控制和缓存策略。Mybatis中是使用装饰模式实现的，具体可以看下mybatis的cache包<br></p><div class="image-package">
- <img src="http://upload-images.jianshu.io/upload_images/3167863-476daef898ab2728.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3167863-476daef898ab2728.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
+ <img src="//upload-images.jianshu.io/upload_images/3167863-476daef898ab2728.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="//upload-images.jianshu.io/upload_images/3167863-476daef898ab2728.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
  </div><p><br>具体于配置如下：</p>
  <pre class="hljs undefined"><code>&lt;cache eviction="FIFO|LRU|SOFT|WEAK" flushInterval="300" size="100" /&gt;</code></pre>
  <p>对应具体实现源码可以参考CacheBuilder类的源码。</p>
@@ -174,10 +174,10 @@
  
 ####  5. mybatis二级缓存和分页插件同时使用产生的问题
  <p>问题：分页插件开启二级缓存后，分页查询时无论查询哪一页都返回第一页的数据</p>
- <blockquote><p>在之前讲解Mybatis的执行流程的时候提到，在开启cache的前提下，Mybatis的executor会先从缓存里读取数据，读取不到才去数据库查询。问题就出在这里，sql自动生成插件和分页插件执行的时机是在statementhandler里，而statementhandler是在executor之后执行的，无论sql自动生成插件和分页插件都是通过改写sql来实现的，executor在生成读取cache的key（key由sql以及对应的参数值构成）时使用都是原始的sql，这样当然就出问题了。<br>找到问题的原因后，解决起来就方便了。只要通过拦截器改写executor里生成key的方法，在生成可以时使用自动生成的sql（对应sql自动生成插件）或加入分页信息（对应分页插件）就可以了。<br>参考:<a href="http://blog.csdn.net/hupanfeng/article/details/16950161" target="_blank">http://blog.csdn.net/hupanfeng/article/details/16950161</a></p></blockquote>
+ <blockquote><p>在之前讲解Mybatis的执行流程的时候提到，在开启cache的前提下，Mybatis的executor会先从缓存里读取数据，读取不到才去数据库查询。问题就出在这里，sql自动生成插件和分页插件执行的时机是在statementhandler里，而statementhandler是在executor之后执行的，无论sql自动生成插件和分页插件都是通过改写sql来实现的，executor在生成读取cache的key（key由sql以及对应的参数值构成）时使用都是原始的sql，这样当然就出问题了。<br>找到问题的原因后，解决起来就方便了。只要通过拦截器改写executor里生成key的方法，在生成可以时使用自动生成的sql（对应sql自动生成插件）或加入分页信息（对应分页插件）就可以了。<br>参考:<a href="//blog.csdn.net/hupanfeng/article/details/16950161" target="_blank">//blog.csdn.net/hupanfeng/article/details/16950161</a></p></blockquote>
  6. mybatis整合第三方缓存框架
  <div class="image-package">
- <img src="http://upload-images.jianshu.io/upload_images/3167863-860765ed0fdbcd3e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="http://upload-images.jianshu.io/upload_images/3167863-860765ed0fdbcd3e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
+ <img src="//upload-images.jianshu.io/upload_images/3167863-860765ed0fdbcd3e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-original-src="//upload-images.jianshu.io/upload_images/3167863-860765ed0fdbcd3e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption"></div>
  </div><p><br>我们以ehcache为例。对于ehcache我只会简单的使用。这里我只是介绍Mybatis怎么使用ehcache，不对ehcache配置作说明。我们知道，在配置二级缓存时候，我们可以指定对应的实现类。这里需要mybatis-ehcache-1.0.3.jar这个jar包。在Mapper中我们只要配置如下即可。</p>
  <pre class="hljs undefined"><code>&lt;cache type="org.mybatis.caches.ehcache.EhcacheCache"/&gt;</code></pre>
  <p>当然，项目中ehcache的配置还是需要的。</p>

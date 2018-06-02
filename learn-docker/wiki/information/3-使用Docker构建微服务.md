@@ -72,7 +72,7 @@ Maven的安装比较简单，只需要下载后解压，配置环境变量即可
 
 ```shell
 cd /opt
-wget http://apache.fayea.com/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+wget //apache.fayea.com/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 tar -zxvf apache-maven-3.3.9-bin.tar.gz
 ```
 (2) 配置环境变量：
@@ -114,7 +114,7 @@ mvn -version
   <id>aliyun</id>
   <mirrorOf>central</mirrorOf>
   <name>Aliyun Central mirror</name>
-  <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+  <url>//maven.aliyun.com/nexus/content/groups/public</url>
 </mirror>
 ```
 

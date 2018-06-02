@@ -1,9 +1,9 @@
 # 项目简介
 本项目是《使用Spring Cloud与Docker实战微服务》：
 
-[http://git.oschina.net/itmuch/spring-cloud-book](http://git.oschina.net/itmuch/spring-cloud-book)
+[//git.oschina.net/itmuch/spring-cloud-book](//git.oschina.net/itmuch/spring-cloud-book)
 
-[http://www.github.com/eacdy/spring-cloud-book](http://www.github.com/eacdy/spring-cloud-book)
+[//www.github.com/eacdy/spring-cloud-book](//www.github.com/eacdy/spring-cloud-book)
 
  
 内容主要包含：

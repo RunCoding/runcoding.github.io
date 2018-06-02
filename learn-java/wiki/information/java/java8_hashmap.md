@@ -1,5 +1,5 @@
  <blockquote>
-<p>本文来自美团点评技术团队： <a href="http://tech.meituan.com/java-hashmap.html" target="_blank" rel="external">Java 8系列之重新认识HashMap</a></p>
+<p>本文来自美团点评技术团队： <a href="//tech.meituan.com/java-hashmap.html" target="_blank" rel="external">Java 8系列之重新认识HashMap</a></p>
 </blockquote>
 
 #### 摘要
@@ -9,7 +9,7 @@
 #### 简介
 
 <p>Java为数据结构中的映射定义了一个接口java.util.Map，此接口主要有四个常用的实现类，分别是<code>HashMap</code>、<code>Hashtable</code>、<code>LinkedHashMap</code>和<code>TreeMap</code>，类继承关系如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170616165413193" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616165413193" alt=""></p>
 <a id="more"></a>
 <p>下面针对各个实现类的特点做一些说明：</p>
 
@@ -33,7 +33,7 @@
 ##### 存储结构-字段
 
 从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下如所示。</p>
-<p><img src="http://img.blog.csdn.net/20170616165613975" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616165613975" alt=""></p>
 <p>这里需要讲明白两个问题：数据底层具体存储的是什么？这样的存储方式有什么？优点呢？</p>
 <p>(1) 从源码可知，HashMap类中有一个非常重要的字段，就是 <code>Node[] table</code>，即哈希桶数组，明显它是一个Node的数组。我们来看<code>Node</code>[JDK1.8]是何物。</p>
 
@@ -74,8 +74,8 @@ int size;
 <p>首先，Node[] table的初始化长度length(默认值是16)，Load factor为负载因子(默认值是0.75)，threshold是HashMap所能容纳的最大数据量的Node(键值对)个数。threshold = length * Load factor。也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多。</p>
 <p>结合负载因子的定义公式可知，threshold就是在此Load factor和length(数组长度)对应下允许的最大元素数目，超过这个数目就重新resize(扩容)，扩容后的HashMap容量是之前容量的两倍。默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值；相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1。</p>
 <p>size这个字段其实很好理解，就是HashMap中实际存在的键值对数量。注意和table的长度length、容纳最大键值对数量threshold的区别。而modCount字段主要用来记录HashMap内部结构发生变化的次数，主要用于迭代的快速失败。强调一点，内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化。</p>
-<p>在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这是一种非常规的设计，常规的设计是把桶的大小设计为素数。相对来说素数导致冲突的概率要小于合数，具体证明可以参考<a href="http://blog.csdn.net/liuqiyao_01/article/details/14475159" target="_blank" rel="external">http://blog.csdn.net/liuqiyao_01/article/details/14475159</a> ，Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）。HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。</p>
-<p>这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能。于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树。而当链表长度太长（默认超过8）时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入、删除、查找等算法。本文不再对红黑树展开讨论，想了解更多红黑树数据结构的工作原理可以参考<a href="http://blog.csdn.net/v_july_v/article/details/6105630" target="_blank" rel="external">http://blog.csdn.net/v_july_v/article/details/6105630</a> 。</p>
+<p>在HashMap中，哈希桶数组table的长度length大小必须为2的n次方(一定是合数)，这是一种非常规的设计，常规的设计是把桶的大小设计为素数。相对来说素数导致冲突的概率要小于合数，具体证明可以参考<a href="//blog.csdn.net/liuqiyao_01/article/details/14475159" target="_blank" rel="external">//blog.csdn.net/liuqiyao_01/article/details/14475159</a> ，Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）。HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位哈希桶索引位置时，也加入了高位参与运算的过程。</p>
+<p>这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能。于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树。而当链表长度太长（默认超过8）时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入、删除、查找等算法。本文不再对红黑树展开讨论，想了解更多红黑树数据结构的工作原理可以参考<a href="//blog.csdn.net/v_july_v/article/details/6105630" target="_blank" rel="external">//blog.csdn.net/v_july_v/article/details/6105630</a> 。</p>
 
 #### 功能实现-方法
 <p>HashMap的内部功能实现很多，本文主要从根据key获取哈希桶数组索引位置、put方法的详细执行、扩容过程三个具有代表性的点深入展开讲解。</p>
@@ -99,9 +99,9 @@ static int indexFor(int h, int length) {  //jdk1.7的源码，jdk1.8没有这个
 <p>这个方法非常巧妙，它通过h &amp; (table.length -1)来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当length总是2的n次方时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
 <p>在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。</p>
 <p>下面举例说明下，n为table的长度。</p>
-<p><img src="http://img.blog.csdn.net/20170616170559316" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616170559316" alt=""></p>
 <h4 id="2-分析HashMap的put方法"><a href="#2-分析HashMap的put方法" class="headerlink" title="2. 分析HashMap的put方法"></a><strong>2. 分析HashMap的put方法</strong></h4><p>HashMap的put方法执行过程可以通过下图来理解，自己有兴趣可以去对比源码更清楚地研究学习。</p>
-<p><img src="http://img.blog.csdn.net/20170616170655449" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616170655449" alt=""></p>
 <p>①. 判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；</p>
 <p>②. 根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③；</p>
 <p>③. 判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals；</p>
@@ -212,13 +212,13 @@ static int indexFor(int h, int length) {  //jdk1.7的源码，jdk1.8没有这个
 ```` 
 <p>newTable[i]的引用赋给了e.next，也就是使用了单链表的头插入方式，同一位置上新元素总会被放在链表的头部位置；这样先放在一个索引上的元素终会被放到Entry链的尾部(如果发生了hash冲突的话），这一点和Jdk1.8有区别，下文详解。在旧数组中同一条Entry链上的元素，通过重新计算索引位置后，有可能被放到了新数组的不同位置上。</p>
 <p>下面举个例子说明下扩容过程。假设了我们的hash算法就是简单的用key mod 一下表的大小（也就是数组的长度）。其中的哈希桶数组table的size=2， 所以key = 3、7、5，put顺序依次为 5、7、3。在mod 2以后都冲突在table[1]这里了。这里假设负载因子 loadFactor=1，即当键值对的实际大小size 大于 table的实际大小时进行扩容。接下来的三个步骤是哈希桶数组 resize成4，然后所有的Node重新rehash的过程。</p>
-<p><img src="http://img.blog.csdn.net/20170616171207339" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171207339" alt=""></p>
 <p>下面我们讲解下JDK1.8做了哪些优化。经过观测可以发现，我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。看下图可以明白这句话的意思，n为table的长度，图（a）表示扩容前的key1和key2两种key确定索引位置的示例，图（b）表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的哈希与高位运算结果。</p>
-<p><img src="http://img.blog.csdn.net/20170616171255934" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171255934" alt=""></p>
 <p>元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：</p>
-<p><img src="http://img.blog.csdn.net/20170616171330516" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171330516" alt=""></p>
 <p>因此，我们在扩充HashMap的时候，不需要像JDK1.7的实现那样重新计算hash，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的resize示意图：</p>
-<p><img src="http://img.blog.csdn.net/20170616171352780" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171352780" alt=""></p>
 <p>这个设计确实非常的巧妙，既省去了重新计算hash值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此resize的过程，均匀的把之前的冲突的节点分散到新的bucket了。这一块就是JDK1.8新增的优化点。有一点注意区别，JDK1.7中rehash的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出，JDK1.8不会倒置。有兴趣的同学可以研究下JDK1.8的resize源码，写的很赞，如下:</p>
 
 ````java
@@ -332,13 +332,13 @@ public class HashMapInfiniteLoop {
 
 <p>其中，map初始化为一个长度为2的数组，loadFactor=0.75，threshold=2*0.75=1，也就是说当put第二个key的时候，map就需要进行resize。</p>
 <p>通过设置断点让线程1和线程2同时debug到transfer方法(3.3小节代码块)的首行。注意此时两个线程已经成功添加数据。放开thread1的断点至transfer方法的“Entry next = e.next;” 这一行；然后放开线程2的的断点，让线程2进行resize。结果如下图。</p>
-<p><img src="http://img.blog.csdn.net/20170616171711863" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171711863" alt=""></p>
 <p>注意，Thread1的 e 指向了key(3)，而next指向了key(7)，其在线程二rehash后，指向了线程二重组后的链表。</p>
 <p>线程一被调度回来执行，先是执行 newTalbe[i] = e， 然后是e = next，导致了e指向了key(7)，而下一次循环的next = e.next导致了next指向了key(3)。</p>
-<p><img src="http://img.blog.csdn.net/20170616171741879" alt=""></p>
-<p><img src="http://img.blog.csdn.net/20170616171859708" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171741879" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171859708" alt=""></p>
 <p>e.next = newTable[i] 导致 key(3).next 指向了 key(7)。注意：此时的key(7).next 已经指向了key(3)， 环形链表就这样出现了。</p>
-<p><img src="http://img.blog.csdn.net/20170616171810754" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616171810754" alt=""></p>
 <p>于是，当我们用线程一调用map.get(11)时，悲剧就出现了——Infinite Loop。</p>
 
 #### JDK1.8与JDK1.7的性能对比
@@ -408,7 +408,7 @@ static void test(int mapSize) {
 ```
 
 <p>在测试中会查找不同的值，然后度量花费的时间，为了计算getKey的平均时间，我们遍历所有的get方法，计算总的时间，除以key的数量，计算一个平均值，主要用来比较，绝对值可能会受很多环境因素的影响。结果如下：</p>
-<p><img src="http://img.blog.csdn.net/20170616172058883" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616172058883" alt=""></p>
 <p>通过观测测试结果可知，JDK1.8的性能要高于JDK1.7 15%以上，在某些size的区域上，甚至高于100%。由于Hash算法较均匀，JDK1.8引入的红黑树效果不明显，下面我们看看Hash不均匀的的情况。</p>
 <h3 id="Hash极不均匀的情况"><a href="#Hash极不均匀的情况" class="headerlink" title="Hash极不均匀的情况"></a><strong>Hash极不均匀的情况</strong></h3><p>假设我们又一个非常差的Key，它们所有的实例都返回相同的hashCode值。这是使用HashMap最坏的情况。代码修改如下：</p>
 
@@ -423,7 +423,7 @@ static void test(int mapSize) {
 ```
 
 <p>仍然执行main方法，得出的结果如下表所示：</p>
-<p><img src="http://img.blog.csdn.net/20170616172148396" alt=""></p>
+<p><img src="//img.blog.csdn.net/20170616172148396" alt=""></p>
 <p>从表中结果中可知，随着size的变大，JDK1.7的花费时间是增长的趋势，而JDK1.8是明显的降低趋势，并且呈现对数增长稳定。当一个链表太长的时候，HashMap会动态的将它替换成一个红黑树，这话的话会将时间复杂度从O(n)降为O(logn)。hash算法均匀和不均匀所花费的时间明显也不相同，这两种情况的相对比较，可以说明一个好的hash算法的重要性。</p>
 <pre><code>测试环境：处理器为2.2 GHz Intel Core i7，内存为16 GB 1600 MHz DDR3，SSD硬盘，使用默认的JVM参数，运行在64位的OS X 10.10.1上。
 </code></pre><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><p>(1) 扩容是一个特别耗性能的操作，所以当程序员在使用HashMap的时候，估算map的大小，初始化的时候给一个大致的数值，避免map进行频繁的扩容。</p>
@@ -433,11 +433,11 @@ static void test(int mapSize) {
 <p>(5) 还没升级JDK1.8的，现在开始升级吧。HashMap的性能提升仅仅是JDK1.8的冰山一角。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ol>
 <li>JDK1.7&amp;JDK1.8 源码。</li>
-<li>酷壳COOLSHELL，<a href="http://coolshell.cn/articles/9606.html" target="_blank" rel="external">疫苗：JAVA HASHMAP的死循环</a>，2013</li>
-<li>CSDN博客频道，<a href="http://blog.csdn.net/xuefeng0707/article/details/40797085" target="_blank" rel="external">HashMap多线程死循环问题</a>，2014。</li>
-<li>红黑联盟，<a href="http://www.2cto.com/kf/201505/401433.html" target="_blank" rel="external">Java类集框架之HashMap(JDK1.8)源码剖析</a>，2015。</li>
-<li>CSDN博客频道， <a href="http://blog.csdn.net/v_july_v/article/details/6105630" target="_blank" rel="external">教你初步了解红黑树</a>，2010。</li>
+<li>酷壳COOLSHELL，<a href="//coolshell.cn/articles/9606.html" target="_blank" rel="external">疫苗：JAVA HASHMAP的死循环</a>，2013</li>
+<li>CSDN博客频道，<a href="//blog.csdn.net/xuefeng0707/article/details/40797085" target="_blank" rel="external">HashMap多线程死循环问题</a>，2014。</li>
+<li>红黑联盟，<a href="//www.2cto.com/kf/201505/401433.html" target="_blank" rel="external">Java类集框架之HashMap(JDK1.8)源码剖析</a>，2015。</li>
+<li>CSDN博客频道， <a href="//blog.csdn.net/v_july_v/article/details/6105630" target="_blank" rel="external">教你初步了解红黑树</a>，2010。</li>
 <li>Java Code Geeks，<a href="https://www.javacodegeeks.com/2014/04/hashmap-performance-improvements-in-java-8.html" target="_blank" rel="external">HashMap performance improvements in Java 8</a>，2014。</li>
-<li>Importnew，<a href="http://www.importnew.com/13384.html" target="_blank" rel="external">危险！在HashMap中将可变对象用作Key</a>，2014。</li>
-<li>CSDN博客频道，<a href="http://blog.csdn.net/liuqiyao_01/article/details/14475159" target="_blank" rel="external">为什么一般hashtable的桶数会取一个素数</a>，2013。</li>
+<li>Importnew，<a href="//www.importnew.com/13384.html" target="_blank" rel="external">危险！在HashMap中将可变对象用作Key</a>，2014。</li>
+<li>CSDN博客频道，<a href="//blog.csdn.net/liuqiyao_01/article/details/14475159" target="_blank" rel="external">为什么一般hashtable的桶数会取一个素数</a>，2013。</li>
 </ol>

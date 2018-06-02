@@ -112,7 +112,7 @@
 RUN apt-get -y install nginx
 </code></pre>
 <h4 id="add-将外部文件拷贝到镜像里src可以为url">ADD , 将外部文件拷贝到镜像里,src可以为url</h4>
-<pre><code>ADD http://nicescale.com/  /data/nicescale.tgz
+<pre><code>ADD //nicescale.com/  /data/nicescale.tgz
 </code></pre>
 <h4 id="workdir-pathtoworkdir-设置工作目录">WORKDIR /path/to/workdir, 设置工作目录</h4>
 <pre><code>WORKDIR /var/www

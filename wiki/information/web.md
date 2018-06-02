@@ -170,10 +170,10 @@ SYN cookies技术
 ###  参考资料
 
 - 计算机网络：自顶向下方法
-- TCP三次握手及四次挥手详细图解        http://www.cnblogs.com/hnrainll/archive/2011/10/14/2212415.html
-- TCP协议三次握手过程分析             http://www.cnblogs.com/rootq/articles/1377355.html
-- TCP协议中的三次握手和四次挥手(图解)  http://blog.csdn.net/whuslei/article/details/6667471
-- 百度百科：SYN攻击                  http://baike.baidu.com/subview/32754/8048820.htm
+- TCP三次握手及四次挥手详细图解        //www.cnblogs.com/hnrainll/archive/2011/10/14/2212415.html
+- TCP协议三次握手过程分析             //www.cnblogs.com/rootq/articles/1377355.html
+- TCP协议中的三次握手和四次挥手(图解)  //blog.csdn.net/whuslei/article/details/6667471
+- 百度百科：SYN攻击                  //baike.baidu.com/subview/32754/8048820.htm
 
 
 ## HTTP的特性
@@ -233,7 +233,7 @@ application/x-www-form-urlencoded
 multipart/form-data
 这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 <form> 表单的 enctype 等于 multipart/form-data。直接来看一个请求示例：
 
-POST http://www.example.com HTTP/1.1
+POST //www.example.com HTTP/1.1
 Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
 
 ------WebKitFormBoundaryrGKCBY7qhFd3TrwA
@@ -412,10 +412,10 @@ CSRF(XSRF) 顾名思义，是伪造请求，冒充用户在站内的正常操作
 
 例如，一论坛网站的发贴是通过 GET 请求访问，点击发贴之后 JS 把发贴内容拼接成目标 URL 并访问：
 
-  http://example.com/bbs/create_post.php?title=标题&content=内容
+  //example.com/bbs/create_post.php?title=标题&content=内容
 那么，我们只需要在论坛中发一帖，包含一链接：
 
-  http://example.com/bbs/create_post.php?title=我是脑残&content=哈哈
+  //example.com/bbs/create_post.php?title=我是脑残&content=哈哈
 只要有用户点击了这个链接，那么他们的帐户就会在不知情的情况下发布了这一帖子。可能这只是个恶作剧，但是既然发贴的请求可以伪造，那么删帖、转帐、改密码、发邮件全都可以伪造。
 
 如何防范 CSRF 攻击？可以注意以下几点：
@@ -468,10 +468,10 @@ XSS 是实现 CSRF 的诸多途径中的一条，但绝对不是唯一的一条�
 
 如果不需要用户输入 HTML，可以直接对用户的输入进行 HTML escape 。下面一小段脚本：
 
-  <script>window.location.href=”http://www.baidu.com”;</script>
+  <script>window.location.href=”//www.baidu.com”;</script>
 经过 escape 之后就成了：
 
-  &lt;script&gt;window.location.href=&quot;http://www.baidu.com&quot;&lt;/script&gt;
+  &lt;script&gt;window.location.href=&quot;//www.baidu.com&quot;&lt;/script&gt;
 它现在会像普通文本一样显示出来，变得无毒无害，不能执行了。
 
 当我们需要用户输入 HTML 的时候，需要对用户输入的内容做更加小心细致的处理。仅仅粗暴地去掉 script 标签是没有用的，任何一个合法 HTML 标签都可以添加 onclick 一类的事件属性来执行 JavaScript。更好的方法可能是，将用户的输入使用 HTML 解析库进行解析，获取其中的数据。然后根据用户原有的标签属性，重新构建 HTML 元素树。构建的过程中，所有的标签、属性都只从白名单中拿取。

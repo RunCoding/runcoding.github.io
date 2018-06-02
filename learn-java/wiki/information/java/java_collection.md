@@ -95,7 +95,7 @@ Map - ConcurrentHashMap
 -  HashMap的iterator迭代器执行快速失败机制，也就是说在迭代过程中修改集合结构，除非调用迭代器自身的remove方法，否则以其他任何方式的修改都将抛出并发修改异常。而Hashtable返回的Enumeration不是快速失败的。
 
 注：`Fast-fail`机制:在使用迭代器的过程中有其它线程修改了集合对象结构或元素数量,都将抛出ConcurrentModifiedException，但是抛出这个异常是不保证的，我们不能编写依赖于此异常的程序。<br>
- <a href='http://www.importnew.com/22011.html'>为什么HashMap是线程不安全的</a>?
+ <a href='//www.importnew.com/22011.html'>为什么HashMap是线程不安全的</a>?
  答：HashMap在扩容时需要resize，而扩容时需要重新计算rehash，需要transfer(遍历所有元素，转移元素)
 
 #### List集合和Set集合

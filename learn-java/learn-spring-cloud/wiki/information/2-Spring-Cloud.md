@@ -10,7 +10,7 @@ Spring Cloud 包含了多个子项目：
 
 > 例如：Spring Cloud Config、Spring Cloud Netflix等
 
-Spring Cloud 项目主页：[http://projects.spring.io/spring-cloud/](http://projects.spring.io/spring-cloud/)
+Spring Cloud 项目主页：[//projects.spring.io/spring-cloud/](//projects.spring.io/spring-cloud/)
 
 
 
@@ -73,7 +73,7 @@ Spring Cloud 项目主页：[http://projects.spring.io/spring-cloud/](http://pro
 
 * Spring Cloud所有的配置项：
 
-[http://cloud.spring.io/spring-cloud-static/Brixton.SR5/#_appendix_compendium_of_configuration_properties](http://cloud.spring.io/spring-cloud-static/Brixton.SR5/#_appendix_compendium_of_configuration_properties)
+[//cloud.spring.io/spring-cloud-static/Brixton.SR5/#_appendix_compendium_of_configuration_properties](//cloud.spring.io/spring-cloud-static/Brixton.SR5/#_appendix_compendium_of_configuration_properties)
 
 
 
@@ -85,8 +85,8 @@ Spring Cloud 项目主页：[http://projects.spring.io/spring-cloud/](http://pro
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="//maven.apache.org/POM/4.0.0" xmlns:xsi="//www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="//maven.apache.org/POM/4.0.0 //maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.itmuch.cloud</groupId>

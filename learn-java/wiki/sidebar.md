@@ -13,7 +13,7 @@
      - [Spring Cloud]({{baseDomain}}?sidebar=learn-java/learn-spring-cloud) 
      - [Spring Boot](https://doc.yonyoucloud.com/doc/Spring-Boot-Reference-Guide/I.%20Spring%20Boot%20Documentation/index.html) 
   
-  - [分布式锁](http://www.jianshu.com/p/535efcab356d) 
+  - [分布式锁](//www.jianshu.com/p/535efcab356d) 
 
 - [Web](learn-java/wiki/information/web)
 - 数据持久化   
@@ -28,14 +28,14 @@
      - [Memcached](learn-java/wiki/information/cache/memcached)     
      - [全站缓存时代](https://mp.weixin.qq.com/s/Qda9sayJI2hq_nzvuROG4Q)  
 - 测试
-  - [全链路压测](http://jm.taobao.org/2017/03/30/20170330/)     
+  - [全链路压测](//jm.taobao.org/2017/03/30/20170330/)     
 - 服务相关 
   - Docker
   - Jenkins 
   - 服务监控
    - [Grafana](https://kibana.logstash.es/content/elasticsearch/other/grafana.html)
-   - [Kibana](http://www.cnblogs.com/hanyifeng/p/5860731.html)
-   - [JVM GC](http://blog.csdn.net/wwd0501/article/details/78404105)
+   - [Kibana](//www.cnblogs.com/hanyifeng/p/5860731.html)
+   - [JVM GC](//blog.csdn.net/wwd0501/article/details/78404105)
    - [性能分析](learn-java/wiki/information/performance/performance)
 - [版本控制](/wiki/information/version)   
 - [面试经](learn-java/wiki/information/interview)    

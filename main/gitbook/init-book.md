@@ -1,5 +1,5 @@
-## http://www.chengweiyang.cn/gitbook/customize/book.json.html 
-## http://caibaojian.com/gitbook/format/plugins.html
+## //www.chengweiyang.cn/gitbook/customize/book.json.html 
+## //caibaojian.com/gitbook/format/plugins.html
 ## Setup
 
 1. Install node.js and npm package.

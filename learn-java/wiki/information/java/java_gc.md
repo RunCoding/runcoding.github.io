@@ -1,5 +1,5 @@
 ### JVM内存模型
-<img src='http://upload-images.jianshu.io/upload_images/44770-3e7a9bf747d90dbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240'>
+<img src='//upload-images.jianshu.io/upload_images/44770-3e7a9bf747d90dbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240'>
 - Java虚拟机规范定义Java内存模型，尝试屏蔽掉各种硬件和操作系统的访问差异；<br>
 - JVM内存模型的目标：定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存取出来这样的细节；<br>
 - volatile关键字：当一个变量用volatile关键字限定后，会有两个语义：<br>
@@ -10,7 +10,7 @@
     synchronized关键字：当一个线程对一个变量加锁的时候，就会清空这个变量在当前工作内存中的值，因此该关键字同时满足了可见性和原子性。<br>
 
 ### Java运行时数据区
-<img src='http://upload-images.jianshu.io/upload_images/44770-3dc57436ce2ef1d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240'>
+<img src='//upload-images.jianshu.io/upload_images/44770-3dc57436ce2ef1d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240'>
 - `程序计数器（PC）`：Java线程私有，类似于操作系统里的PC计数器，用于指定下一条需要执行的字节码的地址；
 - `Java虚拟机栈`：Java线程私有，虚拟机展描述的是Java方法执行的内存模型;<br>
     - 每个方法在执行的时候，都会创建一个栈帧用于存储局部变量、操作数、动态链接、方法出口等信息；<br>
@@ -49,7 +49,7 @@
 
 ### 虚拟机参数设置
 代码的运行参数设置为： -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
-<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/gc_x.png" >
+<img src="//p9on00i25.bkt.clouddn.com/learn-java/java/gc_x.png" >
 
 #### 参数详解
 
@@ -65,8 +65,8 @@
  -XX:+PrintGCTimeStamps 改成-XX:+PrintGCDateStamps 将相对时间改成绝对时间
  -XX:-HeapDumpOnOutOfMemoryError改成-XX:+HeapDumpOnOutOfMemoryError    OOM自动导出dump信息
  -XX:-OmitStackTraceInFastThrow  关闭此项优化可以强制打印堆栈。解决NPE没有堆栈信息问题
- -Xloggc:/data/applogs/heap_trace.txt    GClog位置,可以使用在线工具分析  http://gceasy.io/
-                                         http://fastthread.io/   线程分析
+ -Xloggc:/data/applogs/heap_trace.txt    GClog位置,可以使用在线工具分析  //gceasy.io/
+                                         //fastthread.io/   线程分析
 
 -Xms / -Xmx — 堆的初始大小 / 堆的最大大小
 -Xmn — 堆中年轻代的大小

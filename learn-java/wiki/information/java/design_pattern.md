@@ -1,5 +1,5 @@
 # Java设计模式-DesignPattern
-> 参照Hongyang的CSDN博客所写。如有错误欢迎指正，如有侵权，请联系我删除。http://www.jianshu.com/p/61b67ca754a3
+> 参照Hongyang的CSDN博客所写。如有错误欢迎指正，如有侵权，请联系我删除。//www.jianshu.com/p/61b67ca754a3
 
 #### Java 设计模式：
 观察者模式、工厂模式、单例模式、策略模式、命令模式、装饰者模式、外观模式、模板方法模式、状态模式
@@ -17,25 +17,25 @@
 
 ## 博客目录：
 
- - 1.[ 设计模式 观察者模式(Observer Pattern) 以微信公众服务为例](http://blog.csdn.net/lmj623565791/article/details/24179699)
+ - 1.[ 设计模式 观察者模式(Observer Pattern) 以微信公众服务为例](//blog.csdn.net/lmj623565791/article/details/24179699)
 
- - 2.[ 设计模式 工厂模式(Factory Pattern) 从卖肉夹馍说起](http://blog.csdn.net/lmj623565791/article/details/24460585)
+ - 2.[ 设计模式 工厂模式(Factory Pattern) 从卖肉夹馍说起](//blog.csdn.net/lmj623565791/article/details/24460585)
 
- - 3.[ 设计模式 单例设计模式(Singleton Pattern) 完全解析](http://blog.csdn.net/dmk877/article/details/50311791)
+ - 3.[ 设计模式 单例设计模式(Singleton Pattern) 完全解析](//blog.csdn.net/dmk877/article/details/50311791)
 
- - 4.[ 设计模式 策略模式(Strategy Pattern) 以角色游戏为背景](http://blog.csdn.net/lmj623565791/article/details/24116745)
+ - 4.[ 设计模式 策略模式(Strategy Pattern) 以角色游戏为背景](//blog.csdn.net/lmj623565791/article/details/24116745)
 
- - 5.[ 设计模式 适配器模式(Adapter Pattern) 以手机充电器为例](http://blog.csdn.net/lmj623565791/article/details/25833393)
+ - 5.[ 设计模式 适配器模式(Adapter Pattern) 以手机充电器为例](//blog.csdn.net/lmj623565791/article/details/25833393)
 
- - 6.[ 设计模式 命令模式(Command Pattern) 管理智能家电](http://blog.csdn.net/lmj623565791/article/details/24602057)
+ - 6.[ 设计模式 命令模式(Command Pattern) 管理智能家电](//blog.csdn.net/lmj623565791/article/details/24602057)
 
- - 7.[ 设计模式 装饰者模式(Decorator Pattern) 带你重回传奇世界](http://blog.csdn.net/lmj623565791/article/details/24269409)
+ - 7.[ 设计模式 装饰者模式(Decorator Pattern) 带你重回传奇世界](//blog.csdn.net/lmj623565791/article/details/24269409)
 
- - 8.[ 设计模式 外观模式(Facade Pattern) 一键电影模式](http://blog.csdn.net/lmj623565791/article/details/25837275)
+ - 8.[ 设计模式 外观模式(Facade Pattern) 一键电影模式](//blog.csdn.net/lmj623565791/article/details/25837275)
 
- - 9.[ 设计模式 模版方法模式(Template Method Pattern) 展现程序员的一天](http://blog.csdn.net/lmj623565791/article/details/26276093)
+ - 9.[ 设计模式 模版方法模式(Template Method Pattern) 展现程序员的一天](//blog.csdn.net/lmj623565791/article/details/26276093)
 
- - 10.[ 设计模式 状态模式(State Pattern) 以自动售货机为例](http://blog.csdn.net/lmj623565791/article/details/26350617)
+ - 10.[ 设计模式 状态模式(State Pattern) 以自动售货机为例](//blog.csdn.net/lmj623565791/article/details/26350617)
 
 
 ## 源码Source Code
