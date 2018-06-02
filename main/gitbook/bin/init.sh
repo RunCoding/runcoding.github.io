@@ -18,4 +18,4 @@ cp -r  _book/.  ../../../runcodingbook
 rm -rf _book
 rm -rf wiki
 ## 提交文档
-## cd ../../../runcodingbook && git add . && git commit -a -m 'Update doc' && git push
+cd ../../../runcodingbook && git add . && git commit -a -m 'Update doc' && git push

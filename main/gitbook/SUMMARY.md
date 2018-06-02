@@ -13,9 +13,7 @@
      - [Spring应用](learn-java/wiki/information/spring/spring_info.md)
      - [Spring MVC](learn-java/wiki/information/spring/spring_mvc.md)  
      - [Spring Boot](https://doc.yonyoucloud.com/doc/Spring-Boot-Reference-Guide/I.%20Spring%20Boot%20Documentation/index.html) 
-  
-  - [分布式锁](//www.jianshu.com/p/535efcab356d) 
-
+     
 - [Web](learn-java/wiki/information/web.md)
 - 数据持久化   
   - [Mysql](learn-java/wiki/information/database/mysql.md) 
