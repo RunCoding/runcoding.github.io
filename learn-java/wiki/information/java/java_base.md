@@ -463,7 +463,7 @@ _类加载的过程_：`加载、连接（验证、准备、解析）、初始�
 同步阻塞 --> 线程在获取synchronized同步锁失败（被其他线程占用）<br>
 其他阻塞 --> 通过调用线程的发出了I/O请求时，线程会进入同步阻塞状态<br>
 - 死亡状态（Dead）:线程执行完了或异常退出了run()方法。结束生命周期<br>
-<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/thread_run.png" >
+<img src="https://runcoding.github.io/static/wiki/learn-java/java/thread_run.png" >
 
 #### 同步操作
 - CountDownLatch 通常用来使主线程等待其他线程执行完再执行所用到

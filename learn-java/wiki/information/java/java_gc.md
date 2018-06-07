@@ -49,7 +49,7 @@
 
 ### 虚拟机参数设置
 代码的运行参数设置为： -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
-<img src="http://p9on00i25.bkt.clouddn.com/learn-java/java/gc_x.png" >
+<img src="https://runcoding.github.io/static/wiki/learn-java/java/gc_x.png" >
 
 #### 参数详解
 
