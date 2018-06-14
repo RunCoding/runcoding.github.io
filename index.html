@@ -122,12 +122,12 @@
                     runcodingBrowse(dateTime);
 
                     return md
+                        + '\n<br><div id="disqus_thread"></div>'
                         + '\n\n'
                         + '<br>最后更新 {docsify-updated} '
                         + editUrl
                         + author
-                        + browse
-                        + '\n<br><div id="disqus_thread"></div>';
+                        + browse  ;
                 })
 
                 hook.afterEach(function(html, next) {
