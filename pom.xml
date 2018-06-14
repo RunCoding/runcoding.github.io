@@ -19,6 +19,10 @@
 		<!--  Netty 4 demo -->
 		<module>learn-java/netty</module>
 
+		<module>learn-java/rxjava</module>
+
+		<module>learn-java/guava</module>
+
 		<!-- Spring Boot 集成 restful -->
 		<module>learn-java/springboot/restful</module>
 		<module>learn-java/springboot/restful-simple</module>
