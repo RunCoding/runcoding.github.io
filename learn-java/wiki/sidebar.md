@@ -30,6 +30,7 @@
 - 测试
   - [全链路压测](//jm.taobao.org/2017/03/30/20170330/)     
 - 服务相关  
+  - [Sentinel限量](https://github.com/alibaba/Sentinel)
   - 分布式跟踪系统
    - [zipkin-Twitter](https://zipkin.io/)
    - [Dapper-Google](https://bigbully.github.io/Dapper-translation/) 
