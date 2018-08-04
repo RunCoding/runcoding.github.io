@@ -79,7 +79,7 @@
             renderer: {
                 code: function(code, lang) {
                     var html = '';
-                    if(code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/) ||  code.match(/^mermaid/) ){
+                    if(lang.match(/^sequenceDiagram/) || lang.match(/^graph/) || lang.match(/^gantt/) ||  langs.match(/^mermaid/) ){
                         var cb = function(svgGraph) {
                             //console.log(svgGraph)
                             code = svgGraph;
