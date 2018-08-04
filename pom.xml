@@ -21,7 +21,10 @@
 
 		<module>learn-java/rxjava</module>
 
+		<module>learn-java/reactor</module>
+
 		<module>learn-java/guava</module>
+		<module>learn-java/mq/kafka</module>
 
 		<!-- Spring Boot 集成 restful -->
 		<module>learn-java/springboot/restful</module>

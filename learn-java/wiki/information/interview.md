@@ -50,9 +50,9 @@ _对象直接比较_ , `对象`==`对象`,代码可以这么写，但是一般�
 ### **中间件**
 #### _MQ的理解_
 ##### _RocketMQ的原理与实践_
-  - 原理与实践：//www.jianshu.com/p/453c6e7ff81c
-  - RocketMQ原理解析：//blog.csdn.net/column/details/learningrocketmq.html
-  - 阿里中间件团队博客：//jm.taobao.org/2017/01/12/rocketmq-quick-start-in-10-minutes/
+  - 原理与实践：www.jianshu.com/p/453c6e7ff81c
+  - RocketMQ原理解析：blog.csdn.net/column/details/learningrocketmq.html
+  - 阿里中间件团队博客：jm.taobao.org/2017/01/12/rocketmq-quick-start-in-10-minutes/
   
 #### _RPC_
 #####  Netty的工作原理
@@ -60,7 +60,7 @@ _对象直接比较_ , `对象`==`对象`,代码可以这么写，但是一般�
 - https://dubbo.gitbooks.io/dubbo-dev-book/
 - https://dubbo.gitbooks.io/dubbo-user-book/
 - https://dubbo.gitbooks.io/dubbo-admin-book/ 
-- //dubbo.io
+- dubbo.io
 
 ### **缓存**
 #### _Redis的理解_

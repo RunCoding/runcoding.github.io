@@ -83,7 +83,7 @@ public class FileClient {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
-		new FileClient("localhost", 8082, "D:/reciveFile.txt").run();
+		new FileClient("localhost", 8082, "/Users/xukai/Downloads/x.png").run();
 	}
 
 }

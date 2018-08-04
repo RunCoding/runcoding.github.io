@@ -27,7 +27,7 @@ public class WebsocketChatServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup)
+             b.group(bossGroup, workerGroup)
              .channel(NioServerSocketChannel.class)
              .childHandler(new WebsocketChatServerInitializer())
              .option(ChannelOption.SO_BACKLOG, 128)
@@ -36,7 +36,8 @@ public class WebsocketChatServer {
     		System.out.println("WebsocketChatServer 启动了" + port);
     		
             // 绑定端口，开始接收进来的连接
-            ChannelFuture f = b.bind(port).sync();
+            ChannelFuture bind = b.bind(port);
+               ChannelFuture f = bind.sync();
 
             // 等待服务器  socket 关闭 。
             // 在这个例子中，这不会发生，但你可以优雅地关闭你的服务器。
