@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runcoding.dao.order.OrderMapper">
+    
+
+    <select id="select" parameterType="java.lang.Long" resultType="com.runcoding.model.po.order.OrderPo">
+        select 
+        id as id, order_number as orderNumber, user_id as userId, create_time as createTime, 
+            update_time as updateTime
+        from `order`
+        where id = #{id}
+    </select>
+    
+
+    <insert id="insert" keyProperty="id" parameterType="com.runcoding.model.po.order.OrderPo" useGeneratedKeys="true">
+        insert into `order` (order_number, user_id)
+        values ( #{orderNumber}, #{userId})
+    </insert>
+    
+
+    <update id="update" parameterType="com.runcoding.model.po.order.OrderPo">
+        update `order`
+        <set> order_number = #{orderNumber}
+        </set>
+         where id = #{id}
+    </update>
+    
+
+    <delete id="delete" parameterType="com.runcoding.model.po.order.OrderPo">
+        delete from `order`
+         where id = #{id}
+    </delete>
+</mapper>

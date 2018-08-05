@@ -11,28 +11,28 @@
 	<modules>
 
 		<!-- Java 基础Demo -->
-		<module>learn-java/base-java</module>
+		<module>develop/back_end/java/base-java</module>
 
 		<!-- spring-cloud-microservice -->
-		<module>learn-java/learn-spring-cloud</module>
+		<module>develop/back_end/java/learn-spring-cloud</module>
 
 		<!--  Netty 4 demo -->
-		<module>learn-java/netty</module>
+		<module>develop/back_end/java/netty</module>
 
-		<module>learn-java/rxjava</module>
+		<module>develop/back_end/java/rxjava</module>
 
-		<module>learn-java/reactor</module>
+		<module>develop/back_end/java/reactor</module>
 
-		<module>learn-java/guava</module>
-		<module>learn-java/mq/kafka</module>
+		<module>develop/back_end/java/guava</module>
+		<module>develop/back_end/java/mq/kafka</module>
 
 		<!-- Spring Boot 集成 restful -->
-		<module>learn-java/springboot/restful</module>
-		<module>learn-java/springboot/restful-simple</module>
-		<module>learn-java/springboot/runcoding-core</module>
-		<module>learn-java/springboot/runcoding-business</module>
+		<module>develop/back_end/java/springboot/restful</module>
+		<module>develop/back_end/java/springboot/restful-simple</module>
+		<module>develop/back_end/java/springboot/runcoding-core</module>
+		<module>develop/back_end/java/springboot/runcoding-business</module>
 		<!-- 当当分库分表插件 -->
-		<module>learn-java/spring-mvc/runcoding-shardingjdbc</module>
+		<module>develop/back_end/java/spring-mvc/runcoding-shardingjdbc</module>
 
 
 

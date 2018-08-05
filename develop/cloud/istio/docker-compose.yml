@@ -1,0 +1,39 @@
+version: '2'
+services:
+  etcd:
+    image: quay.io/coreos/etcd:latest
+    networks:
+      istiomesh:
+        aliases:
+          - etcd
+    ports:
+      - "4001:4001"
+      - "2380:2380"
+      - "2379:2379"
+    environment:
+      - SERVICE_IGNORE=1
+    command: [
+              "/usr/local/bin/etcd",
+              "-advertise-client-urls=http://0.0.0.0:2379",
+              "-listen-client-urls=http://0.0.0.0:2379"
+             ]
+
+  istio-apiserver:
+    image: gcr.io/google_containers/kube-apiserver-amd64:v1.7.3
+    networks:
+      istiomesh:
+        ipv4_address: 172.28.0.13
+        aliases:
+          - apiserver
+    ports:
+      - "8080:8080"
+    privileged: true
+    environment:
+      - SERVICE_IGNORE=1
+    command: [
+               "kube-apiserver", "--etcd-servers", "http://etcd:2379",
+               "--service-cluster-ip-range", "10.99.0.0/16",
+               "--insecure-port", "8080",
+               "-v", "2",
+               "--insecure-bind-address", "0.0.0.0"
+             ]
