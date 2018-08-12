@@ -30,6 +30,11 @@ services:
       - SERVICE_IGNORE=1
     command: ["kube-apiserver", "--etcd-servers", "http://etcd:2379", "--service-cluster-ip-range", "10.99.0.0/16", "--insecure-port", "8080", "-v", "2", "--insecure-bind-address", "0.0.0.0"]
 
+
+  kubernetes-dashboard:
+    image: mritd/kubernetes-dashboard-amd64:v1.5.1
+
+
   consul:
     image: gliderlabs/consul-server
     networks:

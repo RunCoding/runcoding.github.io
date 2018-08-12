@@ -2,7 +2,7 @@
 
 var express = require('express');
 var path = require('path');
-var PORT = 3306;
+var PORT = 3333;
 
 var app = express();
 

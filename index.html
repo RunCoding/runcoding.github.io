@@ -115,10 +115,10 @@
                 hook.beforeEach(function(md) {
                     // 每次开始解析 Markdown 内容时调用
                     var url = 'https://github.com/runcoding/runcoding.github.io/edit/master/wiki/zh-cn' + vm.route.file;
-                    var editUrl = '[编辑](' + url + ')\n';
+                    var editUrl = '[编辑](' + url + ') ';
                     var author = '  @[联系作者](https://runcoding.github.io)';
                     var dateTime = new Date().getTime();
-                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">'+Math.floor(Math.random()*10000)+' 🕶️</span>次';
+                    var browse = '  &浏览<span class="run_coding_browse_'+dateTime+'">'+Math.floor(Math.random()*10000)+'</span>次';
 
                     runcodingBrowse(dateTime);
 
