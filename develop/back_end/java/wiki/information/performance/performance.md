@@ -217,6 +217,21 @@ PS Old Generation
 
 ```
 
+## jol-cli现实Java对象大小 
+- [官网](http://openjdk.java.net/projects/code-tools/jol/)
+- [jol-cli-0.9-full.jar下载](http://central.maven.org/maven2/org/openjdk/jol/jol-cli/0.9/jol-cli-0.9-full.jar)
+
+[ObjectSize](../../../base-java/src/main/java/com/runcoding/learn/jvm/ObjectSize.java ':include')
+
+### 查看jdk自带类
+```sh
+> java -jar jol-cli-0.9-full.jar internals java.util.HashMap
+```
+
+## jc-tools
+[JCTools 官网](http://jctools.github.io/JCTools/)
+JCTools是服务虚拟机并发开发的工具，提供一些JDK没有的并发数据结构辅助开发。
+
 
 ## jstack（用来生成虚拟机线程快照信息，分析线程死锁停顿等）
 例如: jstack 2419 

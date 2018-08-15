@@ -35,6 +35,6 @@
    - [Kibana](//www.cnblogs.com/hanyifeng/p/5860731.html)
    - [JVM GC](//blog.csdn.net/wwd0501/article/details/78404105)
    - [性能分析](learn-java/wiki/information/performance/performance.md)
-- [版本控制](wiki/information/version.md)   
+- [版本控制](learn-java/wiki/information/version.md)
 - [面试经](learn-java/wiki/information/interview.md)    
 - [名称解释](learn-java/wiki/information/nounal.md)    

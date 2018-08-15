@@ -1,1 +1,3 @@
-supervisor node-express/server.js
+cd node-express
+cnpm install
+supervisor server.js
