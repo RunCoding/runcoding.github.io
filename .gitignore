@@ -1,5 +1,6 @@
 *.iml
 
+target
 node_modules
 main/gitbook/wiki
 main/gitbook/_book
