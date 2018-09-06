@@ -1,4 +1,5 @@
 - [docker-cli-to-kubectl](/develop/cloud/kubernetes/wiki)
 - 文档
+  - [推荐kubernetes学习](https://github.com/liguohua-bigdata/kubernets-learn) 
   - [kubernetes-handbook](https://jimmysong.io/kubernetes-handbook/concepts/concepts.html)
   - [kubernetes](https://yeasy.gitbooks.io/docker_practice/kubernetes/)

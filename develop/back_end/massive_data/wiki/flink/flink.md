@@ -1,6 +1,7 @@
 ## Flink相关网站推荐
 - [Fink官网](https://flink.apache.org/)
 - [Fink(data-artisans)官网](https://data-artisans.com/)
+- [flink学习](https://github.com/liguohua-bigdata/simple-flink)
 - https://oc.flink-china.org/1.2.0/index.html
 - 文档： https://flink-china.org/introduction.html#section
 - 推荐阅读有赞计算实践： https://tech.youzan.com/storm-in-action
@@ -37,6 +38,13 @@ end
 
 ```
 
+- 1.flink table：主要用于处理关系型的结构化数据，对结构化数据进行查询操作，将结构化数据抽象成关系表，并通过类SQL的DSL对关系表进行各种查询操作。
+提供SQL on bigdata的功能,flink table既可以在流处理中使用SQL,也可以在批处理中使用SQL,对应sparkSQL.
+- 2.flink gelly：主要用于图计算领域，提供相关的图计算API和图计算算法的实现,对应spark graph。
+- 3.flink ML（machine leaning）：主要用于机器学习领域，提供了机器学习Pipelines APIh和多种机器学习算法的实现，对应sparkML
+- 4.flink CEP（Complex event processing）：主要用于复杂事件处理领域。
+
+
 ```mermaid
 graph TD
     fileSystem-->messageTransport
@@ -59,6 +67,38 @@ end
 
 ```
 
+### 物理架构
+```mermaid
+graph TD
+ c[clink]-->master["Job Manage"]
+ master-->Workers["Task Managers"]
+ master-->Workers2[Task Managers]
+```
+- Master (Job Manager): 处理job的提交，资源的调度，元数据的管理，运行状态监控等。
+- Workers (Task Managers):分解job变成各种operation，并执行operation完成job任务。
+- 数据在node之间流动，优先计算本datanode中的data block，本node没有，才考虑拉取其他node上的block。
+- 所有操作都基于内存，在计算完成后可以写入各种持久化存储系统，如hdfs,hbase等。
+
+![flink运行时架构图](https://raw.githubusercontent.com/runcoding/static/master/wiki/pic20161027406.png)
+
+### 特性
+#### 实现了自己的内存管理机制
+1.flinK在jvm内部实现了自己的内存管理机制，以提高内存使用效率，防止大规模GC.
+2.flink将大规模的数据存放到out-heap内存，以防止在jvm的heap中创建大量对象，而引起大规模GC.
+
+#### 同一个运行时环境，同时支持流处理，批处理
+1.flink的一套runtime环境，统一了流处理，批处理，两大业务场景
+2.flink本质是一个流处理系统，同时它将批处理看出特殊的流处理，因此也能应付批处理的场景
+
+#### 支持迭代和增量迭代
+1.flinK支持迭代和增量迭代操作（这一特性在图计算和机器学习领域非常有用）
+2.增量迭代可以根据计算的依赖关系，优化计算环境，获得最好的计算效率
+
+
+#### 支持程序优化
+1.flink的批处理场景下可以根据计算的依赖关系，自动的避免一些昂贵的不必要的中间操作（诸如：sort,shuffle等）
+2.flink会自动缓存一些中间结果，以便后续计算的多次使用，这样能显著的提高效率。
+
 ## 窗口
 - 事件时间(事件发生本身记录的时间)
 - 处理时间(处理事件的机器所测量的时间)
@@ -73,6 +113,7 @@ stream.timeWindow(Time.minutes(1))
 ```java
 stream.timeWindow(Time.minutes(1),Time.seconds(30))
 ```
+
 ### 计数窗口
 通过元素的个数来定义。
 > 不建议使用计数窗口，如果元素达不到指定，窗口占用的内存就没办法释放
@@ -89,7 +130,7 @@ stream.countWindow(4,2)
 ### 回话窗口
 用来表示一些活动或行为阶段。如：web系统中的session
 1. 在Flink中，回话窗口由超时时间设定，即希望等待多久才认为回话已经结束。
-``java
+```java
 /**如果用户处于非活动状态长达5分钟，则认为回话结束*/
 stream.window(SessionWindows.withGap(Time.minutes(5)))
 ```
