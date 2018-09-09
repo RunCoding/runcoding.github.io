@@ -3,6 +3,7 @@
     - [安装](/develop/back_end/massive_data/wiki/flink/install)
     - 实现原理
         - [调度](/develop/back_end/massive_data/wiki/flink/internal/jobs-scheduling)
+        - [slot调度](/develop/back_end/massive_data/wiki/flink/internal/slot-parallelism)
         - [并行度](/develop/back_end/massive_data/wiki/flink/internal/parallelism)
         - [内存管理](/develop/back_end/massive_data/wiki/flink/internal/memory)
     - stream
