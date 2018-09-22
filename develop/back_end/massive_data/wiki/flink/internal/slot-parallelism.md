@@ -145,6 +145,7 @@ parallelism.default:1
 
 ## 六、设置parallelism的方法
 ### 1.在操作符级别上设置parallelism
+```java
 scala
 val env = StreamExecutionEnvironment.getExecutionEnvironment
 val text = [...]
@@ -157,9 +158,10 @@ val wordCounts = text
     .sum(1).setParallelism(5)
 wordCounts.print()
 env.execute("Word Count Example")
-
+```
 
 ### 2.在运行环境级别上设置parallelism
+```java
 scala
 val env = StreamExecutionEnvironment.getExecutionEnvironment
 
@@ -175,10 +177,11 @@ val wordCounts = text
 wordCounts.print()
 
 env.execute("Word Count Example")
-
+```
 
 ### 3.在客户端级别上设置parallelism
 ### # 3.1通过p参数设置parallelism
+```java
 scala
 //设置parallelism为10
 ./bin/flink run -p 10 ../examples/*WordCount-java*.jar
@@ -198,7 +201,7 @@ try {
 } catch {
     case e: Exception => e.printStackTrace
 }
-
+```
 
 ### 4.在系统级别上设置parallelism
 scala
