@@ -2,6 +2,8 @@
 - [kubectl](/develop/cloud/kubernetes/wiki/kubectl/kubectl.md)
 - [helm k8s 应用包管理工具](/develop/cloud/kubernetes/wiki/helm/helm)
 - [单机部署利器kubeadm](/develop/cloud/kubernetes/wiki/kubeadm/kubeadm)
+- [minukube](https://qii404.me/2018/01/06/minukube.html)
+
 - 文档
   - [推荐kubernetes-handbook](https://jimmysong.io/kubernetes-handbook/concepts/concepts.html)
   - [推荐kubernetes学习](https://github.com/liguohua-bigdata/kubernets-learn)
