@@ -1,4 +1,5 @@
 - [安装kubernetes](/develop/cloud/kubernetes/k8s-for-docker-desktop/README.md)
+- [yaml文件](/develop/cloud/kubernetes/wiki/yaml/yaml.md)
 - [kubectl](/develop/cloud/kubernetes/wiki/kubectl/kubectl.md)
 - [helm k8s 应用包管理工具](/develop/cloud/kubernetes/wiki/helm/helm)
 - [单机部署利器kubeadm](/develop/cloud/kubernetes/wiki/kubeadm/kubeadm)
