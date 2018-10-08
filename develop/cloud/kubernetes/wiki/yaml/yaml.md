@@ -1,3 +1,8 @@
+## yaml 文件
+
+[yaml](../yaml/demo.yaml ':include')
+
+
 ### Pod 生命周期的变化
 - Pending
   这个状态意味着，Pod 的 YAML 文件已经提交给了 Kubernetes，
