@@ -6,4 +6,4 @@
 - 4. 让大家更简单更直接的认识我。 
  
 ## 联系我
-![微信](http://otter.qiniudn.com/wechat.jpg)
+<img  src="http://otter.qiniudn.com/wechat.jpg" style="max-width: 100px;">
