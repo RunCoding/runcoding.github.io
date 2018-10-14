@@ -6,4 +6,4 @@
 - 4. 让大家更简单更直接的认识我。 
  
 ## 联系我
-https://runcoding.github.io
+<img width="150" height="150" src="http://otter.qiniudn.com/wechat.jpg"/>
