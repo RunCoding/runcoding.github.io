@@ -4,6 +4,3 @@
 - 2. 快速查找知识。
 - 3. 知识共享，方便以后的程序员，在我走过的路上，越过坑。
 - 4. 让大家更简单更直接的认识我。 
- 
-## 联系我
-<img width="250" height="250" src="http://otter.qiniudn.com/wechat.jpg"/>
