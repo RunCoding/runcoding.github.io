@@ -20,7 +20,7 @@
 
 ![mirror](https://raw.githubusercontent.com/runcoding/static/master/wiki/picmirror.jpg)
 
-3. 预先从阿里云`Docker`镜像下载 `Kubernetes` 所需要的镜像, 可以通过修改 [./images](./images) 文件定制你自己需要的镜像
+3. 预先从阿里云`Docker`镜像下载 `Kubernetes` 所需要的镜像, 可以通过修改 [./images](/images) 文件定制你自己需要的镜像
 
 ```bash
 $ ./load_images.sh
