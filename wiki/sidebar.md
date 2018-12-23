@@ -2,7 +2,6 @@
   - [个人简介](/wiki/home)
 - **技能**
   - [计数机技术]({{baseDomain}}?sidebar=develop)
-  - [视觉微观]({{baseDomain}}?sidebar=microcosmic)
 - **意识**
   - [团队]({{baseDomain}}?sidebar=team)
   - [书单](/wiki/information/books)

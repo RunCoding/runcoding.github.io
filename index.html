@@ -10,7 +10,8 @@
 </head>
 <body>
 <div id="app">RunningGhost 正在添煤&煽火……，精彩资源正在呈现中……</div>
-<script type="text/javascript" src="/main/dist/mermaid/mermaid.js" ></script>
+<script src="/main/dist/mermaid/mermaid.js" ></script>
+<script src="main/dist/json/json-to-table.js"></script>
 <script>
 
    var runcodingBrowse =  function (dateTime) {
@@ -78,9 +79,22 @@
         markdown: {             //markdown语法
             renderer: {
                 code: function(code, lang) {
+                  lang = lang || '';
+                  if(lang == 'json2table'){
+                    try{
+                      code = JSON.parse(code);
+                    } catch(e) {
+                      try{
+                        code = eval("("+ code +")");
+                      }catch(e2) {
+                        code = [{"<span style='color: #ffa666'>请检查下面的json存在语法错误</span>":code}]
+                      }
+                    }
+                    return json2table(code,'');;
+                  }
                     var html = '';
-                    lang = lang || '';
-                    if(lang.match(/^sequenceDiagram/) || lang.match(/^graph/) || lang.match(/^gantt/) ||  lang.match(/^mermaid/) ){
+                    if(lang.match(/^sequenceDiagram/) || lang.match(/^graph/) ||
+                            lang.match(/^gantt/) ||  lang.match(/^mermaid/) ){
                         var cb = function(svgGraph) {
                             //console.log(svgGraph)
                             code = svgGraph;
@@ -90,13 +104,15 @@
                         }catch (e) {
                             var baseCode = "#/edit/"+Base64.encodeURI(code);
                             code = "<h5 style='color: #ffa637'>流程图设计存在语法错误。"
-                                + "<a href='https://mermaidjs.github.io/mermaid-live-editor"+baseCode+"' target='_blank'>推荐在线语法检查</a></h5>"
+                                + "<a href='https://mermaidjs.github.io/mermaid-live-editor"+baseCode
+                                    +"' target='_blank'>推荐在线语法检查</a></h5>"
                                 + code;
                         }
                         return '<div class="mermaid" >' + code + '</div>';
                     }
                     var hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup)
-                    return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang + '">' + hl + '</code></pre>'
+                    return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang
+                            + '">' + hl + '</code></pre>'
                 }
             }
         },
@@ -112,7 +128,8 @@
                 var footer = [
                     '<hr/>',
                     '<footer>',
-                    '<span>本服务由<a href="https://runcoding.github.io" target="_blank">&copy; RunningGhost</a>提供支持.</span>',
+                    '<span>本服务由<a href="https://runcoding.github.io" ' +
+                    'target="_blank">&copy; RunningGhost</a>提供支持.</span>',
                     '</footer>'
                 ].join('');
                 hook.init(function() {
