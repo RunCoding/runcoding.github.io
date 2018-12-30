@@ -106,6 +106,7 @@ public class TestListNodeAlgorithm {
             System.out.print(node.val);
             node = node.next;
             System.out.print(node != null ? "->" : "");
+            System.gc();
         }
     }
 

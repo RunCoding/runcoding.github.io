@@ -40,6 +40,7 @@ public class AccountAdminController {
     @ApiOperation(value="保存账号", notes="新增账号")
     @ApiImplicitParam(name = "account", value = "用户详细实体account", required = true, dataType = "Account")
     public boolean addAccount(Account account) {
+        account.setCreatedTime(1111);
         return accountService.saveByAccount(account);
     }
 
