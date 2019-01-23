@@ -19,15 +19,6 @@ import java.util.List;
 @Repository
 public interface TradeRepository extends ElasticsearchRepository<Trade, String> {
 
-    /**通过tradeId查询*/
-    List<Trade> findByTradeId(String tradeId);
 
-    /**通过活动名称查询*/
-    @Query("{\"bool\":{\"must\":{\"query_string\":{\"query\":\"?0\",\"fields\":[\"name\"],\"default_operator\":\"and\"}}}}")
-    List<Trade> findByCaseName(String caseName);
-
-    /**组合查询：通过活动名称和活动编号查询*/
-    @Query("{\"filtered\":{\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"name\":{\"query\":\"?0\",\"slop\":1}}}]}},\"filter\":{\"bool\":{\"should\":[{\"term\":{\"caseCode\":\"?1\"}}]}}}}")
-    Page<Trade> queryByCaseInfo(String caseName, String caseCode, Pageable pageable);
 
 }

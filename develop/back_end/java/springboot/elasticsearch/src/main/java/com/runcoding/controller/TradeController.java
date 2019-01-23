@@ -24,8 +24,8 @@ public class TradeController {
     }
 
     @DeleteMapping("/{tradeId}/delete")
-    public ResponseEntity<String> deleteTrade(@PathVariable("tradeId") String TradeId) {
-        orderSupportService.deleteTrade(TradeId);
+    public ResponseEntity<String> deleteTrade(@PathVariable("tradeId") String tradeId) {
+        orderSupportService.deleteTrade(tradeId);
         return ResponseEntity.ok("Deleted");
     }
 

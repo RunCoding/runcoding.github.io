@@ -27,11 +27,11 @@ public class OrderSupportService {
     }
 
     public void deleteTrade(String tradeId) {
-        tradeRepository.delete(tradeId);
+        tradeRepository.deleteById(tradeId);
     }
 
     public Trade getByTradeId(String tradeId) {
-        Trade trade = tradeRepository.findOne(tradeId);
+        Trade trade = tradeRepository.findById(tradeId).get();
         return trade;
     }
 }

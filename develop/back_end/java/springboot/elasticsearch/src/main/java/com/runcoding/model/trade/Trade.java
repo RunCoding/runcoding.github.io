@@ -29,7 +29,7 @@ public class Trade {
 
     @ApiModelProperty("交易编号")
     @Id
-    private String tradeNumber;
+    private String tradeId;
 
     @ApiModelProperty("用户编号")
     private Long userId;
