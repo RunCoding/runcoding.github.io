@@ -1,5 +1,6 @@
 package com.runcoding.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.runcoding.model.trade.Trade;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -24,10 +26,13 @@ public class ElasticController {
 
 
     @GetMapping("/elastic/details")
-    public ResponseEntity<Map<String, Settings>> getElasticInformation() {
+    public ResponseEntity<Map<String, String>> getElasticInformation() {
 
         Client client = elasticsearchOperations.getClient();
-        Map<String, Settings> asMap = client.settings().getAsGroups();
+        Map<String, String> asMap = new HashMap<>();
+        client.settings().getAsGroups(true).forEach((groupName,settings)->{
+            asMap.put(groupName, String.valueOf(settings.names()));
+        });
         return ResponseEntity.ok(asMap);
     }
 
