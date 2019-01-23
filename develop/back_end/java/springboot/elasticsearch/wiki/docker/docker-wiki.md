@@ -1,0 +1,1 @@
+docker build -t elasticsearch:6.2.2 .

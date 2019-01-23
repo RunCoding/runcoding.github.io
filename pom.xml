@@ -32,6 +32,7 @@
 		<module>develop/back_end/java/springboot/restful-simple</module>
 		<module>develop/back_end/java/springboot/runcoding-core</module>
 		<module>develop/back_end/java/springboot/runcoding-business</module>
+		<module>develop/back_end/java/springboot/elasticsearch</module>
 		<!-- 当当分库分表插件 -->
 		<module>develop/back_end/java/spring-mvc/runcoding-shardingjdbc</module>
 
