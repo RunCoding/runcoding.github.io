@@ -25,10 +25,9 @@ import java.util.List;
 @Document(indexName = "trade-2019",
           type = "trade",
           shards = 4, /**节点数和Shard数相等时，ElasticSearch集群的性能可以达到最优。通常不推荐一个节点超过2个shard。*/
-          replicas = 2 /**Replica也是Shard，与shard不同的是，replica只会参与读操作，同时也能提高集群的可用性。
-                      对于Replica来说，它的主要作用就是提高集群错误恢复的能力，
-                      所以replica的数目与shard的数目以及node的数目相关，与shard不同的是，
-                      replica的数目可以在集群建立之后变更，切代价较小，所以相比shard的数目而言，没有那么重要。*/
+          replicas = 2 /**索引副本(Replica)机制的的思路很简单：为索引分片创建一份新的拷贝，它可以像原来的主分片一样处理用户搜索请求。
+                          同时也顺便保证了数据的安全性。即如果主分片数据丢失，ElasticSearch通过索引副本使得数据不丢失。
+                          索引副本可以随时添加或者删除，所以用户可以在需要的时候动态调整其数量。*/
 )
 @Builder
 public class Trade {
