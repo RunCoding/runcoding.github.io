@@ -6,8 +6,6 @@ services:
     container_name: elasticsearch
     environment:
       - ES_CLUSTERNAME=elasticsearch
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
@@ -30,11 +28,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
     container_name: elasticsearch2
     environment:
-      - ES_CLUSTERNAME=elasticsearch
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
+      - ES_CLUSTERNAME=elasticsearch2
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
     ulimits:
       memlock:
         soft: -1
@@ -45,8 +40,8 @@ services:
       - ./node/elasticsearch2/data:/usr/share/elasticsearch/data
     command: elasticsearch
     ports:
-      - 9202:9200
-      - 9302:9300
+      - 9202:9202
+      - 9302:9302
     networks:
       - esnet
     links:
@@ -55,14 +50,11 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
     container_name: elasticsearch3
     environment:
-      - ES_CLUSTERNAME=elasticsearch
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
+      - ES_CLUSTERNAME=elasticsearch3
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
     ports:
-      - 9203:9200
-      - 9303:9300
+      - 9203:9203
+      - 9303:9303
     ulimits:
       memlock:
         soft: -1

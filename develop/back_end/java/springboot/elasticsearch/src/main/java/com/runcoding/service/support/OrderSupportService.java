@@ -31,7 +31,6 @@ public class OrderSupportService {
     }
 
     public Trade getByTradeId(String tradeId) {
-        Trade trade = tradeRepository.findById(tradeId).get();
-        return trade;
+        return tradeRepository.findById(tradeId).get();
     }
 }

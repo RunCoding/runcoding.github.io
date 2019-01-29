@@ -1,9 +1,7 @@
 package com.runcoding.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.runcoding.model.trade.Trade;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.common.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;

@@ -14,7 +14,7 @@
 		<module>develop/back_end/java/base-java</module>
 
 		<!-- spring-cloud-microservice -->
-		<module>develop/back_end/java/learn-spring-cloud</module>
+		<!--<module>develop/back_end/java/learn-spring-cloud</module>-->
 
 		<!--  Netty 4 demo -->
 		<module>develop/back_end/java/netty</module>
@@ -22,6 +22,8 @@
 		<!--<module>develop/back_end/java/rxjava</module>
 
 		<module>develop/back_end/java/reactor</module>-->
+
+		<module>develop/back_end/java/bigmap</module>
 
 		<module>develop/back_end/java/guava</module>
 		<module>develop/back_end/java/mq/kafka</module>
