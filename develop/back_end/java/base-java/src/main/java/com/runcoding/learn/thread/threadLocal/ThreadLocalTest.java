@@ -28,6 +28,7 @@ public class ThreadLocalTest {
      * @throws InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
+        new Thread();
         for (int i = 0; i < 50; i++) {
             poolExecutor.execute(() -> {
                 localVariable.set(new LocalVariable());
