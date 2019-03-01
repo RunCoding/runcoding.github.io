@@ -1,0 +1,66 @@
+package com.runcoding.configurer.data;
+
+import com.alibaba.fastjson.JSON;
+import com.runcoding.configurer.data.type.JsonTypeHandler;
+import com.runcoding.handler.interceptors.SqlLogInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.MappedTypes;
+import org.apache.ibatis.type.TypeHandler;
+import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.apache.ibatis.type.TypeReference;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+import javax.sql.DataSource;
+
+/**
+ * @module 主数据源配置
+ * @author xukai
+ * @date: 2017年10月27日
+ */
+@Configuration
+@MapperScan(basePackages = "com.runcoding.dao",
+            sqlSessionFactoryRef = "mainSqlSessionFactory")
+public class DataSourceConfiguration {
+
+
+    @Value("${spring.datasource.type}")
+    private Class<? extends DataSource> dataSource;
+
+    @Bean(name = "mainDataSource")
+    @ConfigurationProperties("spring.datasource")
+    @Primary
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().type(dataSource).build();
+    }
+
+    @Bean(name = "mainTransactionManager")
+    @Primary
+    public DataSourceTransactionManager mainTransactionManager(@Qualifier("mainDataSource") DataSource mainDataSource) {
+        return new DataSourceTransactionManager(mainDataSource);
+    }
+
+    @Bean(name = "mainSqlSessionFactory")
+    @Primary
+    public SqlSessionFactory mainSqlSessionFactory(@Qualifier("mainDataSource") DataSource mainDataSource)
+            throws Exception {
+        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(mainDataSource);
+        sessionFactory.setPlugins(new Interceptor[]{ new SqlLogInterceptor()});
+        sessionFactory.setTypeHandlersPackage("com.runcoding.configurer.data.type");
+        SqlSessionFactory session = sessionFactory.getObject();
+        TypeHandlerRegistry typeHandlerRegistry = session.getConfiguration().getTypeHandlerRegistry();
+        System.out.println(JSON.toJSONString(typeHandlerRegistry));
+        return session;
+    }
+
+}
