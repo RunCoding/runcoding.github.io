@@ -1,14 +1,10 @@
 package com.runcoding.configurer.data;
 
-import com.alibaba.fastjson.JSON;
-import com.runcoding.configurer.data.type.JsonTypeHandler;
 import com.runcoding.handler.interceptors.SqlLogInterceptor;
+import com.runcoding.handler.type.TypeHandlerRegistrar;
+import com.runcoding.handler.type.TypeHandlerScannerRegistrar;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.MappedTypes;
-import org.apache.ibatis.type.TypeHandler;
-import org.apache.ibatis.type.TypeHandlerRegistry;
-import org.apache.ibatis.type.TypeReference;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,8 +13,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
@@ -27,9 +25,11 @@ import javax.sql.DataSource;
  * @author xukai
  * @date: 2017年10月27日
  */
+@Component
 @Configuration
 @MapperScan(basePackages = "com.runcoding.dao",
             sqlSessionFactoryRef = "mainSqlSessionFactory")
+@Import(TypeHandlerScannerRegistrar.class)
 public class DataSourceConfiguration {
 
 
@@ -56,11 +56,13 @@ public class DataSourceConfiguration {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(mainDataSource);
         sessionFactory.setPlugins(new Interceptor[]{ new SqlLogInterceptor()});
-        sessionFactory.setTypeHandlersPackage("com.runcoding.configurer.data.type");
         SqlSessionFactory session = sessionFactory.getObject();
-        TypeHandlerRegistry typeHandlerRegistry = session.getConfiguration().getTypeHandlerRegistry();
-        System.out.println(JSON.toJSONString(typeHandlerRegistry));
+        /**注册自定义绑定*/
+        TypeHandlerRegistrar.typeHandlerRegistry(sessionFactory);
         return session;
     }
 
+
 }
+
+

@@ -1,10 +1,13 @@
 package com.runcoding.model.po.order;
 
-import java.util.Date;
-
+import com.runcoding.handler.type.annotation.ColumnType;
 import com.runcoding.model.po.account.AccountPo;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.Date;
 
 /**
  * @author xukai
@@ -25,6 +28,7 @@ public class OrderPo {
     private Long userId;
 
     @ApiModelProperty( "用户信息")
+    @ColumnType()
     private AccountPo userInfo;
 
     @ApiModelProperty( "")
@@ -32,4 +36,6 @@ public class OrderPo {
 
     @ApiModelProperty( "")
     private Date updateTime;
+
+
 }

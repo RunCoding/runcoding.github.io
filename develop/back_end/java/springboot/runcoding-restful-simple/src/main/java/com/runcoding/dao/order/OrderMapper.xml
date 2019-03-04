@@ -14,7 +14,18 @@
         from `order`
         where id = #{id}
     </select>
-    
+
+    <select id="all" resultType="com.runcoding.model.po.order.OrderPo">
+         select
+           id as id,
+           order_number as orderNumber,
+           user_id as userId,
+           user_info as userInfo,
+           create_time as createTime,
+           update_time as updateTime
+        from `order`
+    </select>
+
 
     <insert id="insert" keyProperty="id" parameterType="com.runcoding.model.po.order.OrderPo" useGeneratedKeys="true">
         insert into `order` (order_number, user_id,user_info)

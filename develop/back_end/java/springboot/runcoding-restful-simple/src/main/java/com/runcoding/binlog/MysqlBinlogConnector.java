@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @created Time: 2019-02-23 21:49
  * @description Copyright (C), 2017-2019,
  **/
-@Component
+//@Component
 public class MysqlBinlogConnector implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {

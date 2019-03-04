@@ -1,18 +1,19 @@
-package com.runcoding.configurer.data.type;
+package com.runcoding.handler.type;
 
 
 import com.alibaba.fastjson.JSON;
-import com.runcoding.model.po.account.AccountPo;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@MappedTypes({AccountPo.class})
+/**
+ * @author xukai
+ * @param <T>
+ */
 public class JsonTypeHandler<T extends Object> extends BaseTypeHandler<T> {
 
 
@@ -54,14 +55,13 @@ public class JsonTypeHandler<T extends Object> extends BaseTypeHandler<T> {
     }
  
     private T toObject(String content, Class<?> clazz) {
-        if (content != null && !content.isEmpty()) {
-            try {
-                return (T) JSON.parseObject(content,clazz);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            return null;
+        if(content == null || content.isEmpty()){
+            return (T) content;
+        }
+        try {
+            return (T) JSON.parseObject(content,clazz);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
  
