@@ -5,15 +5,14 @@
 
     <select id="select" parameterType="java.lang.Long" resultType="com.runcoding.model.po.account.AccountPo">
         select 
-        id as id, username as username, created_time as createdTime, updated_time as updatedTime, 
-            is_discarded as isDiscarded
+        id as id, username as username
         from account
         where id = #{id}
     </select>
     
 
     <insert id="insert" keyProperty="id" parameterType="com.runcoding.model.po.account.AccountPo" useGeneratedKeys="true">
-        insert into account ( username, is_discarded) values (#{username},  #{isDiscarded})
+        insert into account ( username) values (#{username}})
     </insert>
     
 

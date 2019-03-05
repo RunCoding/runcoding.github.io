@@ -35,7 +35,7 @@ public class OrderSupportService {
 
    @Transactional(rollbackFor = Exception.class,isolation = Isolation.READ_UNCOMMITTED)
     public  void createOrder(OrderPo orderPo){
-        AccountPo account = AccountPo.builder().username("run").isDiscarded(1).build();
+        AccountPo account = AccountPo.builder().username("run").build();
         int insertAccount = accountService.insert(account);
         orderPo.setUserId(account.getId());
         int insertOrder = orderService.insert(orderPo);

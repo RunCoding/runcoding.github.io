@@ -32,6 +32,5 @@ public class AccountPo {
     @ApiModelProperty( "修改时间")
     private Date updatedTime;
 
-    @ApiModelProperty( "1代表删除")
-    private Integer isDiscarded;
+
 }

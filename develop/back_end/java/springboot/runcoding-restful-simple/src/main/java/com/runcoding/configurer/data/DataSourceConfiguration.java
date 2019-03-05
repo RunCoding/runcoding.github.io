@@ -2,7 +2,7 @@ package com.runcoding.configurer.data;
 
 import com.runcoding.handler.interceptors.SqlLogInterceptor;
 import com.runcoding.handler.type.TypeHandlerRegistrar;
-import com.runcoding.handler.type.TypeHandlerScannerRegistrar;
+import com.runcoding.handler.type.annotation.ColumnTypeScan;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,8 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.runcoding.dao",
             sqlSessionFactoryRef = "mainSqlSessionFactory")
-@Import(TypeHandlerScannerRegistrar.class)
+/**@ColumnTypeScan basePackages包下扫描类，支持全局json映射*/
+//@ColumnTypeScan(basePackages = "com.runcoding.model")
 public class DataSourceConfiguration {
 
 

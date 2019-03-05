@@ -61,8 +61,9 @@ public class JsonTypeHandler<T extends Object> extends BaseTypeHandler<T> {
         try {
             return (T) JSON.parseObject(content,clazz);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
+        return (T) content;
     }
  
 

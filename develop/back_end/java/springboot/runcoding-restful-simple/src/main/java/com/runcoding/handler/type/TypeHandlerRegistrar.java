@@ -20,6 +20,12 @@ public class TypeHandlerRegistrar {
 
     private  static  Map<ColumnStyle, Set<Class<?>>> registrarClass = Maps.newHashMap();
 
+
+    /***
+     * 类型需要注册类
+     * @param column
+     * @param regClass
+     */
     public static void registrarClass(ColumnType column, Class<?> regClass){
         if(column == null){
              return;

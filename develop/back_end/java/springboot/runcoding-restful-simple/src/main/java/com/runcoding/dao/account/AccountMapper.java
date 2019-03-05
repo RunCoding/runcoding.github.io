@@ -1,6 +1,7 @@
 package com.runcoding.dao.account;
 
 import com.runcoding.model.po.account.AccountPo;
+import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -13,7 +14,7 @@ public interface AccountMapper {
      * @author xukai
      * @Date 2018-01-02 17:22:57
      */
-    AccountPo select(Long id);
+    AccountPo select(@Param("id") Long id);
 
     
     /**
