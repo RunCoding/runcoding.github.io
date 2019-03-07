@@ -1,5 +1,6 @@
 package com.runcoding.learn.thread.threadLocal;
 
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +38,17 @@ public class ThreadLocalTest {
             });
             Thread.sleep(1000);
         }
+
+        Future<?> future = poolExecutor.submit(() -> {
+            System.out.println("future");
+            try {
+                Thread.sleep(10000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        /**暂停等待*/
+        future.cancel(true);
     }
 
 }
