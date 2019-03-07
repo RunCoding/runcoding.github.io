@@ -1,11 +1,16 @@
 package com.runcoding.service.order.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.runcoding.dao.order.OrderMapper;
 import com.runcoding.model.po.order.OrderPo;
 import com.runcoding.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /**
@@ -23,7 +28,14 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    
+
+    @Override
+    public List<OrderPo> all() {
+        PageHelper.startPage(1,2);
+        Page<OrderPo> page = orderMapper.all();
+        return page.getResult();
+    }
+
     /**
      * @author xukai
      * @Date 2018-01-02 17:23:57

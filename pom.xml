@@ -17,7 +17,7 @@
 		<!--<module>develop/back_end/java/learn-spring-cloud</module>-->
 
 		<!--  Netty 4 demo -->
-		<module>develop/back_end/java/netty</module>
+		<!--<module>develop/back_end/java/netty</module>-->
 
 		<!--<module>develop/back_end/java/rxjava</module>
 
