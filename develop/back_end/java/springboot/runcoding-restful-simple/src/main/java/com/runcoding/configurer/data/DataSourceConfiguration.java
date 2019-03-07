@@ -1,5 +1,6 @@
 package com.runcoding.configurer.data;
 
+import com.github.pagehelper.PageHelper;
 import com.runcoding.handler.interceptors.SqlLogInterceptor;
 import com.runcoding.handler.type.TypeHandlerRegistrar;
 import com.runcoding.handler.type.annotation.ColumnTypeScan;
@@ -18,6 +19,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * @module 主数据源配置
@@ -60,6 +62,17 @@ public class DataSourceConfiguration {
         /**注册自定义绑定*/
         TypeHandlerRegistrar.typeHandlerRegistry(sessionFactory);
         return session;
+    }
+
+    @Bean
+    public PageHelper pageHelper(){
+        PageHelper pageHelper = new PageHelper();
+        Properties p = new Properties();
+        p.setProperty("offsetAsPageNum","true");
+        p.setProperty("rowBoundsWithCount","true");
+        p.setProperty("reasonable","true");
+        pageHelper.setProperties(p);
+        return pageHelper;
     }
 
 

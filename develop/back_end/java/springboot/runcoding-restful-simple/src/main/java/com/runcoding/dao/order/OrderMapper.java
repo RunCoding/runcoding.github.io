@@ -1,8 +1,8 @@
 package com.runcoding.dao.order;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.github.pagehelper.Page;
 import com.runcoding.model.po.order.OrderPo;
-
-import java.util.List;
 
 
 /**
@@ -11,7 +11,8 @@ import java.util.List;
  */
 public interface OrderMapper {
 
-    List<OrderPo>  all();
+    @JSONField(name = "all")
+    Page<OrderPo> all();
     
     /**
      * @author xukai

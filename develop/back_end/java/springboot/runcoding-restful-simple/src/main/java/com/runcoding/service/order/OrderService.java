@@ -2,13 +2,17 @@ package com.runcoding.service.order;
 
 import com.runcoding.model.po.order.OrderPo;
 
+import java.util.List;
+
 
 /**
  * @author xukai
  * @Date 2018-01-02 17:23:57
  */
 public interface OrderService {
-    
+
+    List<OrderPo> all();
+
     /**
      * @author xukai
      * @Date 2018-01-02 17:23:57
