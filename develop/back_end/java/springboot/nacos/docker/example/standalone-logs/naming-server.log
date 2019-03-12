@@ -1,0 +1,80 @@
+2019-03-12 13:45:07,971 INFO [VIPSRV-DISTRO] healthy server list changed, disable health check for 60000 ms from now on, healthList: [], newHealthyList [ffd74dc4b64a:0]
+
+2019-03-12 13:45:13,187 ERROR [AUTO-INIT] failed to auto init
+
+java.lang.IllegalStateException: unable to find local peer: ffd74dc4b64a:0, all peers: []
+	at com.alibaba.nacos.naming.raft.PeerSet.local(PeerSet.java:191)
+	at com.alibaba.nacos.naming.raft.PeerSet.getLeader(PeerSet.java:49)
+	at com.alibaba.nacos.naming.core.DomainsManager.initConfig(DomainsManager.java:100)
+	at com.alibaba.nacos.naming.core.DomainsManager.access$500(DomainsManager.java:44)
+	at com.alibaba.nacos.naming.core.DomainsManager$3.run(DomainsManager.java:607)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2019-03-12 13:45:18,188 ERROR [AUTO-INIT] failed to auto init
+
+java.lang.IllegalStateException: unable to find local peer: ffd74dc4b64a:0, all peers: []
+	at com.alibaba.nacos.naming.raft.PeerSet.local(PeerSet.java:191)
+	at com.alibaba.nacos.naming.raft.PeerSet.getLeader(PeerSet.java:49)
+	at com.alibaba.nacos.naming.core.DomainsManager.initConfig(DomainsManager.java:100)
+	at com.alibaba.nacos.naming.core.DomainsManager.access$500(DomainsManager.java:44)
+	at com.alibaba.nacos.naming.core.DomainsManager$3.run(DomainsManager.java:607)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2019-03-12 13:45:18,771 INFO [SERVER-INIT] got port: 8848
+
+2019-03-12 13:45:18,771 INFO [SERVER-INIT] got path: /nacos
+
+2019-03-12 13:45:23,191 INFO [AUTO-INIT] leader is: ffd74dc4b64a:8848
+
+2019-03-12 13:45:46,093 INFO [HEALTH-CHECK] health check is false
+
+2019-03-12 13:46:08,119 INFO [VIPSRV-DISTRO] distro threshold restored and stable now, enable health check. current ratio: 1.0
+
+2019-03-12 13:46:08,120 INFO [VIPSRV-DISTRO] healthy server list changed, disable health check for 60000 ms from now on
+
+2019-03-12 13:47:23,029 INFO [VIPSRV-DISTRO] distro threshold restored and stable now, enable health check. current ratio: 1.0
+
+2019-03-12 13:50:45,750 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 13:55:45,406 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:00:45,064 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:05:44,724 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:10:44,381 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:15:44,052 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:20:43,709 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:25:43,368 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:30:43,025 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:35:42,690 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:40:42,347 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:45:42,007 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:50:41,669 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 14:55:41,324 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 15:00:40,982 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 15:05:40,643 INFO [HEALTH-CHECK] health check is true
+
+2019-03-12 15:10:40,303 INFO [HEALTH-CHECK] health check is true
+

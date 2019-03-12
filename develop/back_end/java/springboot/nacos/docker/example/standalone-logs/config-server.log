@@ -1,0 +1,40 @@
+2019-03-12 13:45:09,733 INFO notifyConnectTimeout:200
+
+2019-03-12 13:45:09,735 INFO notifySocketTimeout:8000
+
+2019-03-12 13:45:09,736 INFO isHealthCheck:true
+
+2019-03-12 13:45:09,736 INFO maxHealthCheckFailCount:12
+
+2019-03-12 13:45:09,738 INFO maxContent:10485760
+
+2019-03-12 13:45:09,740 INFO spring.datasource.platform:""
+
+2019-03-12 13:45:15,420 INFO ServerListService address-server port:8848
+
+2019-03-12 13:45:15,422 INFO ADDRESS_SERVER_URL:http://jmenv.tbsite.net:8080/nacos/serverlist
+
+2019-03-12 13:45:15,430 WARN [serverlist] updated to [ffd74dc4b64a]
+
+2019-03-12 13:45:15,757 WARN DumpService start
+
+2019-03-12 13:45:15,769 INFO start clear all config-info.
+
+2019-03-12 13:45:15,784 WARN clear all config-info failed.
+
+2019-03-12 13:45:15,786 WARN clear all config-info-tenant failed.
+
+2019-03-12 13:45:15,964 INFO start clear all config-info-beta.
+
+2019-03-12 13:45:15,964 WARN clear all config-info-beta failed.
+
+2019-03-12 13:45:15,966 WARN clear all config-info-beta-tenant failed.
+
+2019-03-12 13:45:15,992 INFO start clear all config-info-tag.
+
+2019-03-12 13:45:15,995 WARN clear all config-info-tag failed.
+
+2019-03-12 13:45:15,996 WARN clear all config-info-tag-tenant failed.
+
+2019-03-12 14:07:03,336 WARN The task in ip: ffd74dc4b64a:8848  did not completed in 1000ms 
+

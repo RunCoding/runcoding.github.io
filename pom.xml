@@ -13,9 +13,6 @@
 		<!-- Java 基础Demo -->
 		<module>develop/back_end/java/base-java</module>
 
-		<!-- spring-cloud-microservice -->
-		<!--<module>develop/back_end/java/learn-spring-cloud</module>-->
-
 		<!--  Netty 4 demo -->
 		<!--<module>develop/back_end/java/netty</module>-->
 
@@ -29,10 +26,8 @@
 		<module>develop/back_end/java/mq/kafka</module>
 
 		<!-- Spring Boot 集成 restful -->
-		<module>develop/back_end/java/springboot/jax-rs2-guide</module>
-		<module>develop/back_end/java/springboot/runcoding-restful</module>
-		<module>develop/back_end/java/springboot/runcoding-restful-simple</module>
-		<module>develop/back_end/java/springboot/elasticsearch</module>
+		<module>develop/back_end/java/springboot</module>
+
 		<!-- 当当分库分表插件 -->
 		<module>develop/back_end/java/spring-mvc/runcoding-shardingjdbc</module>
 

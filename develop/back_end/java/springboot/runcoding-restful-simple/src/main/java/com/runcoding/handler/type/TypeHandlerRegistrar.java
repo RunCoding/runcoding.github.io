@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class TypeHandlerRegistrar {
 
-    private  static  Map<ColumnStyle, Set<Class<?>>> registrarClass = Maps.newHashMap();
+    private  static  Map<ColumnStyle, Set<Class<?>>> registrarClass = Maps.newConcurrentMap();
 
 
     /***
