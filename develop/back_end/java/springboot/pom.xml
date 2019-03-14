@@ -21,6 +21,8 @@
         <module>runcoding-restful-simple</module>
         <module>elasticsearch</module>
         <module>nacos/runcoding-nacos</module>
+        <module>security/sso</module>
+        <module>security/authserver</module>
     </modules>
     
 </project>

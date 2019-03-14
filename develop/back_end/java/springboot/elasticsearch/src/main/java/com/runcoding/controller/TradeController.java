@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author maidao
+ * @author runcoding
  */
 @RestController
 @RequestMapping(value = "/trade")
