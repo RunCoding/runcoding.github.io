@@ -1,7 +1,8 @@
 package com.runcoding.sso.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -20,5 +21,12 @@ public class AuthorizationController extends WebMvcConfigurerAdapter {
         registry.addViewController("/oauth/confirm_access").setViewName("authorize");
     }
 
+    @Autowired
+    private ConsumerTokenServices tokenServices;
 
+    @RequestMapping(method = RequestMethod.POST, value = "api/access_token/revoke")
+    public String revokeToken(@RequestParam("token") String token) {
+        tokenServices.revokeToken(token);
+        return token;
+    }
 }

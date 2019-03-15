@@ -3,13 +3,14 @@ package com.runcoding.sso.config;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.Filter;
@@ -22,20 +23,29 @@ import java.io.IOException;
 /**
  * @author runcoding
  */
-@ComponentScan("com.runcoding.sso")
 @Configuration
-@Component
 @EnableOAuth2Sso
-public class LoginConfigurer extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.antMatcher("/dashboard/**").authorizeRequests().anyRequest()
-				.authenticated().and().csrf()
-				.csrfTokenRepository(csrfTokenRepository()).and()
-				.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-				.logout().logoutUrl("/dashboard/logout").permitAll()
-				.logoutSuccessUrl("/");
+		http.antMatcher("/dashboard/**")
+			.authorizeRequests()
+			.anyRequest()
+			.authenticated()
+			.and().csrf()
+			.csrfTokenRepository(csrfTokenRepository()).and()
+			//.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+			.logout().logoutUrl("/dashboard/logout").permitAll()
+			.logoutSuccessUrl("/")
+				.and().csrf().disable();
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		///,/favicon.ico,/index.html,/home.html,/dashboard.html,/js/**,/css/**,/webjars/**
+		web.ignoring().antMatchers("////","/js/**", "/css/**", "/images/**", "/**/favicon.ico","/index.html","/home.html","/dashboard.html","/js/**","/webjars/**");
 	}
 
 	private Filter csrfHeaderFilter() {
