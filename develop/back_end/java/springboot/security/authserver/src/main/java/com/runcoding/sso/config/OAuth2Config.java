@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -12,12 +13,15 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -25,6 +29,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 import javax.sql.DataSource;
 import java.security.KeyPair;
+import java.util.Arrays;
 
 /**
  * @author runcoding
@@ -56,7 +61,7 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 		return dataSource;
 	}
 
-    @Bean
+    //@Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         KeyPair keyPair = new KeyStoreKeyFactory(
@@ -94,38 +99,40 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 		 * scopes.and().withClient()
 		 * // 设置OAuth2的client信息也使用数据库存储和读取
 		 * **/
-         //clients.jdbc(dataSource());
+         clients.jdbc(dataSource());
 
-        clients.inMemory()
+       /* clients.inMemory()
                 .withClient("acme")
                 .secret("acmesecret")
                 .authorizedGrantTypes("authorization_code", "refresh_token",
-                        "password").scopes("openid");
+                        "password").scopes("openid");*/
 	}
 
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-        endpoints.authenticationManager(authenticationManager).accessTokenConverter(
-                jwtAccessTokenConverter());
-
+       // endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter());
+		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer()));
+		endpoints.tokenStore(tokenStore()).tokenEnhancer(tokenEnhancerChain).authenticationManager(authenticationManager);
 	}
 
-/*	@Bean
+    @Bean
 	@Primary
 	public DefaultTokenServices tokenServices() {
 		final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
 		defaultTokenServices.setTokenStore(tokenStore());
 		defaultTokenServices.setSupportRefreshToken(true);
 		return defaultTokenServices;
-	}*/
+	}
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+		oauthServer.realm("oauth2-resources");
 		oauthServer.tokenKeyAccess("permitAll()");
 		oauthServer.checkTokenAccess("isAuthenticated()");
-		//oauthServer.allowFormAuthenticationForClients();
+		oauthServer.allowFormAuthenticationForClients();
 	}
 
 	@Bean
@@ -144,5 +151,10 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 		return new CustomTokenEnhancer();
 	}
 
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

@@ -1,7 +1,6 @@
 package com.runcoding.sso.config;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,16 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+
 		http.antMatcher("/dashboard/**")
 			.authorizeRequests()
 			.anyRequest()
 			.authenticated()
-			.and().csrf()
-			.csrfTokenRepository(csrfTokenRepository()).and()
+			//.and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
 			//.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-			.logout().logoutUrl("/dashboard/logout").permitAll()
-			.logoutSuccessUrl("/")
-				.and().csrf().disable();
+			//.logout().logoutUrl("/dashboard/logout").permitAll()
+			//.logoutSuccessUrl("/")
+            .and().csrf().disable();
 	}
 
 	@Override

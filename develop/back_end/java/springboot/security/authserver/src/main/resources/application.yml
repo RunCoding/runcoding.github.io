@@ -2,18 +2,12 @@
 server:
   port: 8080
 
-security:
-  user:
-    name: runcoding
-    password: runcoding
-  ignored: /css/**,/js/**,/favicon.ico,/webjars/**
-
 logging:
   level:
     org.springframework.security: DEBUG
 
 jdbc:
   driverClassName: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3307/oauth2?createDatabaseIfNotExist=true
+  url: jdbc:mysql://localhost:3307/oauth2?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&tinyInt1isBit=false&useSSL=false
   user: root
   pass: mysql

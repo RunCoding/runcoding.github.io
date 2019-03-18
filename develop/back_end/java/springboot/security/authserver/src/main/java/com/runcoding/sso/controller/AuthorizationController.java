@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.security.Principal;
+
 /**
  * @author xukai
  * @date 2019-03-14
@@ -28,5 +30,10 @@ public class AuthorizationController extends WebMvcConfigurerAdapter {
     public String revokeToken(@RequestParam("token") String token) {
         tokenServices.revokeToken(token);
         return token;
+    }
+
+    @GetMapping("/user/me")
+    public Principal user(Principal principal) {
+        return principal;
     }
 }

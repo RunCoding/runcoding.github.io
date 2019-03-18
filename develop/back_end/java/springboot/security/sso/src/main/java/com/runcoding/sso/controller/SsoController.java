@@ -2,7 +2,7 @@ package com.runcoding.sso.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.Collections;
@@ -13,16 +13,24 @@ import java.util.Map;
  * @date 2019-03-14
  * @desc:
  */
-@RestController
+@Controller
 @RequestMapping("/dashboard")
 public class SsoController {
 
+
+    @RequestMapping("/login")
+    public String login() {
+        return "redirect:/#/";
+    }
+
     @RequestMapping("/message")
-    public Map<String, Object> dashboard() {
-        return Collections.<String, Object> singletonMap("message", "Yay!");
+    @ResponseBody
+    public Map<String, Object> dashboardMessage() {
+        return Collections.singletonMap("message", "Yay!");
     }
 
     @RequestMapping("/user")
+    @ResponseBody
     public Principal user(Principal user) {
         return user;
     }

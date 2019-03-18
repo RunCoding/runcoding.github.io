@@ -12,18 +12,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 	@Autowired
 	public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		auth.inMemoryAuthentication()
 				.withUser("runcoding").password(passwordEncoder.encode("runcoding")).roles("USER").and()
-				.withUser("admin").password(passwordEncoder.encode("nimda")).roles("ADMIN");
+				.withUser("admin").password(passwordEncoder.encode("admin")).roles("ADMIN");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login").permitAll()
-				.antMatchers("/oauth/token/revokeById/**").permitAll()
+				.antMatchers("/oauth/**").permitAll()
 				.antMatchers("/tokens/**").permitAll()
 				.anyRequest().authenticated()
 				.and().formLogin().permitAll()
