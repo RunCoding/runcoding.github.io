@@ -1,11 +1,14 @@
 package com.runcoding.sso.config;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
@@ -45,6 +48,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		///,/favicon.ico,/index.html,/home.html,/dashboard.html,/js/**,/css/**,/webjars/**
 		web.ignoring().antMatchers("////","/js/**", "/css/**", "/images/**", "/**/favicon.ico","/index.html","/home.html","/dashboard.html","/js/**","/webjars/**");
+	}
+
+	@Primary
+	@Bean
+	public RemoteTokenServices tokenServices() {
+		final RemoteTokenServices tokenService = new RemoteTokenServices();
+		tokenService.setCheckTokenEndpointUrl("http://localhost:8080/oauth/check_token");
+		tokenService.setClientId("fooClientIdPassword");
+		tokenService.setClientSecret("secret");
+		return tokenService;
 	}
 
 	private Filter csrfHeaderFilter() {
