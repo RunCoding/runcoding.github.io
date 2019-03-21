@@ -47,6 +47,11 @@ public class LambdaCoding {
             oldVal.addAll(currVal);
             return oldVal;
         }).orElse(Lists.newArrayList());
+        orderReduce.forEach(o->{
+            if(o.getId() == 1){
+                System.out.println(""+JSON.toJSONString(o));
+            }
+        });
         System.out.println("多对象聚合:"+JSON.toJSONString(orderReduce,SerializerFeature.DisableCircularReferenceDetect));
     }
 
