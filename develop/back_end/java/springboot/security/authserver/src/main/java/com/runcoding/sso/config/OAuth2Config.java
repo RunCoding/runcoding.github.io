@@ -1,13 +1,10 @@
 package com.runcoding.sso.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
@@ -23,12 +20,9 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
-import java.security.KeyPair;
 import java.util.Arrays;
 
 /**
@@ -51,6 +45,13 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private TokenStore tokenStore;
+
+	@Autowired
+	private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+
 	@Bean
 	public DataSource dataSource() {
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -61,75 +62,32 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 		return dataSource;
 	}
 
-    //@Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        KeyPair keyPair = new KeyStoreKeyFactory(
-                new ClassPathResource("keystore.jks"), "foobar".toCharArray())
-                .getKeyPair("test");
-        converter.setKeyPair(keyPair);
-        return converter;
-    }
-
-	@Bean
-	public TokenStore tokenStore() {
-		// 使用JdbcTokenStore把token存储到数据库中，RedisTokenStore的使用方法也类似
-		return new JdbcTokenStore(dataSource());
-	}
-
-
-	/**
-	 * http://www.iocoder.cn/Spring-Security/OAuth2-learning/
-	 * 生产使用数据库管理
-	 * 1. 客户端密码模式：
-	 *  curl -X POST --user acme:acmesecret http://localhost:8080/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=runcoding&password=runcoding&scope=openid"
-	 *  -- 刷新token
-	 *  curl -i -X POST -u 'acme:acmesecret'  http://localhost:8080/oauth/token -H "accept: application/json" -d 'grant_type=refresh_token&refresh_token=xxxx'
-	 *
-	 *
-	 * 2. 客户端模式：
-	 * curl -X POST "http://localhost:8080/oauth/token" --user acme:acmesecret -d "grant_type=client_credentials&scope=read_contacts"
-	 *
-	 *
-	 * */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		/**
-		 * 设置第二个client
-		 * scopes.and().withClient()
-		 * // 设置OAuth2的client信息也使用数据库存储和读取
-		 * **/
          clients.jdbc(dataSource());
-
-       /* clients.inMemory()
-                .withClient("acme")
-                .secret("acmesecret")
-                .authorizedGrantTypes("authorization_code", "refresh_token",
-                        "password").scopes("openid");*/
 	}
 
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-       // endpoints.authenticationManager(authenticationManager).accessTokenConverter(jwtAccessTokenConverter());
 		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer()));
-		endpoints.tokenStore(tokenStore()).tokenEnhancer(tokenEnhancerChain).authenticationManager(authenticationManager);
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter));
+		//tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer()));
+		endpoints.tokenStore(tokenStore).tokenEnhancer(tokenEnhancerChain).authenticationManager(authenticationManager);
 	}
 
     @Bean
-	@Primary
-	public DefaultTokenServices tokenServices() {
+	public DefaultTokenServices tokenServices(TokenStore tokenStore) {
 		final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-		defaultTokenServices.setTokenStore(tokenStore());
+		defaultTokenServices.setTokenStore(tokenStore);
 		defaultTokenServices.setSupportRefreshToken(true);
 		return defaultTokenServices;
 	}
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-		oauthServer.realm("oauth2-resources");
+		oauthServer.realm("oauth2-service");
 		oauthServer.tokenKeyAccess("permitAll()");
 		oauthServer.checkTokenAccess("isAuthenticated()");
 		oauthServer.allowFormAuthenticationForClients();

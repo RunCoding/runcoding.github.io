@@ -10,8 +10,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +38,13 @@ public class AuthorizationController extends WebMvcConfigurerAdapter {
     public String revokeToken(@RequestParam("token") String token) {
         tokenServices.revokeToken(token);
         return token;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/tokens")
+    @ResponseBody
+    public List<String> getTokens(@RequestParam(value = "clientId",defaultValue = "fooClientIdPassword") String  clientId) {
+        Collection<OAuth2AccessToken> tokens = tokenStore.findTokensByClientId(clientId);
+        return Optional.ofNullable(tokens).orElse(Collections.emptyList()).stream().map(OAuth2AccessToken::getValue).collect(Collectors.toList());
     }
 
     @PostMapping("/introspect")

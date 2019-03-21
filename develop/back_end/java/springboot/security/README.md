@@ -10,7 +10,6 @@
    curl  --header "Authorization:Bearer c3974f9d-a42e-4883-9c50-2bcc465cc7f9" http://localhost:9090/foos/1
 
 
-
 ### 密码模式(保留用户账号信息)：   
 - 获取token： curl -X POST -u 'fooClientIdPassword:secret' http://localhost:8080/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=runcoding&password=runcoding&scope=foo%20read%20write%20openid"
 
@@ -28,3 +27,10 @@ http://localhost:8080/oauth/authorize?client_id=fooClientIdPassword&redirect_uri
    http://localhost:8080/oauth/authorize?client_id=fooClientIdPassword&redirect_uri=http://localhost:9999/dashboard/login&response_type=code&scope=openid
 ####  获取token： 
    curl -X POST --user fooClientIdPassword:secret http://localhost:8080/oauth/token -H "content-type: application/x-www-form-urlencoded" -d "code=8iiDIL&grant_type=authorization_code&redirect_uri=http://localhost:9999/dashboard/login&scope=openid"
+
+### jwt 使用非对称加密(https://www.baeldung.com/spring-boot-https-self-signed-certificate)
+https://juejin.im/post/5a043c59f265da430e4e9c82
+
+生成证书：keytool -genkeypair -alias jwtkey -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore jwtkey.p12 -validity 3650
+
+keytool -list -rfc --keystore jwtkey.p12  | openssl x509 -inform pem -pubkey
