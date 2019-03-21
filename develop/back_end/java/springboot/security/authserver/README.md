@@ -6,6 +6,10 @@
 ```json
 {"access_token":"62471a3a-7455-4d11-8dca-d19caac51fe1","token_type":"bearer","expires_in":35999,"scope":"openid","organization":"fooClientIdPasswordxQal"}
 ```
+- 获取resource:
+   curl  --header "Authorization:Bearer c3974f9d-a42e-4883-9c50-2bcc465cc7f9" http://localhost:9090/foos/1
+
+
 
 ### 密码模式(保留用户账号信息)：   
 - 获取token： curl -X POST -u 'fooClientIdPassword:secret' http://localhost:8080/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=runcoding&password=runcoding&scope=foo%20read%20write%20openid"

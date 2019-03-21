@@ -19,7 +19,7 @@
         <wro4j.version>1.7.6</wro4j.version>
         <java.version>1.7</java.version>
         <jwt.version>1.0.9.RELEASE</jwt.version>
-        <oauth.version>2.3.4.RELEASE</oauth.version>
+        <oauth.version>2.3.5.RELEASE</oauth.version>
     </properties>
 
     <dependencies>
