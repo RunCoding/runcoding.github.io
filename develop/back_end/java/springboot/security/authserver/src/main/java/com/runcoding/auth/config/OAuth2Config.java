@@ -1,4 +1,4 @@
-package com.runcoding.sso.config;
+package com.runcoding.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -110,6 +110,7 @@ public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	}
 
 
+	/***加密方式*/
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

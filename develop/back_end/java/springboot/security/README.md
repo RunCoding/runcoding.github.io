@@ -11,7 +11,8 @@
 
 
 ### 密码模式(保留用户账号信息)：   
-- 获取token： curl -X POST -u 'fooClientIdPassword:secret' http://localhost:8080/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=runcoding&password=runcoding&scope=foo%20read%20write%20openid"
+- 获取token：
+ curl -X POST -u 'fooClientIdPassword:secret' http://localhost:8080/oauth/token -H "accept: application/json" -H "content-type: application/x-www-form-urlencoded" -d "grant_type=password&username=runcoding&password=runcoding&scope=foo%20read%20write%20openid"
 
 ```json
 {"access_token":"5b19199e-5ad8-4343-9c18-2c7c8f968b80","token_type":"bearer","refresh_token":"c1cd722c-31fc-441c-8f3b-6926d2af6915","expires_in":35999,"scope":"foo","organization":"runcodingOyJk"}

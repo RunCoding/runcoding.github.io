@@ -1,4 +1,4 @@
-package com.runcoding.sso.config;
+package com.runcoding.auth.config;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
