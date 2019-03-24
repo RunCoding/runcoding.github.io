@@ -10,5 +10,20 @@ ps -ef | grep node | awk '{print $2}' | xargs kill -9
 -- 删除node 及其子进程
 ```
 
+## Spring CLI
+https://start.spring.io/
+
+```
+spring init  \
+     --build maven  \
+     --groupId com.runcoding  \
+     --version 0.0.1-SNAPSHOT  \
+     --java-version 1.8  \
+     --dependencies web  \
+     --name run  \
+     --artifact springdemo \
+     spring-boot-demo
+```
+
 ## idea
 
