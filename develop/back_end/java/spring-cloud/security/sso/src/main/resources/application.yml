@@ -19,6 +19,9 @@ logging:
     com.netflix.discovery: 'OFF'
 
 security:
+  basic:
+    sevlert:
+      enabled: false
   oauth2:
     sso:
       loginPath: /dashboard/login
@@ -27,7 +30,9 @@ security:
       clientSecret: secret
       accessTokenUri: http://localhost:8080/oauth/token #是获取访问令牌的URL
       userAuthorizationUri: http://localhost:8080/oauth/authorize #授权用户被重定向的目标URL
-      scope: openid
-      clientAuthenticationScheme: header
+      clientAuthenticationScheme: form
     resource:
-      user-info-uri: http://localhost:8080/user/me
+      userInfoUri: http://localhost:8080/user/me
+      preferTokenInfo: false
+      jwt:
+        key-value:

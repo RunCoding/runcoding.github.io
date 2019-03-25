@@ -29,24 +29,44 @@ import java.io.IOException;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	/***
+	 * http://blog.didispace.com/xjf-spring-security-3/
+	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		http.antMatcher("/dashboard/**")
-			.authorizeRequests()
-			.anyRequest()
-			.authenticated()
+		    http
+				.authorizeRequests()
+					/**放行请求配置*/
+					.antMatchers("/dashboard/user").permitAll()
+					/**需要认证的地址配置*/
+				    .antMatchers("/dashboard/**").authenticated()
+					/**角色配置*/
+					.antMatchers("/dashboard/userInfo").hasAuthority("ROLE_USER").anyRequest().permitAll()
+				.and()
+				.logout()
+					.deleteCookies("OAUTH2SESSION")
+					.invalidateHttpSession(false)
+					.logoutUrl("/dashboard/logout")
+					.logoutSuccessUrl("/")
+					.permitAll()
+			    .and()
+					.rememberMe().tokenValiditySeconds(2419200)
+			    .and()
+				.csrf()
+					.disable()
+				.httpBasic()
+					.disable()
+					 ;
 			//.and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
 			//.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-			//.logout().logoutUrl("/dashboard/logout").permitAll()
-			//.logoutSuccessUrl("/")
-            .and().csrf().disable();
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		///,/favicon.ico,/index.html,/home.html,/dashboard.html,/js/**,/css/**,/webjars/**
-		web.ignoring().antMatchers("////","/js/**", "/css/**", "/images/**", "/**/favicon.ico","/index.html","/home.html","/dashboard.html","/js/**","/webjars/**");
+		web.ignoring().antMatchers("/resources/**");
+				//.antMatchers("////","/js/**", "/css/**", "/images/**", "/**/favicon.ico","/index.html","/home.html","/dashboard.html","/js/**","/webjars/**");
 	}
 
 	@Primary

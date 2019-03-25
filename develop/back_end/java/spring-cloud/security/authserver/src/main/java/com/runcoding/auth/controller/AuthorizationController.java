@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,11 +35,15 @@ public class AuthorizationController extends WebMvcConfigurerAdapter {
     @Autowired
     private ConsumerTokenServices tokenServices;
 
-    @RequestMapping(method = RequestMethod.POST, value = "api/access_token/revoke")
-    public String revokeToken(@RequestParam("token") String token) {
-        tokenServices.revokeToken(token);
-        return token;
-    }
+   /** @RequestMapping(method = RequestMethod.DELETE, value = "/oauth/token")
+    @ResponseBody */
+    public void revokeToken(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+        if (authorization != null && authorization.contains("Bearer")) {
+            String tokenId = authorization.substring("Bearer".length() + 1);
+            tokenServices.revokeToken(tokenId);
+            }
+        }
 
     @RequestMapping(method = RequestMethod.GET, value = "/tokens")
     @ResponseBody
