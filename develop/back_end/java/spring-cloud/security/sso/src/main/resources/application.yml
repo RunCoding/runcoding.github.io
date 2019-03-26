@@ -31,6 +31,7 @@ security:
       accessTokenUri: http://localhost:8080/oauth/token #是获取访问令牌的URL
       userAuthorizationUri: http://localhost:8080/oauth/authorize #授权用户被重定向的目标URL
       clientAuthenticationScheme: form
+      scope: openid #autoapprove 自动授权
     resource:
       userInfoUri: http://localhost:8080/user/me
       preferTokenInfo: false
