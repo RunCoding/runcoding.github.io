@@ -28,11 +28,11 @@ import java.util.Arrays;
 
 /**
  * @author runcoding
+ * 开启授权服务器
  */
 @Configuration
-/**开启授权服务器*/
 @EnableAuthorizationServer
-public  class OAuth2Config extends AuthorizationServerConfigurerAdapter {
+public  class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private Environment env;

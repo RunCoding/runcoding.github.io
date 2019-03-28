@@ -66,4 +66,16 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         //return new JdbcTokenStore(dataSource());
         return new JwtTokenStore(accessTokenConverter());
     }
+
+    @Primary
+    @Bean
+    public RemoteTokenServices tokenServices() {
+        final RemoteTokenServices tokenService = new RemoteTokenServices();
+        tokenService.setCheckTokenEndpointUrl("http://localhost:8080/oauth/check_token");
+        tokenService.setClientSecret("secret");
+        tokenService.setClientId("sampleClientId");
+        tokenService.setAccessTokenConverter(customAccessTokenConverter);
+        return tokenService;
+    }
+
 }

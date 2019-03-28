@@ -2,6 +2,7 @@ package com.runcoding.sso.controller;
 
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,16 +20,16 @@ import java.util.Map;
  * @desc:
  */
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping("/")
 public class SsoController {
 
-
-    @RequestMapping("/login")
-    public String login() {
+    @RequestMapping("/dashboard/login")
+    public String login(String state) {
+        System.out.println("state="+state);
         return "redirect:/#/";
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("/dashboard/logout")
     public void exit(HttpServletRequest request, HttpServletResponse response) {
         // token can be revoked here if needed
         new SecurityContextLogoutHandler().logout(request, null, null);
@@ -39,13 +41,13 @@ public class SsoController {
         }
     }
 
-    @RequestMapping("/message")
+    @RequestMapping("/dashboard/message")
     @ResponseBody
     public Map<String, Object> dashboardMessage() {
         return Collections.singletonMap("message", "Yay!");
     }
 
-    @RequestMapping("/user")
+    @RequestMapping("/dashboard/user")
     @ResponseBody
     public Principal user(Principal user) {
         return user;

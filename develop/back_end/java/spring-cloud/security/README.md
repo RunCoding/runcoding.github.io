@@ -26,6 +26,7 @@ http://localhost:8080/oauth/authorize?client_id=fooClientIdPassword&redirect_uri
 ### 授权码模式(authorization_code): http://localhost:9999
 ####  获取code：  
    http://localhost:8080/oauth/authorize?client_id=fooClientIdPassword&redirect_uri=http://localhost:9999/dashboard/login&response_type=code&scope=openid
+
 ####  获取token： 
    curl -X POST --user fooClientIdPassword:secret http://localhost:8080/oauth/token -H "content-type: application/x-www-form-urlencoded" -d "code=8iiDIL&grant_type=authorization_code&redirect_uri=http://localhost:9999/dashboard/login&scope=openid"
 

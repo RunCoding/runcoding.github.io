@@ -13,7 +13,7 @@ INSERT INTO oauth_client_details
 	refresh_token_validity, additional_information, autoapprove)
 VALUES
 	('sampleClientId', '{bcrypt}$2a$10$o49FhBnJHIfq8HBP0JMve./lN6lpvIkmux9H86.Y3jvaEvzdmGmxe', 'read,write,foo,bar,openid',
-	'implicit', 'http://localhost:9999/dashboard/login', 'ROLE_USER,ROLE_ANONYMOUS', 36000, 36000, null, true);
+	'implicit', 'http://localhost:9090/auth/login', 'ROLE_USER,ROLE_ANONYMOUS', 36000, 36000, null, 'openid');
 
 INSERT INTO oauth_client_details
 	(client_id, client_secret, scope, authorized_grant_types,
