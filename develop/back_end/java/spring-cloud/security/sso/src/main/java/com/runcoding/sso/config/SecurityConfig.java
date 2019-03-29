@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -53,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				    .antMatchers("/dashboard/**").authenticated()
 					/**角色配置*/
 					.antMatchers("/dashboard/userInfo").hasAuthority("ROLE_USER").anyRequest().permitAll()
+				 //.and().formLogin().loginProcessingUrl("/dashboard/login").successHandler(defaultLoginSuccessAuthHandler())
 				.and()
 				.logout()
 					.deleteCookies("OAUTH2SESSION")
@@ -73,6 +73,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			//.and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
 			//.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
 	}
+
+	@Bean
+	public DefaultLoginSuccessAuthHandler defaultLoginSuccessAuthHandler(){
+		DefaultLoginSuccessAuthHandler authHandler = new DefaultLoginSuccessAuthHandler();
+		authHandler.setTargetUrlParameter("state");
+		return authHandler;
+	}
+
 
 	@Bean
 	public JwtAuthenticationFilter authenticationTokenFilterBean(){
