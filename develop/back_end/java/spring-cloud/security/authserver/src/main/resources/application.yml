@@ -10,7 +10,7 @@ logging:
 
 jdbc:
   driverClassName: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3307/oauth2?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&tinyInt1isBit=false&useSSL=false
+  url: jdbc:mysql://192.200.233.63:3307/oauth2?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&tinyInt1isBit=false&useSSL=false
   user: root
   pass: mysql
 

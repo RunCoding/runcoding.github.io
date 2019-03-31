@@ -58,15 +58,15 @@ create table if not exists oauth_code (
 );
 
 create table if not exists oauth_approvals (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
+    id bigint(20) NOT NULL AUTO_INCREMENT,
 	userId VARCHAR(255),
 	clientId VARCHAR(255),
 	scope VARCHAR(255),
 	status VARCHAR(10),
 	expiresAt TIMESTAMP,
-	lastModifiedAt TIMESTAMP,
+	lastModifiedAt  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`) USING BTREE,
-  KEY `clientId` (`clientId`)
+    KEY `clientId` (`clientId`)
 );
 
 create table if not exists ClientDetails (

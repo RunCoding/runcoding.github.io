@@ -12,7 +12,7 @@
     </resultMap>
 
 
-    <select id="select" parameterType="java.lang.Long" resultMap="resultMap">
+    <select id="select" parameterType="java.lang.Long" resultMap="resultMap" statementType="PREPARED">
         select 
            id as id,
            order_number as orderNumber,
