@@ -15,6 +15,15 @@ import java.io.IOException;
  */
 public class RewriteAccessDenyFilter extends GenericFilterBean {
 
+
+    /***
+     * 登录跳转
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {

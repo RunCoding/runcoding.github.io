@@ -1,14 +1,33 @@
 package com.runcoding.sso.config;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.DefaultUserInfoRestTemplateFactory;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateCustomizer;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateFactory;
+import org.springframework.context.annotation.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.filter.state.DefaultStateKeyGenerator;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.AccessTokenProviderChain;
+import org.springframework.security.oauth2.client.token.AccessTokenRequest;
+import org.springframework.security.oauth2.client.token.ClientTokenServices;
+import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
+import org.springframework.security.oauth2.client.token.auth.ClientAuthenticationHandler;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -18,6 +37,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.Filter;
@@ -27,6 +47,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
+
 /**
  * @author runcoding
  */
@@ -55,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				 //.and().formLogin().loginProcessingUrl("/dashboard/login").successHandler(defaultLoginSuccessAuthHandler())
 				.and()
 				.logout()
-					.deleteCookies("OAUTH2SESSION")
+					.deleteCookies("sso")
 					.invalidateHttpSession(false)
 					.logoutUrl("/dashboard/logout")
 					.logoutSuccessUrl("/")
@@ -101,6 +123,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		tokenService.setClientSecret("secret");
 		return tokenService;
 	}
+
+
+	@Bean
+	@Primary
+	public UserInfoRestTemplateFactory clientUserInfoRestTemplateFactory(
+			ObjectProvider<List<UserInfoRestTemplateCustomizer>> customizers,
+			ObjectProvider<OAuth2ProtectedResourceDetails> details,
+			ObjectProvider<OAuth2ClientContext> oauth2ClientContext) {
+		return new ClientUserInfoRestTemplateFactory(customizers, details,
+				oauth2ClientContext);
+	}
+
 
 	private String publicKey = "-----BEGIN PUBLIC KEY-----\n" +
 			"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkNcERjHvpqxXCAoI2HEN\n" +

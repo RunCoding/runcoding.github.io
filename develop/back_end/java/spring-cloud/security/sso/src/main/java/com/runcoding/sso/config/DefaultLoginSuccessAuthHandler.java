@@ -27,7 +27,7 @@ public class DefaultLoginSuccessAuthHandler extends SimpleUrlAuthenticationSucce
         String[] parameterValues = request.getParameterValues("state");
         System.out.println("parameterValues="+parameterValues);
         /**登录成功跳转*/
-        targetUrl = "https://runcoding.github.io/";
+       // targetUrl = "https://runcoding.github.io/";
         super.getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }
