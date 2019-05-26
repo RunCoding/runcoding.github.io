@@ -45,7 +45,7 @@ public class OrderController {
             String sql = "SELECT id AS id FROM `order` WHERE id=?";
             Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,1);
+            statement.setInt(1, 1);
             ResultSet resultSet = statement.executeQuery();
             System.out.println("resultSet="+resultSet.getStatement());
         } catch (SQLException e) {
