@@ -14,23 +14,25 @@
 		<module>develop/back_end/java/base-java</module>
 
 		<!--  Netty 4 demo -->
-		<module>develop/back_end/java/netty</module>
-
+	<!--	<module>develop/back_end/java/netty</module>
+-->
 		<!--<module>develop/back_end/java/rxjava</module>
 
 		<module>develop/back_end/java/reactor</module>-->
 
+<!--
 		<module>develop/back_end/java/bigmap</module>
 
 		<module>develop/back_end/java/guava</module>
 		<module>develop/back_end/java/mq/kafka</module>
+-->
 
 		<!-- Spring Boot 集成 restful -->
 		<module>develop/back_end/java/springboot</module>
 		<module>develop/back_end/java/spring-cloud</module>
 
 		<!-- 当当分库分表插件 -->
-		<module>develop/back_end/java/spring-mvc/runcoding-shardingjdbc</module>
+		<!--<module>develop/back_end/java/spring-mvc/runcoding-shardingjdbc</module>-->
 
 
 
