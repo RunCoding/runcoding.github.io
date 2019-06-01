@@ -10,6 +10,13 @@ ps -ef | grep node | awk '{print $2}' | xargs kill -9
 -- 删除node 及其子进程
 ```
 
+### 统计一个文件夹下单词的数量
+```sh
+>  egrep -o "\b[[:alpha:]]+\b" -r flink-java/** \
+    |awk '{++count[$0]} END{for (word in count){ printf("%-20s,%d\n",word,count[word]);}}' \
+    |sort -n -r -k2,2  -t ',' |head -200000 > alpha-c.csv
+```
+
 ## Spring CLI
 https://start.spring.io/
 
