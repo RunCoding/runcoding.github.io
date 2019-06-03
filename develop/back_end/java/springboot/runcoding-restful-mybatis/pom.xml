@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.runcoding</groupId>
-    <artifactId>runcoding-restful-simple</artifactId>
+    <artifactId>runcoding-restful-mybatis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>runcoding-restful-simple</name>
+    <name>runcoding-restful-mybatis</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -166,6 +166,13 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+        </dependency>
+
+
 
     </dependencies>
 

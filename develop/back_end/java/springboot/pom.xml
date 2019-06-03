@@ -18,7 +18,7 @@
     <modules>
         <module>jax-rs2-guide</module>
         <module>runcoding-restful</module>
-        <module>runcoding-restful-simple</module>
+        <module>runcoding-restful-mybatis</module>
         <module>elasticsearch</module>
         <module>nacos/runcoding-nacos</module>
     </modules>
