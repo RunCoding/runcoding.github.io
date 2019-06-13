@@ -15,7 +15,7 @@ node.ingest: true #用于预处理数据（索引和搜索阶段都可以用到)
 
 #bootstrap.mlockall: #内存锁，选项为true或false，用来确保用户在es-jvm中设置的ES_HEAP_SIZE参数内存可以使用一半以上而又不溢出
 
-network.host: 192.168.0.13 #对外暴露的host，0.0.0.0时暴露给外网
+network.host: 192.168.0.137 #对外暴露的host，0.0.0.0时暴露给外网
 http.port: 9200
 transport.tcp.port: 9300
 http.cors.enabled: true

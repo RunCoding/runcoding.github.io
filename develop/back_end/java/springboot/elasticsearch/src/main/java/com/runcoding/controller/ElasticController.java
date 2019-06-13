@@ -41,4 +41,6 @@ public class ElasticController {
         elasticsearchTemplate.putMapping(Trade.class);
         elasticsearchTemplate.refresh(Trade.class);
     }
+
+
 }

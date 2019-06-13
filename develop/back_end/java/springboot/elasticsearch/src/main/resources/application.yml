@@ -11,6 +11,7 @@ spring:
       cluster-nodes: 192.168.0.137:9300,192.168.0.137:9302,192.168.0.137:9303
       repositories:
         enabled: true
+      indexName: trade_v1  #索引名称(可以支持版本)
 
 logging:
        level:
