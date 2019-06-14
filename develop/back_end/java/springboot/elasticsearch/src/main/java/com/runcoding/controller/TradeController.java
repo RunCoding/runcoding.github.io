@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,12 @@ public class TradeController {
     @PostMapping("/init")
     @ApiOperation("初始化交易数据")
     public boolean initTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName){
+        List<Trade> trades = initTrades(tradeTypeName);
+        tradeRepository.saveAll(trades);
+        return true;
+    }
+
+    public static List<Trade> initTrades(@RequestParam(value = "tradeTypeName", defaultValue = "订单交易") String tradeTypeName) {
         /**交易地理位置*/
         List<TradeGeoPoint> tradeGeoPoints = Lists.newArrayList(
                 TradeGeoPoint.builder().name("杭州").latitude(30.2756).longitude(120.197521).build(),
@@ -51,11 +58,9 @@ public class TradeController {
         );
 
         /**初始化10笔交易*/
-        List<Trade> trades =  Stream.generate(()->random.nextLong(1000000,99999999))
+        return Stream.generate(()->random.nextLong(1000000,99999999))
                 .limit(10).map((i)->tradeBuild(tradeTypeName,i, tradeGeoPoints.get(random.nextInt(tradeGeoPoints.size()))))
                 .collect(Collectors.toList());
-        tradeRepository.saveAll(trades);
-        return true;
     }
 
     @PostMapping("/add")
@@ -120,7 +125,7 @@ public class TradeController {
         return ResponseEntity.ok("Deleted");
     }
 
-    public static Trade tradeBuild(String tradeTypeName,Long tradeId, TradeGeoPoint location) {
+    public static Trade tradeBuild(String tradeTypeName,Long tradeId, TradeGeoPoint geo) {
         List<String> userNames = Lists.newArrayList("张三", "李四", "王五");
         String username = userNames.get(random.nextInt(userNames.size()));
 
@@ -150,7 +155,8 @@ public class TradeController {
         return Trade.builder().tradeId(tradeId).tradeName(tradeTypeName+tradeId)
                 .tradeTypeId(1L).tradeStatus(0).userName(username)
                 .totalRealAmount(BigDecimal.valueOf(random.nextLong(20000),2))
-                .tradeOrders(tradeOrderOrders).userId(userId).location(location)
+                .tradeOrders(tradeOrderOrders).userId(userId)
+                .location(new GeoPoint(geo.getLatitude(),geo.getLongitude()))
                 .createTime(DateTime.now().toDate()).build();
     }
 

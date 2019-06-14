@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -78,7 +79,7 @@ public class Trade {
 
     /**地址位置 **/
     @GeoPointField
-    private TradeGeoPoint location;
+    private GeoPoint location;
 
     @Field(type = FieldType.Object)
     private Map<String, String> names = new HashMap<>();

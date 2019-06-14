@@ -21,9 +21,9 @@ transport.tcp.port: 9300
 http.cors.enabled: true
 http.cors.allow-origin: "*"
 
-discovery.zen.minimum_master_nodes: 2 #最少的主节点个数，为了防止脑裂，最好设置为(总结点数/2 + 1)个
-discovery.zen.ping.unicast.hosts: ["192.168.0.137:9300","192.168.0.137:9302","192.168.0.137:9303"] #集群的ip集合，可指定端口，默认为9300，如 ["192.168.1.101","192.168.1.102"]
-discovery.zen.ping_timeout: 5s #主节点选举超时时间设置
+#discovery.zen.minimum_master_nodes: 2 #最少的主节点个数，为了防止脑裂，最好设置为(总结点数/2 + 1)个
+#discovery.zen.ping.unicast.hosts: ["192.168.0.137:9300","192.168.0.137:9302","192.168.0.137:9303"] #集群的ip集合，可指定端口，默认为9300，如 ["192.168.1.101","192.168.1.102"]
+#discovery.zen.ping_timeout: 5s #主节点选举超时时间设置
 
 bootstrap.memory_lock: false #内存锁定检查
 gateway.recover_after_nodes: 1 #值为n，网关控制在n个节点启动之后才恢复整个集群
