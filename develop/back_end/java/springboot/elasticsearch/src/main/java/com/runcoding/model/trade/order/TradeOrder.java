@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -27,10 +29,6 @@ public class TradeOrder {
     @ApiModelProperty( "订单编号")
     @Field()
     private String orderNumber;
-
-    @ApiModelProperty( "用户编号")
-    @Field()
-    private Long userId;
 
     @ApiModelProperty("订单总金额")
     @Field(index = false)
@@ -57,11 +55,11 @@ public class TradeOrder {
     private List<OrderDetail>  orderDetails;
 
     @ApiModelProperty("订单创建时间")
-    @Field()
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private Date createTime;
 
     @ApiModelProperty("订单修改时间")
-    @Field()
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private Date updateTime;
 
 }

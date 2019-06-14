@@ -2,11 +2,12 @@ package com.runcoding.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.runcoding.model.trade.GeoPoint;
+import com.runcoding.model.trade.TradeGeoPoint;
 import com.runcoding.model.trade.Trade;
 import com.runcoding.model.trade.order.OrderDetail;
 import com.runcoding.model.trade.order.TradeOrder;
 import com.runcoding.service.support.elastic.repositorys.TradeRepository;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,25 +38,42 @@ public class TradeController {
 
     private static ThreadLocalRandom random =   ThreadLocalRandom.current();
 
+    @PostMapping("/init")
+    @ApiOperation("初始化交易数据")
+    public boolean initTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName){
+        /**交易地理位置*/
+        List<TradeGeoPoint> tradeGeoPoints = Lists.newArrayList(
+                TradeGeoPoint.builder().name("杭州").latitude(30.2756).longitude(120.197521).build(),
+                TradeGeoPoint.builder().name("千岛湖").latitude(29.604433).longitude(119.005505).build(),
+                TradeGeoPoint.builder().name("宁波").latitude(29.795295).longitude(121.614758).build(),
+                TradeGeoPoint.builder().name("上海").latitude(31.233868).longitude(121.449963).build(),
+                TradeGeoPoint.builder().name("南京").latitude(32.061557).longitude(118.758312).build()
+        );
+
+        /**初始化10笔交易*/
+        List<Trade> trades =  Stream.generate(()->random.nextLong(1000000,99999999))
+                .limit(10).map((i)->tradeBuild(tradeTypeName,i, tradeGeoPoints.get(random.nextInt(tradeGeoPoints.size()))))
+                .collect(Collectors.toList());
+        tradeRepository.saveAll(trades);
+        return true;
+    }
+
     @PostMapping("/add")
+    @ApiOperation("手动添加一笔交易数据到ES")
     public ResponseEntity<Trade> addTrade(@RequestBody Trade trade) {
         Trade savedTrade = tradeRepository.save(trade);
         return ResponseEntity.ok(savedTrade);
     }
 
-    @DeleteMapping("/{tradeId}/delete")
-    public ResponseEntity<String> deleteTrade(@PathVariable("tradeId") Long  tradeId) {
-        tradeRepository.deleteById(tradeId);
-        return ResponseEntity.ok("Deleted");
-    }
-
-    @DeleteMapping("/clean")
-    public ResponseEntity<String> deleteTradeAll() {
-        tradeRepository.deleteAll();
-        return ResponseEntity.ok("Deleted");
+    @GetMapping("/trades")
+    @ApiOperation("查询所有的交易数据")
+    public ResponseEntity<PageImpl<Trade>> trades() {
+        PageImpl<Trade> tradeList = (PageImpl<Trade>) tradeRepository.findAll();
+        return ResponseEntity.ok(tradeList);
     }
 
     @GetMapping("/{tradeId}")
+    @ApiOperation("按交易id查询")
     public ResponseEntity<Trade> getByTradeId(@PathVariable("tradeId") Long  tradeId) {
         Trade trade = tradeRepository.findById(tradeId).orElse(null);
         log.info("findById={}", JSON.toJSONString(trade));
@@ -77,7 +95,8 @@ public class TradeController {
     }
 
     @GetMapping("/{tradeId}/{userId}")
-    public ResponseEntity<Page<Trade>> getByTradeAndUserId(@PathVariable("tradeId") Long  tradeId,
+    @ApiOperation("按交易id和用户id查询查询")
+    public ResponseEntity<Page<Trade>> getByTradeAndUserId(@PathVariable("tradeId") Long tradeId,
                                                            @PathVariable("userId") Long userId) {
 
         Pageable pageable =   PageRequest.of(0,10);
@@ -87,33 +106,24 @@ public class TradeController {
         return ResponseEntity.ok(page);
     }
 
-    @GetMapping("/trades")
-    public ResponseEntity<PageImpl<Trade>> trades() {
-        PageImpl<Trade> tradeList = (PageImpl<Trade>) tradeRepository.findAll();
-        return ResponseEntity.ok(tradeList);
+    @DeleteMapping("/{tradeId}/delete")
+    @ApiOperation("按交易id删除数据")
+    public ResponseEntity<String> deleteTrade(@PathVariable("tradeId") Long  tradeId) {
+        tradeRepository.deleteById(tradeId);
+        return ResponseEntity.ok("Deleted");
     }
 
-
-    @PostMapping("/init")
-    public boolean initTrade(){
-        /**交易地理位置*/
-        List<GeoPoint> geoPoints = Lists.newArrayList(
-            GeoPoint.builder().name("杭州").latitude(30.2756).longitude(120.197521).build(),
-            GeoPoint.builder().name("千岛湖").latitude(29.604433).longitude(119.005505).build(),
-            GeoPoint.builder().name("宁波").latitude(29.795295).longitude(121.614758).build(),
-            GeoPoint.builder().name("上海").latitude(31.233868).longitude(121.449963).build(),
-            GeoPoint.builder().name("南京").latitude(32.061557).longitude(118.758312).build()
-        );
-        /**初始化10笔交易*/
-        List<Trade> trades =  Stream.generate(()->random.nextLong(1000000,99999999))
-                .limit(10).map((i)->tradeBuild(i,geoPoints.get(random.nextInt(geoPoints.size()))))
-                .collect(Collectors.toList());
-        tradeRepository.saveAll(trades);
-        return true;
+    @DeleteMapping("/clean")
+    @ApiOperation("删除所有的es中的交易数据")
+    public ResponseEntity<String> deleteTradeAll() {
+        tradeRepository.deleteAll();
+        return ResponseEntity.ok("Deleted");
     }
 
+    public static Trade tradeBuild(String tradeTypeName,Long tradeId, TradeGeoPoint location) {
+        List<String> userNames = Lists.newArrayList("张三", "李四", "王五");
+        String username = userNames.get(random.nextInt(userNames.size()));
 
-    public static Trade tradeBuild(Long tradeId, GeoPoint location) {
         Long userId = random.nextLong(100,105);
         OrderDetail orderDetail = OrderDetail.builder()
               .orderNumber(String.valueOf(random.nextLong(1000000,99999999)))
@@ -127,7 +137,7 @@ public class TradeController {
               .qty(random.nextInt(10))
               .build();
         List<OrderDetail> orderDetails = Lists.newArrayList(orderDetail);
-        TradeOrder tradeOrder = TradeOrder.builder().userId(userId)
+        TradeOrder tradeOrder = TradeOrder.builder()
             .orderNumber(String.valueOf(random.nextLong(1000000,99999999)))
             .freightAmount(BigDecimal.valueOf(random.nextLong(200),2))
             .realAmount(BigDecimal.valueOf(random.nextLong(8),2))
@@ -137,11 +147,11 @@ public class TradeController {
             .orderStatus(0).orderDetails(orderDetails)
             .createTime(DateTime.now().toDate()).build();
         List<TradeOrder> tradeOrderOrders = Lists.newArrayList(tradeOrder);
-
-        return Trade.builder().tradeId(tradeId).tradeName(location.getName()+"交易"+tradeId)
-                .tradeTypeId(1L).tradeStatus(0)
+        return Trade.builder().tradeId(tradeId).tradeName(tradeTypeName+tradeId)
+                .tradeTypeId(1L).tradeStatus(0).userName(username)
                 .totalRealAmount(BigDecimal.valueOf(random.nextLong(20000),2))
                 .tradeOrders(tradeOrderOrders).userId(userId).location(location)
                 .createTime(DateTime.now().toDate()).build();
     }
+
 }

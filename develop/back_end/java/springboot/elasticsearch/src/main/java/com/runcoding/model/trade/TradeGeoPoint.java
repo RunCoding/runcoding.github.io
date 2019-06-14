@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeoPoint {
+public class TradeGeoPoint {
 
 	/**
 	 * 地区

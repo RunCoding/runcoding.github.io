@@ -2,7 +2,10 @@ package com.runcoding.model.trade;
 
 import com.runcoding.model.trade.order.TradeOrder;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 
@@ -41,8 +44,12 @@ public class Trade {
     @Field()
     private Long userId;
 
+    @ApiModelProperty("用户名称")
+    @Field(type = FieldType.Keyword,index = false,fielddata = true)
+    private String userName;
+
     @ApiModelProperty("交易名称")
-    @Field()
+    @Field(fielddata = true)
     private String tradeName;
 
     @ApiModelProperty("交易类型编号")
@@ -62,16 +69,16 @@ public class Trade {
     private List<TradeOrder> tradeOrders;
 
     @ApiModelProperty("交易创建时间")
-    @Field()
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private Date createTime;
 
     @ApiModelProperty("交易修改时间")
-    @Field()
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private Date updateTime;
 
     /**地址位置 **/
     @GeoPointField
-    private GeoPoint location;
+    private TradeGeoPoint location;
 
     @Field(type = FieldType.Object)
     private Map<String, String> names = new HashMap<>();

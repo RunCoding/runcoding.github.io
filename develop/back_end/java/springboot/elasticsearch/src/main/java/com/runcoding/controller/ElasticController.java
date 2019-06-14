@@ -38,8 +38,8 @@ public class ElasticController {
     public void clearIndices() {
         elasticsearchTemplate.deleteIndex(Trade.class);
         elasticsearchTemplate.createIndex(Trade.class);
-        elasticsearchTemplate.putMapping(Trade.class);
-        elasticsearchTemplate.refresh(Trade.class);
+        //elasticsearchTemplate.putMapping(Trade.class);
+        //elasticsearchTemplate.refresh(Trade.class);
     }
 
 
