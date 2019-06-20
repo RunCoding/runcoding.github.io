@@ -1,3 +1,11 @@
+
+### productSkuName类型改变，导致启动失败 @Field(type = FieldType.keyword) 变成 @Field(type = FieldType.Text)
+```log
+Caused by: java.lang.IllegalArgumentException: mapper [tradeOrders.orderDetails.productSkuName] of different type,
+ current_type [keyword], merged_type [text]
+```
+解决: 删除ES 索引重新创建
+
 **一、Query查询器 与 Filter 过滤器**
 
 **1.1 过滤器（filter）**

@@ -19,6 +19,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,8 +34,7 @@ import java.util.stream.Stream;
 @RequestMapping(value = "/trade")
 public class TradeController {
 
-
-    @Autowired
+    @Autowired(required = false)
     private TradeRepository tradeRepository;
 
     private static ThreadLocalRandom random =   ThreadLocalRandom.current();

@@ -1,5 +1,6 @@
 package com.runcoding.model.trade;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.runcoding.model.trade.order.TradeOrder;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,22 @@ import java.util.Map;
  * @author xukai
  * @date 2019-01-23
  * @desc: 交易信息
+ * FieldType=  {
+ *  Text, //text取代了string，当一个字段是要被全文搜索的,设置text类型以后，字段内容会被分析，在生成倒排索引以前，
+ *          字符串会被分析器分成一个一个词项。text类型的字段不用于排序，很少用于聚合（termsAggregation除外）。
+ * 	Integer,
+ * 	Long,
+ * 	Date,
+ * 	Float,
+ * 	Double,
+ * 	Boolean,
+ * 	Object,
+ * 	Auto,
+ * 	Nested, //嵌套类型
+ * 	Ip,
+ * 	Attachment, //附件类型
+ * 	Keyword //类型适用于索引结构化的字段
+ * }
  */
 @Data
 @Builder
@@ -28,7 +45,7 @@ import java.util.Map;
 @Document(indexName = "#{@indexName}",
           type = "trade",
           shards = 4, /**节点数和Shard数相等时，ElasticSearch集群的性能可以达到最优。通常不推荐一个节点超过2个shard。*/
-          replicas = 2 /**索引副本(Replica)机制的的思路很简单：为索引分片创建一份新的拷贝，它可以像原来的主分片一样处理用户搜索请求。
+          replicas = 0 /**索引副本(Replica)机制的的思路很简单：为索引分片创建一份新的拷贝，它可以像原来的主分片一样处理用户搜索请求。
                           同时也顺便保证了数据的安全性。即如果主分片数据丢失，ElasticSearch通过索引副本使得数据不丢失。
                           索引副本可以随时添加或者删除，所以用户可以在需要的时候动态调整其数量。*/
 )
@@ -42,27 +59,27 @@ public class Trade {
     private Long tradeId;
 
     @ApiModelProperty("用户编号")
-    @Field()
+    @Field(type = FieldType.Long)
     private Long userId;
 
     @ApiModelProperty("用户名称")
-    @Field(type = FieldType.Keyword,index = false,fielddata = true)
+    @Field(type = FieldType.Text)
     private String userName;
 
     @ApiModelProperty("交易名称")
-    @Field(fielddata = true)
+    @Field(type = FieldType.Text)
     private String tradeName;
 
     @ApiModelProperty("交易类型编号")
-    @Field()
+    @Field(type = FieldType.Long)
     private Long tradeTypeId;
 
     @ApiModelProperty("实付总金额")
-    @Field(index = false)
+    @Field(type = FieldType.Double,index = false)
     private BigDecimal totalRealAmount;
 
     @ApiModelProperty("交易状态")
-    @Field()
+    @Field(type = FieldType.Integer)
     private Integer tradeStatus;
 
     @ApiModelProperty("交易订单列表")
@@ -71,10 +88,12 @@ public class Trade {
 
     @ApiModelProperty("交易创建时间")
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     private Date createTime;
 
     @ApiModelProperty("交易修改时间")
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
+    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     private Date updateTime;
 
     /**地址位置 **/

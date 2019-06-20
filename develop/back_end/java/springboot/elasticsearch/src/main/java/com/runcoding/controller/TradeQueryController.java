@@ -7,6 +7,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.search.FuzzyQuery;
+import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.search.MatchQuery;
@@ -46,14 +47,23 @@ public class TradeQueryController {
 
     @GetMapping("/queryUserIdAndProductSkuId")
     @ApiOperation("精确匹配用户下sku查询交易")
-    public ResponseEntity<Page<Trade>> queryUserIdAndProductSkuId(@RequestParam(value = "userId",defaultValue = "33661")String userId,
-                                                 @RequestParam(value = "productSkuId",defaultValue = "4")String productSkuId,
+    public ResponseEntity<Page<Trade>> queryUserIdAndProductSkuId(
+                                                 @RequestParam(value = "userId",defaultValue = "102")String userId,
+                                                 @RequestParam(value = "orderNumber",defaultValue = "78905248")String orderNumber,
+                                                 @RequestParam(value = "productSkuId",defaultValue = "1")String productSkuId,
                                                  @RequestParam(value = "tradeTypeId",defaultValue = "1")String tradeTypeId,
                                                  @RequestParam(value = "tradeStatus",defaultValue = "0")String tradeStatus){
+        /**嵌套属性*/
+        NestedQueryBuilder nestedOrderNumberQuery = QueryBuilders.nestedQuery("tradeOrders", new QueryStringQueryBuilder(orderNumber).field("tradeOrders.orderNumber"), ScoreMode.Avg);
+        /**多级嵌套属性*/
+        NestedQueryBuilder nestedProductSkuIdQuery = QueryBuilders.nestedQuery("tradeOrders.orderDetails", new QueryStringQueryBuilder(productSkuId).field("tradeOrders.orderDetails.productSkuId"), ScoreMode.Avg);
+
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
-                .must(new QueryStringQueryBuilder(tradeStatus).field("tradeStatus"))
-                .must(new QueryStringQueryBuilder(tradeTypeId).field("tradeTypeId"))
-                .must(new QueryStringQueryBuilder(productSkuId).field("tradeOrders.orderDetails.productSkuId"))
+                 .must(new QueryStringQueryBuilder(tradeStatus).field("tradeStatus"))
+                 .must(new QueryStringQueryBuilder(tradeTypeId).field("tradeTypeId"))
+                 .must(nestedOrderNumberQuery)
+                 .must(nestedProductSkuIdQuery)
+                //.must(new QueryStringQueryBuilder(productSkuId).field("tradeOrders.orderDetails.productSkuId"))
                 .must(new QueryStringQueryBuilder(userId).field("userId"));
 
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -61,28 +71,13 @@ public class TradeQueryController {
                 .withSort(new FieldSortBuilder("tradeId").order(SortOrder.ASC))
                 .build();
 
-        long count = elasticsearchTemplate.count(searchQuery);
+        long count = elasticsearchTemplate.count(searchQuery,Trade.class);
         log.info("用户和sku查询交易数量={}",count);
 
         Page<Trade> page = elasticsearchTemplate.queryForPage(searchQuery, Trade.class);
         return ResponseEntity.ok(page);
     }
 
-    @GetMapping("/mustNot")
-    @ApiOperation("必须不存在查询")
-    public ResponseEntity<Page<Trade>> mustNotQuery(){
-        Pageable pageable =   PageRequest.of(0,10);
-        Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "tradeId"));
-        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery().mustNot(QueryBuilders.existsQuery("updateTime"));
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withFilter(boolQuery).withQuery(matchAllQuery())
-                .withSort(new FieldSortBuilder("tradeId").order(SortOrder.ASC))
-                .build();
-        String matchQuery = searchQuery.toString();
-        log.info("mustNot={}",matchQuery);
-        Page<Trade> page = elasticsearchTemplate.queryForPage(new StringQuery(matchQuery, pageable,sort), Trade.class);
-        return ResponseEntity.ok(page);
-    }
 
     @GetMapping("/match/tradeName")
     @ApiOperation("模糊查询交易")
@@ -147,7 +142,7 @@ public class TradeQueryController {
         Pageable pageable =   PageRequest.of(0,10);
         Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "tradeId"));
         MultiMatchQueryBuilder multiMatchQuery = QueryBuilders.multiMatchQuery(tradeName,
-                "tradeName" , "tradeOrders.orderDetails.productSkuName","location.name")
+                "tradeName" , "tradeOrders.orderDetails.productSkuName")
                 /**分词后评分越高的排在前面*/
                 .type(MultiMatchQueryBuilder.Type.BEST_FIELDS)
                 /***越多字段匹配的评分越高，在商品搜索时使用*/
@@ -273,7 +268,7 @@ public class TradeQueryController {
         Criteria criteria = new Criteria();
         criteria.and(
                 /**模糊查询，会分词。注意分词*/
-                new Criteria("tradeName").contains("订单交易"),
+                new Criteria("userName").contains("张"),
                 /**用户id在[100,105]之间*/
                 new Criteria("userId").between(100,105),
                 /**查询值必须已张"三"结尾。注意分词*/
@@ -286,7 +281,7 @@ public class TradeQueryController {
         CriteriaQuery query = new CriteriaQuery(criteria);
         Sort orders = Sort.by(
                 /**根据创建时间，降序排序*/
-                new Sort.Order(Sort.Direction.DESC, "createdTime"),
+                new Sort.Order(Sort.Direction.DESC, "createTime"),
                 /**根据id，生序排序*/
                 new Sort.Order(Sort.Direction.ASC, "tradeId")
         );

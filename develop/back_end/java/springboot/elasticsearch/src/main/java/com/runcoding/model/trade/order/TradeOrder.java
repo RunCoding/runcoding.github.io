@@ -23,31 +23,31 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class TradeOrder {
 
     @ApiModelProperty("交易编号")
-    @Field()
+    @Field(type = FieldType.Keyword,index = true)
     private String tradeNumber;
 
     @ApiModelProperty( "订单编号")
-    @Field()
+    @Field(type = FieldType.Keyword,index = true)
     private String orderNumber;
 
     @ApiModelProperty("订单总金额")
-    @Field(index = false)
+    @Field(type = FieldType.Double, index = false)
     private BigDecimal totalAmount;
 
     @ApiModelProperty("实付金额")
-    @Field(index = false)
+    @Field(type = FieldType.Double, index = false)
     private BigDecimal realAmount;
 
     @ApiModelProperty("优惠金额")
-    @Field(index = false)
+    @Field(type = FieldType.Double, index = false)
     private BigDecimal promotionAmount;
 
     @ApiModelProperty("运费金额")
-    @Field(index = false)
+    @Field(type = FieldType.Double, index = false)
     private BigDecimal freightAmount;
 
     @ApiModelProperty("订单状态")
-    @Field()
+    @Field(type = FieldType.Integer)
     private Integer orderStatus;
 
     @ApiModelProperty("订单明细")
@@ -56,10 +56,12 @@ public class TradeOrder {
 
     @ApiModelProperty("订单创建时间")
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     private Date createTime;
 
     @ApiModelProperty("订单修改时间")
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
     private Date updateTime;
 
 }
