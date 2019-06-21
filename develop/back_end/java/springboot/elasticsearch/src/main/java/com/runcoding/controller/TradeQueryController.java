@@ -3,29 +3,33 @@ package com.runcoding.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.runcoding.model.trade.Trade;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import com.runcoding.service.support.elastic.BusinessElasticsearchTemplate;
+import com.runcoding.service.support.elastic.query.BusinessNativeSearchQuery;
+import com.runcoding.service.support.elastic.query.BusinessNativeSearchQueryBuilder;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.search.MatchQuery;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ScrolledPage;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.data.elasticsearch.core.query.*;
+import org.springframework.data.util.CloseableIterator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
@@ -35,14 +39,19 @@ import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
  * - https://n3xtchen.github.io/n3xtchen/elasticsearch/2017/07/05/elasticsearch-23-useful-query-example
  * - https://zq99299.github.io/note-book/elasticsearch-senior/java-api/88-full-text.html
  * - https://zq99299.github.io/note-book/elasticsearch-core/
+ * - https://blog.csdn.net/tianyaleixiaowu/article/details/77965257
+ * - https://github.com/spring-projects/spring-data-elasticsearch/blob/master/src/test/java/org/springframework/data/elasticsearch/core/ElasticsearchTemplateTests.java
+ * -  深度分页es过程：
+ *    - http://tech.dianwoda.com/2017/09/21/elasticsearchshen-du-fen-ye/
+ *    - http://arganzheng.life/deep-pagination-in-elasticsearch.html
  */
 @Slf4j
 @RestController
 @RequestMapping(value = "/trade/query")
 public class TradeQueryController {
 
-    @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
+    @Resource
+    private BusinessElasticsearchTemplate elasticsearchTemplate;
 
 
     @GetMapping("/queryUserIdAndProductSkuId")
@@ -63,21 +72,52 @@ public class TradeQueryController {
                  .must(new QueryStringQueryBuilder(tradeTypeId).field("tradeTypeId"))
                  .must(nestedOrderNumberQuery)
                  .must(nestedProductSkuIdQuery)
-                //.must(new QueryStringQueryBuilder(productSkuId).field("tradeOrders.orderDetails.productSkuId"))
-                .must(new QueryStringQueryBuilder(userId).field("userId"));
+                 .must(new QueryStringQueryBuilder(userId).field("userId"))
+                ;
 
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        BusinessNativeSearchQuery searchQuery = new BusinessNativeSearchQueryBuilder()
+                //手动指定索引版本，trade_v2，trade_v3
+                .withIndices("trade_v*")
                 .withFilter(boolQuery).withQuery(matchAllQuery())
                 .withSort(new FieldSortBuilder("tradeId").order(SortOrder.ASC))
+                .withPageable(PageRequest.of(0, 5))
+                /**search-after 前一次查询排序后最后的排序值，多个用','分开。适合实时分页*/
+                .withSearchAfter(10008996)
                 .build();
 
         long count = elasticsearchTemplate.count(searchQuery,Trade.class);
         log.info("用户和sku查询交易数量={}",count);
 
+        List<Trade> trades = elasticsearchTemplate.queryForList(searchQuery, Trade.class);
+        log.info("获取数据trades={}",JSON.toJSONString(trades));
+
+        /**
+         * scroll查询原理是在第一次查询的时候一次性生成一个快照，根据上一次的查询的id来进行下一次的查询，这个就类似于关系型数据库的游标，
+         * 然后每次滑动都是根据产生的游标id进行下一次查询，这种性能比上面说的分页性能要高出很多，基本都是毫秒级的。
+         * 注意：
+         *  1. scroll不支持跳页查询。 使用场景：对实时性要求不高的查询，例如微博或者头条滚动查询。
+         *  2. rpc 调用重试与超时问题，都会导致数据不准确
+         * */
+        ScrolledPage<Trade> scrolledPage = (ScrolledPage<Trade>) elasticsearchTemplate.startScroll(60000, searchQuery, Trade.class);
+
+        log.info("获取数据scrolledPage={}",JSON.toJSONString(scrolledPage));
+        while (scrolledPage.hasContent()){
+            /**通过快照滚动下一页*/
+            scrolledPage = (ScrolledPage<Trade>)elasticsearchTemplate.continueScroll(scrolledPage.getScrollId(), 60000, Trade.class);
+            log.info("ScrollId={},获取数据scrolledPage={}",scrolledPage.getScrollId(),JSON.toJSONString(scrolledPage));
+        }
+        /**删除快照*/
+        elasticsearchTemplate.clearScroll(scrolledPage.getScrollId());
+
+
+        CloseableIterator<Trade> streamTradeList = elasticsearchTemplate.stream(searchQuery, Trade.class);
+
+        log.info("获取数据streamTradeList={}",JSON.toJSONString(streamTradeList));
+
+        /**search-after 会生效，进行排序后过滤*/
         Page<Trade> page = elasticsearchTemplate.queryForPage(searchQuery, Trade.class);
         return ResponseEntity.ok(page);
     }
-
 
     @GetMapping("/match/tradeName")
     @ApiOperation("模糊查询交易")
@@ -119,20 +159,30 @@ public class TradeQueryController {
     public ResponseEntity<Page<Trade>> phraseQueryByTradeName(@RequestParam(value = "tradeName",defaultValue = "交易")String tradeName){
         Pageable pageable =   PageRequest.of(0,10);
         Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "tradeId"));
-         /*MatchPhraseQueryBuilder phraseQueryBuilder = QueryBuilders.matchPhraseQuery("tradeId", 14357081);
-        //当前版本不支持ZeroTermsQuery
-        phraseQueryBuilder.zeroTermsQuery(MatchQuery.ZeroTermsQuery.NULL);
-        phraseQueryBuilder.slop(1);
-        matchQuery = phraseQueryBuilder.toString();
-        page = elasticsearchTemplate.queryForPage(new StringQuery(matchQuery, pageable,sort), Trade.class);
-        log.info("matchPhrase(短语)查询:="+ JSON.toJSONString(page, SerializerFeature.PrettyFormat));*/
+        MatchPhraseQueryBuilder phraseQueryBuilder = QueryBuilders.matchPhraseQuery("tradeName", tradeName);
 
-        MatchPhrasePrefixQueryBuilder prefixQueryBuilder = QueryBuilders.matchPhrasePrefixQuery("tradeName", tradeName)
-                //max_expansions参数，该参数可以控制最后项将要被扩展的前缀的个数。
-                .maxExpansions(10);
-        String matchQuery = prefixQueryBuilder.toString();
+        phraseQueryBuilder.zeroTermsQuery(MatchQuery.ZeroTermsQuery.ALL);
+        /**短语匹配支持跳过<=2个词的内容*/
+        phraseQueryBuilder.slop(2);
+        String matchQuery = phraseQueryBuilder.toString();
         log.info("matchQuery={}",matchQuery);
         Page<Trade> page = elasticsearchTemplate.queryForPage(new StringQuery(matchQuery, pageable,sort), Trade.class);
+        /**
+         * query = {"query":{"wrapper":{"query":"ewogICJtYXRjaF9waHJhc2UiIDogewogICAgInRyYWRlTmFtZSIgOiB7CiAgICAgICJxdWVyeSIgOiAi56S+5ZWGIiwKICAgICAgInNsb3AiIDogMiwKICAgICAgInplcm9fdGVybXNfcXVlcnkiIDogIkFMTCIsCiAgICAgICJib29zdCIgOiAxLjAKICAgIH0KICB9Cn0="}}}
+         * 其中"query":"ewogICJtYXRj……" 为base64编码
+         * 解析后语句: {"query":{"wrapper":{"query":{"match_phrase":{"tradeName":{"query":"社商","slop":2,"zero_terms_query":"ALL","boost":1}}}}}}
+         *
+         * match_phrase 短语匹配,严格按照查询词的顺序,类似mysql '%社商%' ,但是可以通过slop跳过几个词来匹配出"社交电商"的内容。
+         * */
+        log.info("matchPhrase(短语)查询:="+ JSON.toJSONString(page, SerializerFeature.PrettyFormat));
+
+        MatchPhrasePrefixQueryBuilder prefixQueryBuilder = QueryBuilders.matchPhrasePrefixQuery("tradeName", tradeName)
+                .slop(1)
+                //max_expansions参数，该参数可以控制最后项将要被扩展的前缀的个数。
+                .maxExpansions(10);
+         matchQuery = prefixQueryBuilder.toString();
+        log.info("matchQuery={}",matchQuery);
+        page = elasticsearchTemplate.queryForPage(new StringQuery(matchQuery, pageable,sort), Trade.class);
         return ResponseEntity.ok(page);
     }
 

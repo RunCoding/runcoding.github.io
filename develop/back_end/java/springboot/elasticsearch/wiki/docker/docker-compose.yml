@@ -2,7 +2,7 @@
 version: '2.2'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.3
     container_name: elasticsearch
     environment:
       - ES_CLUSTERNAME=elasticsearch
@@ -26,7 +26,7 @@ services:
     networks:
       - esnet
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.3
     container_name: elasticsearch2
     environment:
       - ES_CLUSTERNAME=elasticsearch2
@@ -49,7 +49,7 @@ services:
     links:
       - elasticsearch:elasticsearch
   elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.3
     container_name: elasticsearch3
     environment:
       - ES_CLUSTERNAME=elasticsearch3

@@ -2,8 +2,8 @@ package com.runcoding.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.runcoding.model.trade.TradeGeoPoint;
 import com.runcoding.model.trade.Trade;
+import com.runcoding.model.trade.TradeGeoPoint;
 import com.runcoding.model.trade.order.OrderDetail;
 import com.runcoding.model.trade.order.TradeOrder;
 import com.runcoding.service.support.elastic.repositorys.TradeRepository;
@@ -19,7 +19,6 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,13 +40,17 @@ public class TradeController {
 
     @PostMapping("/init")
     @ApiOperation("初始化交易数据")
-    public boolean initTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName){
-        List<Trade> trades = initTrades(tradeTypeName);
-        tradeRepository.saveAll(trades);
+    public boolean initTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName,
+                             @RequestParam(value = "num",defaultValue = "1")Integer num){
+        for (int i = 0; i < num ; i++) {
+            List<Trade> trades = initTrades(tradeTypeName,1000);
+            tradeRepository.saveAll(trades);
+            log.info("当前处理数据i={}",i);
+        }
         return true;
     }
 
-    public static List<Trade> initTrades(@RequestParam(value = "tradeTypeName", defaultValue = "订单交易") String tradeTypeName) {
+    public static List<Trade> initTrades(String tradeTypeName,Integer limit) {
         /**交易地理位置*/
         List<TradeGeoPoint> tradeGeoPoints = Lists.newArrayList(
                 TradeGeoPoint.builder().name("杭州").latitude(30.2756).longitude(120.197521).build(),
@@ -59,7 +62,7 @@ public class TradeController {
 
         /**初始化10笔交易*/
         return Stream.generate(()->random.nextLong(1000000,99999999))
-                .limit(10).map((i)->tradeBuild(tradeTypeName,i, tradeGeoPoints.get(random.nextInt(tradeGeoPoints.size()))))
+                .limit(limit).map((i)->tradeBuild(tradeTypeName,i, tradeGeoPoints.get(random.nextInt(tradeGeoPoints.size()))))
                 .collect(Collectors.toList());
     }
 
