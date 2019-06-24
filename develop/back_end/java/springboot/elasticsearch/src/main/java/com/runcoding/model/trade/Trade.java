@@ -1,5 +1,6 @@
 package com.runcoding.model.trade;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.runcoding.model.trade.order.TradeOrder;
 import io.swagger.annotations.ApiModelProperty;
@@ -87,13 +88,19 @@ public class Trade {
     private List<TradeOrder> tradeOrders;
 
     @ApiModelProperty("交易创建时间")
-    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
+    /**
+     * https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html
+     * https://segmentfault.com/a/1190000016296983
+     * */
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @ApiModelProperty("交易修改时间")
-    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd'T'HH:mm:ss")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /**地址位置 **/

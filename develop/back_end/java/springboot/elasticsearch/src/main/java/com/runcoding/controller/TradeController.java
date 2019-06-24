@@ -1,24 +1,34 @@
 package com.runcoding.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
 import com.runcoding.model.trade.Trade;
 import com.runcoding.model.trade.TradeGeoPoint;
 import com.runcoding.model.trade.order.OrderDetail;
 import com.runcoding.model.trade.order.TradeOrder;
+import com.runcoding.service.support.elastic.BusinessElasticsearchTemplate;
 import com.runcoding.service.support.elastic.repositorys.TradeRepository;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.index.IndexRequest;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
+import org.springframework.data.elasticsearch.core.query.UpdateQuery;
+import org.springframework.data.elasticsearch.core.query.UpdateQueryBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -36,13 +46,28 @@ public class TradeController {
     @Autowired(required = false)
     private TradeRepository tradeRepository;
 
+    @javax.annotation.Resource
+    private BusinessElasticsearchTemplate elasticsearchTemplate;
+
+
     private static ThreadLocalRandom random =   ThreadLocalRandom.current();
 
-    @PostMapping("/init")
-    @ApiOperation("初始化交易数据")
-    public boolean initTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName,
-                             @RequestParam(value = "num",defaultValue = "1")Integer num){
-        for (int i = 0; i < num ; i++) {
+    @PostMapping("/trade-init")
+    @ApiOperation("初始化固定几条交易数据")
+    public boolean initTrade() throws IOException {
+        Resource res = new ClassPathResource("config/trade-init.json");
+        String jsonStr = FileCopyUtils.copyToString(new FileReader(res.getFile()));
+        List<Trade> trades = JSON.parseObject(jsonStr,new TypeReference<List<Trade>>(){});
+        /**批量保存bulkIndex*/
+        tradeRepository.saveAll(trades);
+        return true;
+    }
+
+    @PostMapping("/batch-init")
+    @ApiOperation("初始化大批量交易数据")
+    public boolean initBatchTrade(@RequestParam(value = "tradeTypeName",defaultValue = "订单交易")String tradeTypeName,
+                             @RequestParam(value = "batchNum",defaultValue = "1")Integer batchNum){
+        for (int i = 0; i < batchNum ; i++) {
             List<Trade> trades = initTrades(tradeTypeName,1000);
             tradeRepository.saveAll(trades);
             log.info("当前处理数据i={}",i);
@@ -73,10 +98,32 @@ public class TradeController {
         return ResponseEntity.ok(savedTrade);
     }
 
+
+    @PostMapping("/bulkUpdate")
+    @ApiOperation("批量修改交易数据到ES")
+    public ResponseEntity<Boolean> bulkUpdateTrade(@RequestParam(value = "tradeId",defaultValue = "41686654")String tradeId) {
+        IndexRequest indexRequest = new IndexRequest();
+        indexRequest.source("updateTime", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        UpdateQuery updateQuery = new UpdateQueryBuilder()
+                .withId(tradeId)
+                .withClass(Trade.class)
+                .withIndexRequest(indexRequest)
+                .build();
+
+        List<UpdateQuery> bulkUpdateList = Lists.newArrayList(updateQuery);
+        elasticsearchTemplate.bulkUpdate(bulkUpdateList);
+
+        return ResponseEntity.ok(true);
+    }
+
+
+
+
     @GetMapping("/trades")
     @ApiOperation("查询所有的交易数据")
     public ResponseEntity<PageImpl<Trade>> trades() {
         PageImpl<Trade> tradeList = (PageImpl<Trade>) tradeRepository.findAll();
+        System.out.println(JSON.toJSONString(tradeList));
         return ResponseEntity.ok(tradeList);
     }
 
