@@ -1,10 +1,12 @@
 package com.runcoding.controller;
 
 import com.runcoding.model.trade.Trade;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @RestController
 public class ElasticController {
 
@@ -41,6 +45,7 @@ public class ElasticController {
         elasticsearchTemplate.putMapping(Trade.class);
         elasticsearchTemplate.refresh(Trade.class);
     }
+
 
 
 }

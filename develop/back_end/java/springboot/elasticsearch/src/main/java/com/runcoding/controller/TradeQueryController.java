@@ -59,9 +59,9 @@ public class TradeQueryController {
     @GetMapping("/queryUserIdAndProductSkuId")
     @ApiOperation("精确匹配用户下sku查询交易")
     public ResponseEntity<Page<Trade>> queryUserIdAndProductSkuId(
-                                                 @RequestParam(value = "userId",defaultValue = "102")String userId,
-                                                 @RequestParam(value = "orderNumber",defaultValue = "78905248")String orderNumber,
-                                                 @RequestParam(value = "productSkuId",defaultValue = "1")String productSkuId,
+                                                 @RequestParam(value = "userId",defaultValue = "100")String userId,
+                                                 @RequestParam(value = "orderNumber",defaultValue = "77290779")String orderNumber,
+                                                 @RequestParam(value = "productSkuId",defaultValue = "66")String productSkuId,
                                                  @RequestParam(value = "tradeTypeId",defaultValue = "1")String tradeTypeId,
                                                  @RequestParam(value = "tradeStatus",defaultValue = "0")String tradeStatus){
         /**嵌套属性*/
@@ -78,13 +78,13 @@ public class TradeQueryController {
                 ;
 
         BusinessNativeSearchQuery searchQuery = new BusinessNativeSearchQueryBuilder()
-                //手动指定索引版本，trade_v2，trade_v3
-                .withIndices("trade_v*")
+                //手动指定索引版本，trade_v2，trade_v3 或trade_v* 或 trade_alias(别名)
+                .withIndices("trade_alias")
                 .withFilter(boolQuery).withQuery(matchAllQuery())
                 .withSort(new FieldSortBuilder("tradeId").order(SortOrder.ASC))
                 .withPageable(PageRequest.of(0, 5))
                 /**search-after 前一次查询排序后最后的排序值，多个用','分开。适合实时分页*/
-                .withSearchAfter(10008996)
+                //.withSearchAfter(10008996)
                 .build();
 
         long count = elasticsearchTemplate.count(searchQuery,Trade.class);

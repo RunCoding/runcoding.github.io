@@ -7,7 +7,7 @@
     },
     "totalRealAmount": 150,
     "tradeId": 41686654,
-    "tradeName": "宁波交易",
+    "tradeName": "中国浙江省宁波市交易",
     "tradeOrders": [
       {
         "createTime": "2019-06-24 14:00:00",
@@ -46,7 +46,7 @@
     },
     "totalRealAmount": 110,
     "tradeId": 73397103,
-    "tradeName": "宁波交易",
+    "tradeName": "中国浙江省宁波市交易",
     "tradeOrders": [
       {
         "createTime": "2019-05-30 14:00:00",
@@ -85,7 +85,7 @@
     },
     "totalRealAmount": 200,
     "tradeId": 25686849,
-    "tradeName": "上海交易",
+    "tradeName": "中国上海市交易",
     "tradeOrders": [
       {
         "createTime": "2019-06-20 14:00:00",
@@ -147,7 +147,7 @@
     },
     "totalRealAmount": 51.32,
     "tradeId": 5935189,
-    "tradeName": "南京交易",
+    "tradeName": "中国江苏省南京市交易",
     "tradeOrders": [
       {
         "createTime": "2019-06-10 14:35:10",
@@ -186,7 +186,7 @@
     },
     "totalRealAmount": 6.71,
     "tradeId": 66508242,
-    "tradeName": "杭州交易",
+    "tradeName": "浙江省杭州市交易",
     "tradeOrders": [
       {
         "createTime": "2019-06-24 14:35:10",

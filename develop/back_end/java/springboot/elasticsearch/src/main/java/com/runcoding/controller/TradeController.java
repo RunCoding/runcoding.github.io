@@ -11,7 +11,9 @@ import com.runcoding.service.support.elastic.BusinessElasticsearchTemplate;
 import com.runcoding.service.support.elastic.repositorys.TradeRepository;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.cluster.metadata.AliasMetaData;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -21,6 +23,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
+import org.springframework.data.elasticsearch.core.query.AliasBuilder;
+import org.springframework.data.elasticsearch.core.query.AliasQuery;
 import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.data.elasticsearch.core.query.UpdateQueryBuilder;
 import org.springframework.http.ResponseEntity;
@@ -98,6 +102,49 @@ public class TradeController {
         return ResponseEntity.ok(savedTrade);
     }
 
+    @PostMapping("/index/aliases")
+    @ApiOperation("添加索引别名")
+    public ResponseEntity<Trade> indexTradeAliases() {
+        String INDEX_NAME = "trade_v3";
+
+        List<AliasMetaData> aliasList = elasticsearchTemplate.queryForAlias(INDEX_NAME);
+        log.info("aliasList={}",JSON.toJSONString(aliasList));
+
+        String aliasName = "trade_alias";
+        AliasQuery aliasQuery = new AliasBuilder().withIndexName(INDEX_NAME).withAliasName(aliasName).build();
+        Boolean aBoolean = elasticsearchTemplate.addAlias(aliasQuery);
+        log.info("add alias success = {}",aBoolean);
+
+        aliasList = elasticsearchTemplate.queryForAlias(INDEX_NAME);
+        log.info("aliasList={}",JSON.toJSONString(aliasList));
+
+        return ResponseEntity.ok( null);
+    }
+
+    @PostMapping("/index/aliases/change")
+    @ApiOperation(value = "切换索引别名",notes = "索引别名切换原子性(v1 to v2)")
+    public ResponseEntity<Trade> changeTradeAliases(@RequestParam(value = "aliasName",defaultValue = "trade_alias")String aliasName,
+                                                    @RequestParam(value = "originalIndex",defaultValue = "trade_v2")String originalIndex,
+                                                    @RequestParam(value = "targetIndex",defaultValue = "trade_v3")String targetIndex) {
+
+        List<AliasMetaData> aliasList = elasticsearchTemplate.queryForAlias(targetIndex);
+        log.info("aliasList={}",JSON.toJSONString(aliasList));
+
+        Boolean  changeAlias =  elasticsearchTemplate.getClient().admin().indices().prepareAliases()
+                /**为别名指定新索引*/
+                .addAlias(targetIndex,aliasName)
+                /**为别名删除旧索引*/
+                .removeAlias(originalIndex, aliasName)
+                .execute().actionGet().isAcknowledged();
+         log.info("change alias success = {}",changeAlias);
+
+        aliasList = elasticsearchTemplate.queryForAlias(targetIndex);
+        log.info("aliasList={}",JSON.toJSONString(aliasList));
+        return ResponseEntity.ok( null);
+    }
+
+
+
 
     @PostMapping("/bulkUpdate")
     @ApiOperation("批量修改交易数据到ES")
@@ -112,7 +159,6 @@ public class TradeController {
 
         List<UpdateQuery> bulkUpdateList = Lists.newArrayList(updateQuery);
         elasticsearchTemplate.bulkUpdate(bulkUpdateList);
-
         return ResponseEntity.ok(true);
     }
 

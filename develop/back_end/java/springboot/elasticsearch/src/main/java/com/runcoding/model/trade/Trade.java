@@ -46,10 +46,12 @@ import java.util.Map;
 @Document(indexName = "#{@indexName}",
           type = "trade",
           shards = 4, /**节点数和Shard数相等时，ElasticSearch集群的性能可以达到最优。通常不推荐一个节点超过2个shard。*/
-          replicas = 0 /**索引副本(Replica)机制的的思路很简单：为索引分片创建一份新的拷贝，它可以像原来的主分片一样处理用户搜索请求。
+          replicas = 0, /**索引副本(Replica)机制的的思路很简单：为索引分片创建一份新的拷贝，它可以像原来的主分片一样处理用户搜索请求。
                           同时也顺便保证了数据的安全性。即如果主分片数据丢失，ElasticSearch通过索引副本使得数据不丢失。
                           索引副本可以随时添加或者删除，所以用户可以在需要的时候动态调整其数量。*/
+        refreshInterval = "1s"/**自动1s刷新一次，-1不刷新(在大批量同步数据时使用)*/
 )
+/**动态模版映射模版*/
 //@DynamicTemplates(mappingPath = "/mappings/test-dynamic_templates_mappings_two.json")
 public class Trade {
 
@@ -64,11 +66,12 @@ public class Trade {
     private Long userId;
 
     @ApiModelProperty("用户名称")
-    @Field(type = FieldType.Text)
+    /**https://github.com/medcl/elasticsearch-analysis-ik*/
+    @Field(type = FieldType.Text,analyzer="ik_max_word" , searchAnalyzer = "ik_smart")
     private String userName;
 
     @ApiModelProperty("交易名称")
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text,analyzer="ik_max_word" , searchAnalyzer = "ik_max_word")
     private String tradeName;
 
     @ApiModelProperty("交易类型编号")
@@ -106,8 +109,5 @@ public class Trade {
     /**地址位置 **/
     @GeoPointField
     private GeoPoint location;
-
-    @Field(type = FieldType.Object)
-    private Map<String, String> names = new HashMap<>();
 
 }

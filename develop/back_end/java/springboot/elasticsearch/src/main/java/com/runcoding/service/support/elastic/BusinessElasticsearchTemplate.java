@@ -272,7 +272,10 @@ public class BusinessElasticsearchTemplate extends ElasticsearchTemplate {
         }
 
         if(query instanceof BusinessNativeSearchQuery){
-           searchRequestBuilder.searchAfter(((BusinessNativeSearchQuery) query).getSearchAfter());
+            Object[] searchAfter = ((BusinessNativeSearchQuery) query).getSearchAfter();
+            if(searchAfter != null){
+               searchRequestBuilder.searchAfter(((BusinessNativeSearchQuery) query).getSearchAfter());
+            }
         }
 
         if (query.getSort() != null) {
