@@ -1,3 +1,5 @@
+[](https://www.jianshu.com/p/7b23935e8b3e)
+
 
 ### productSkuName类型改变，导致启动失败 @Field(type = FieldType.keyword) 变成 @Field(type = FieldType.Text)
 ```log

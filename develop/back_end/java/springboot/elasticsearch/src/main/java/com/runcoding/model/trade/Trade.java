@@ -67,7 +67,14 @@ public class Trade {
 
     @ApiModelProperty("用户名称")
     /**https://github.com/medcl/elasticsearch-analysis-ik*/
-    @Field(type = FieldType.Text,analyzer="ik_max_word" , searchAnalyzer = "ik_smart")
+    @Field( type = FieldType.Text,
+            /**指定字段建立索引时指定的分词器*/
+            analyzer="ik_max_word" ,
+            /**指定字段搜索时使用的分词器*/
+            searchAnalyzer = "ik_smart",
+            /**默认情况下不存储原文*/
+            store = true
+    )
     private String userName;
 
     @ApiModelProperty("交易名称")
