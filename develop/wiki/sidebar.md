@@ -1,8 +1,7 @@
-- [Java]({{baseDomain}}?sidebar=develop/back_end/java)
-- cloud
- - 容器技术
-    - [Docker]({{baseDomain}}?sidebar=develop/cloud/docker)
-    - [kubernetes]({{baseDomain}}?sidebar=develop/cloud/kubernetes)
+- [Java]({{baseDomain}}?sidebar=develop/back_end/java#/develop/back_end/java/wiki/home)
+- 容器 
+  - [Docker]({{baseDomain}}?sidebar=develop/cloud/docker)
+  - [kubernetes]({{baseDomain}}?sidebar=develop/cloud/kubernetes)
 - 网络
    - [网络分析](/develop/wiki/information/network/wireshark)
    - [计数机网络](/develop/wiki/information/network/web)
