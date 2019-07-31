@@ -16,11 +16,13 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <module>jax-rs2-guide</module>
+       <!-- <module>jax-rs2-guide</module>
         <module>runcoding-restful</module>
         <module>runcoding-restful-mybatis</module>
-        <module>elasticsearch</module>
-        <module>nacos/runcoding-nacos</module>
+        <module>elasticsearch</module>-->
+        <module>seata/seata-tcc-order</module>
+        <module>seata/seata-tcc-storage</module>
+        <!--<module>nacos/runcoding-nacos</module>-->
     </modules>
     
 </project>
