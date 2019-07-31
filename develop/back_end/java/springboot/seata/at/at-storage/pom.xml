@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.runcoding</groupId>
-    <artifactId>order</artifactId>
+    <artifactId>at-storage</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
@@ -60,15 +60,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <artifactId>spring-cloud-alibaba-seata</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-seata</artifactId>
         </dependency>
         <dependency>
             <groupId>io.seata</groupId>
@@ -85,6 +81,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

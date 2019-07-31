@@ -19,10 +19,16 @@
     </properties>
 
     <modules>
-        <module>at/account</module>
-        <module>at/bussiness</module>
-        <module>at/order</module>
-        <module>at/storage</module>
+        <module>at/at-account</module>
+        <module>at/at-business</module>
+        <module>at/at-order</module>
+        <module>at/at-storage</module>
+
+        <module>tcc/tcc-account</module>
+        <module>tcc/tcc-business</module>
+        <module>tcc/tcc-order</module>
+        <module>tcc/tcc-storage</module>
+
     </modules>
 
     <dependencyManagement>
