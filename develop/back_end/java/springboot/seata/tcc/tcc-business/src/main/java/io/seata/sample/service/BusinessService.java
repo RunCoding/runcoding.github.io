@@ -1,15 +1,16 @@
 package io.seata.sample.service;
 
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-
-import io.seata.sample.feign.OrderFeignClient;
-import io.seata.sample.feign.StorageFeignClient;
+import io.seata.sample.action.CreateOrderTccAction;
+import io.seata.sample.action.StorageTccAction;
+import io.seata.sample.entity.OrderDto;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author jimin.jm@alibaba-inc.com
@@ -19,9 +20,10 @@ import org.springframework.stereotype.Service;
 public class BusinessService {
 
     @Autowired
-    private StorageFeignClient storageFeignClient;
+    private CreateOrderTccAction createOrderTccAction;
+
     @Autowired
-    private OrderFeignClient orderFeignClient;
+    private StorageTccAction storageTccAction;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -29,10 +31,13 @@ public class BusinessService {
     /**减库存，下订单 */
     @GlobalTransactional
     public void purchase(String userId, String commodityCode, int orderCount) {
-        storageFeignClient.deduct(commodityCode, orderCount);
+        /**预占用库存*/
+        storageTccAction.prepare(null,commodityCode,orderCount);
 
-        orderFeignClient.create(userId, commodityCode, orderCount);
-
+        String orderCode = commodityCode + ThreadLocalRandom.current().nextInt(1000,9999);
+        OrderDto orderDto = OrderDto.builder().userId(userId).commodityCode(orderCode).count(orderCount).build();
+        /**预创建订单*/
+        createOrderTccAction.prepare(null,orderDto,userId,orderCode);
         if (!validData()) {
             throw new RuntimeException("账户或库存不足,执行回滚");
         }

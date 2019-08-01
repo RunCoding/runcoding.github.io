@@ -1,7 +1,9 @@
 package io.seata.sample.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -12,8 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface OrderFeignClient {
 
     @GetMapping("/create")
-    void create(@RequestParam("userId") String userId,
+    boolean create(@RequestParam("userId") String userId,
                 @RequestParam("commodityCode") String commodityCode,
                 @RequestParam("count") Integer count);
+
+    @PostMapping("/commit")
+    boolean commit(@RequestParam("userId") String userId,
+                   @RequestParam("commodityCode") String commodityCode);
+
+    @DeleteMapping("/rollback")
+    boolean rollback(@RequestParam("userId") String userId,
+                   @RequestParam("commodityCode") String commodityCode);
 
 }

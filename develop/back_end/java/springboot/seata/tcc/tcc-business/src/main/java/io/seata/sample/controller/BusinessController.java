@@ -16,11 +16,7 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
-    /**
-     * 购买下单，模拟全局事务提交
-     *
-     * @return
-     */
+    /**  购买下单，模拟全局事务提交  */
     @RequestMapping(value = "/purchase/commit", produces = "application/json")
     public String purchaseCommit() {
         try {
@@ -31,12 +27,7 @@ public class BusinessController {
         return "全局事务提交";
     }
 
-    /**
-     * 购买下单，模拟全局事务回滚
-     * 账户或库存不足
-     *
-     * @return
-     */
+    /** 购买下单，模拟全局事务回滚 账户或库存不足  */
     @RequestMapping("/purchase/rollback")
     public String purchaseRollback() {
         try {

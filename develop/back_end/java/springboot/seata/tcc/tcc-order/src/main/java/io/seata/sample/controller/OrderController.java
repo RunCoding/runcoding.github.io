@@ -2,7 +2,9 @@ package io.seata.sample.controller;
 
 import io.seata.sample.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,9 +20,17 @@ public class OrderController {
 
     @GetMapping(value = "/create", produces = "application/json")
     public Boolean create(String userId, String commodityCode, Integer count) {
+        return orderService.create(userId, commodityCode, count);
+    }
 
-        orderService.create(userId, commodityCode, count);
-        return true;
+    @PostMapping(value = "/commit", produces = "application/json")
+    public Boolean commit(String userId, String commodityCode) {
+        return orderService.commit(userId, commodityCode);
+    }
+
+    @DeleteMapping(value = "/rollback", produces = "application/json")
+    public Boolean rollback(String userId, String commodityCode) {
+        return orderService.rollback(userId, commodityCode);
     }
 
 }

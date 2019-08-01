@@ -19,12 +19,15 @@
     </properties>
 
     <modules>
+        <module>eureka</module>
+
+        <!-- at 模式 -->
         <module>at/at-account</module>
         <module>at/at-business</module>
         <module>at/at-order</module>
         <module>at/at-storage</module>
 
-        <module>tcc/tcc-account</module>
+        <!-- tcc 模式 -->
         <module>tcc/tcc-business</module>
         <module>tcc/tcc-order</module>
         <module>tcc/tcc-storage</module>
@@ -68,7 +71,13 @@
                 <artifactId>seata-all</artifactId>
                 <version>0.7.1</version>
             </dependency>
-            
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.6</version>
+            </dependency>
+
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
