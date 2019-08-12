@@ -18,9 +18,13 @@ import java.util.Map;
 public class AlphaCoding {
 
     /**
+     *
+     * 一、解析本地文件获取单词与词频
      * egrep -o -i "\b[[:alpha:]]+\b" -r flink-java/** \
      *     |awk '{++count[$0]} END{for (word in count){ printf("%-20s,%d\n",word,count[word]);}}' \
      *     |sort -n -r -k2,2  -t ',' |head -200000 > alpha-c.csv
+     * 二、 爬取单词词意(美式男音)
+     * curl http://dict.cn/forward |grep naudio |  awk -v FS="(naudio=\"|\" title)" '{print "http://audio.dict.cn/" $2}' | sed -n '4p' | xargs wget -O forward.mp3
      */
     @Test
     public void alpha() throws Exception {
