@@ -36,11 +36,12 @@
     {
       "模块":"**中间件**",
       "技术栈":[
-        "[分布式锁](//www.jianshu.com/p/535efcab356d)",
+        "[RocketMQ](/develop/back_end/java/wiki/information/middleware/mq/rocketmq_info)",
         "[Netty](/develop/back_end/java/wiki/information/middleware/netty/netty_info)",
         "[Dubbo](/develop/back_end/java/wiki/information/middleware/dubbo/dubbo_info)",
         "[Redis](/develop/back_end/java/wiki/information/cache/redis)",
-        "[Memcached](/develop/back_end/java/wiki/information/cache/memcached)"
+        "[Memcached](/develop/back_end/java/wiki/information/cache/memcached)",
+        "[分布式锁](//www.jianshu.com/p/535efcab356d)",
       ],
     } 
 ]
@@ -52,6 +53,7 @@
    "模块":"**JVM**",
    "技术栈":[
      "[性能分析](/develop/back_end/java/wiki/information/performance/performance)",
+     "[xxfox-jvm 你假笨](http://xxfox.perfma.com/jvm/generate)"
      "[JVM GC](//blog.csdn.net/wwd0501/article/details/78404105)" 
    ],
  }  
@@ -64,11 +66,12 @@
   {
     "模块":"**分布式跟踪系统**",
     "技术栈":[
+      "[skywalking](https://github.com/apache/skywalking)"
+      "[Cat-大众点评](https://github.com/dianping/cat)",
       "[zipkin-Twitter](https://zipkin.io/)",
-      "[Dapper-Google](https://bigbully.github.io/Dapper-translation/)",
       "[Pinpoint](https://github.com/naver/pinpoint)",
+      "[Dapper-Google](https://bigbully.github.io/Dapper-translation/)",
       "[EagleEye-阿里](https://www.alibabacloud.com/help/zh/doc-detail/63092.htm)",
-      "[Cat-大众点评](https://github.com/dianping/cat)"
     ],
   } 
   
