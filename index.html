@@ -80,20 +80,12 @@
             renderer: {
                 code: function(code, lang) {
                   lang = lang || '';
-                  if(lang == 'json2table'){
-                    try{
-                      code = JSON.parse(code);
-                    } catch(e) {
-                      try{
-                        code = eval("("+ code +")");
-                      }catch(e2) {
-                        code = [{"<span style='color: #ffa666'>请检查下面的json存在语法错误</span>":code}]
-                      }
-                    }
-                    return json2table(code,'');;
+                  if(lang == 'json2table' || lang == 'json2tableByAlpha'){
+                    code = parseJSONCode(code);
+                    return lang == 'json2tableByAlpha' ? json2tableByAlpha(code,'') : json2table(code,'');
                   }
-                    var html = '';
-                    if(lang.match(/^sequenceDiagram/) || lang.match(/^graph/) ||
+                  var html = '';
+                  if(lang.match(/^sequenceDiagram/) || lang.match(/^graph/) ||
                             lang.match(/^gantt/) ||  lang.match(/^mermaid/) ){
                         var cb = function(svgGraph) {
                             //console.log(svgGraph)
@@ -195,6 +187,7 @@
 <!-- 代码高亮.默认支持 CSS、JavaScript 和 HTML.其他扩展 -->
 <script type="text/javascript" src="/main/dist/docsify/plugins/prismjs/components/prism-java.min.js"></script>
 <script type="text/javascript" src="/main/dist/fetch/fetch.js"></script>
+<script type="text/javascript" src="/main/dist/howler/howler.min.js"></script>
 <script type="text/javascript" src="/main/dist/docsify/plugins/prismjs/components/prism-markdown.min.js"></script>
 <script type="text/javascript" src="/main/dist/docsify/plugins/prismjs/components/prism-sql.min.js"></script>
 <script type="text/javascript" src="/main/dist/docsify/plugins/prismjs/components/prism-bash.min.js"></script>
@@ -215,6 +208,17 @@
             htmlLabels:true
         }
     });
+    var parseJSONCode = function (code) {
+      try{
+        return  JSON.parse(code);
+      } catch(e) {
+        try{
+          return eval("("+ code +")");
+        }catch(e2) {
+          return [{"<span style='color: #ffa666'>请检查下面的json存在语法错误</span>":code}]
+        }
+      }
+    }
 </script>
 <!--
 <script>

@@ -35,7 +35,7 @@ var json2table = function (json, classes) {
                 rowInfo += "</ul>";
             } 
             rowInfo = rowInfo   || row[colName];
-            bodyRows += '<td>' + rowInfo + '</td>';
+            bodyRows += '<td onmouseover="alphaPlay(this)">' + rowInfo + '</td>';
         })
 
         bodyRows += '</tr>';
@@ -46,3 +46,30 @@ var json2table = function (json, classes) {
                 '<tbody>' + marked(bodyRows)+ '</tbody>' +
             '</table>';
 }
+
+var isAlpha = false;
+
+var json2tableByAlpha = function (json) {
+    isAlpha = true;
+    return json2table(json,'');
+}
+
+var alphaPlay =function (e) {
+    if(!isAlpha){
+        return;
+    }
+    var baseUrl = '';
+    if(window.location.host.indexOf("localhost") == -1){
+        //读取远程
+        baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
+    }
+    var sound = new Howl({
+        src: [baseUrl+'/alpha/'+e.innerHTML+'.mp3'],
+        volume: 0.5,
+        onend: function() {
+            //console.log('Finished!');
+        }
+    });
+    sound.play();
+}
+

@@ -1,7 +1,7 @@
 ## 程序员必须要懂的英语词意
 
 ### 名词 
-  ```json2table
+  ```json2tableByAlpha
   [
       {
           "单词": "license",
@@ -29281,7 +29281,7 @@
   ```
  
 ### 动词 
- ```json2table
+ ```json2tableByAlpha
   [
           {
               "单词": "new",
@@ -34962,7 +34962,7 @@
  ```
  
  ### 不及物动词
- ```json2table
+ ```json2tableByAlpha
  [
          {
              "单词": "except",
@@ -35722,7 +35722,7 @@
      ]
  ```
  ### 及物动词
- ```json2table
+ ```json2tableByAlpha
  [
          {
              "单词": "obtain",
@@ -37007,7 +37007,7 @@
      ]
  ```
 ### 介词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "to",
@@ -37253,7 +37253,7 @@
 ```
 
 ### 代名词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "this",
@@ -37574,7 +37574,7 @@
 ```
 
 ### 数词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "two",
@@ -37770,7 +37770,7 @@
 ```
 
 ### 连接词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "or",
@@ -37856,7 +37856,7 @@
 ```
 
 ### 形容词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "static",
@@ -46272,7 +46272,7 @@
 ```
 
 ### 感叹词
-```json2table
+```json2tableByAlpha
 [
         {
             "单词": "hello",
