@@ -17,7 +17,7 @@ var json2table = function (json, classes) {
     json.map(function(row) {
         bodyRows += '<tr>';
 
-        cols.map(function(colName) {
+        cols.map(function(colName,index) {
             var rowInfo ;
             var rowVal =  row[colName];
             /**值是数组*/
@@ -35,7 +35,11 @@ var json2table = function (json, classes) {
                 rowInfo += "</ul>";
             } 
             rowInfo = rowInfo   || row[colName];
-            bodyRows += '<td onmouseover="alphaPlay(this)">' + rowInfo + '</td>';
+            if(index == 0){
+               bodyRows += '<td onmouseover="alphaPlay(this)">' + rowInfo + '</td>';
+            }else {
+                bodyRows += '<td>' + rowInfo + '</td>';
+            }
         })
 
         bodyRows += '</tr>';
