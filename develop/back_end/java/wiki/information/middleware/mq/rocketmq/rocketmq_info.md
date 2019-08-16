@@ -97,6 +97,8 @@ private long fetchConsumeOffsetFromBroker(MessageQueue mq) throws RemotingExcept
    
  - 更新offset updateOffset(MessageQueue mq, long offset, boolean increaseOnly)  
 
+ - [开始是从master消费消息的，如果出现消费消费过慢的情况，consumer就会从slave（如果slave配置为可读）消费](https://www.cnblogs.com/sunshine-2015/p/8998549.html) 
+
 ### server端分析
  
 #### namesrv

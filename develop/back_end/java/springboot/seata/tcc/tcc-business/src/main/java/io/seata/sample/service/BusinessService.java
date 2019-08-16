@@ -7,6 +7,7 @@ import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -33,7 +34,6 @@ public class BusinessService {
     public void purchase(String userId, String commodityCode, int orderCount) {
         /**预占用库存*/
         storageTccAction.prepare(null,commodityCode,orderCount);
-
         String orderCode = commodityCode + ThreadLocalRandom.current().nextInt(1000,9999);
         OrderDto orderDto = OrderDto.builder().userId(userId).commodityCode(orderCode).count(orderCount).build();
         /**预创建订单*/

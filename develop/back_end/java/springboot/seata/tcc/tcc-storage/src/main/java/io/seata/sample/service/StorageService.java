@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author jimin.jm@alibaba-inc.com
@@ -16,6 +17,7 @@ public class StorageService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean deduct(String commodityCode, int count) {
         int deduct = jdbcTemplate.update("update storage_tbl set count = count - ? where commodity_code = ?",
                 new Object[]{count, commodityCode});
