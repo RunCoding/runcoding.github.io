@@ -10,7 +10,8 @@
                "[Java设计模式](https://www.cnblogs.com/foryang/p/5849402.html)",
                "[Java中的阻塞队列](/develop/back_end/java/wiki/information/java/java_blocking_queue)",
                "[Java8基础](/develop/back_end/java/wiki/information/java/java8)",
-               "[Java8重新认识HashMap](/develop/back_end/java/wiki/information/java/java8_hashmap)"
+               "[Java8重新认识HashMap](/develop/back_end/java/wiki/information/java/java8_hashmap)",
+               "[Express脚本规则引擎](/develop/back_end/java/wiki/information/express)"
         ]
       }
   ]
