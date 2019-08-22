@@ -36,7 +36,7 @@ var json2table = function (json, classes) {
             } 
             rowInfo = rowInfo   || row[colName];
             if(index == 0){
-               bodyRows += '<td onmouseover="alphaPlay(this)">' + rowInfo + '</td>';
+               bodyRows += '<td onmouseover="alphaPlay(this,false)" onclick="alphaPlay(this,true)">' + rowInfo + '</td>';
             }else {
                 bodyRows += '<td>' + rowInfo + '</td>';
             }
@@ -58,17 +58,22 @@ var json2tableByAlpha = function (json) {
     return json2table(json,'');
 }
 
-var alphaPlay =function (e) {
+var alphaPlay =function (e,isFemale) {
     if(!isAlpha){
         return;
     }
     var baseUrl = '';
     if(window.location.host.indexOf("localhost") == -1){
         //读取远程
-        baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
+        //baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
+        return;
+    }
+    var src = baseUrl+'/alpha/translate/'+ e.innerHTML+'.mp3';
+    if(isFemale){
+        src = baseUrl+'/alpha/female/'+ e.innerHTML+'.mp3'
     }
     var sound = new Howl({
-        src: [baseUrl+'/alpha/'+e.innerHTML+'.mp3'],
+        src: [src],
         volume: 0.5,
         onend: function() {
             //console.log('Finished!');
