@@ -11,16 +11,16 @@
 		<modules>
 
 		<!-- 启用project -->
-		<module>develop/back_end/java/express/aviator</module>
-
-<!--
 		<module>develop/back_end/java/base-java</module>
-		<module>develop/back_end/java/springboot</module>
-		<module>develop/back_end/java/netty</module>
-		<module>develop/back_end/java/agent/runcoding-agent</module>
-		<module>develop/back_end/java/spring-cloud</module>
 		<module>develop/back_end/java/reactor</module>
 		<module>develop/back_end/java/rxjava</module>
+
+<!--
+		<module>develop/back_end/java/express/aviator</module>
+		<module>develop/back_end/java/agent/runcoding-agent</module>
+		<module>develop/back_end/java/springboot</module>
+		<module>develop/back_end/java/netty</module>
+		<module>develop/back_end/java/spring-cloud</module>
 		<module>develop/back_end/java/bigmap</module>
 		<module>develop/back_end/java/guava</module>
 		<module>develop/back_end/java/mq/kafka</module>

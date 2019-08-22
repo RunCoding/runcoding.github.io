@@ -1,7 +1,13 @@
 *.iml
-
 target
 node_modules
 main/gitbook/wiki
 main/gitbook/_book
-develop/back_end/java/springboot/elasticsearch/wiki/docker/node/data
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch/data/
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch/plugins/
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch2/data/
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch2/plugins/
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch3/data/
+/develop/back_end/java/springboot/elasticsearch/wiki/docker/node/elasticsearch3/plugins/
+/develop/cloud/prometheus/docker/store/grafana/plugins/
+/develop/cloud/prometheus/docker/store/grafana/provisioning/
