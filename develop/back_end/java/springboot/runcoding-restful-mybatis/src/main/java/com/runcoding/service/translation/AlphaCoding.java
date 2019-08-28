@@ -2,20 +2,33 @@ package com.runcoding.service.translation;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.runcoding.dao.alpha.AlphaMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
+@Service
 public class AlphaCoding {
+
+    @Autowired
+    private AlphaMapper alphaMapper;
 
     /**
      *
@@ -74,5 +87,52 @@ public class AlphaCoding {
         IOUtils.writeLines(alphaCsv, null, outputStream);
         log.info("处理完成");
     }
+
+    final static ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
+            11,
+            11,
+            1,
+            TimeUnit.HOURS,
+            new LinkedBlockingDeque<>());
+
+    /**
+     * https://github.com/dwyl/english-words
+     * https://github.com/Zhangtd/MorTransformation
+     */
+    @Test
+    public void alphaByWord() throws IOException {
+        List<String> lines = IOUtils.readLines(new FileInputStream("/Users/xukai/Downloads/MorTransformation-master/dic.txt"));
+
+        Lists.partition(lines,10000).forEach(list->{
+            poolExecutor.submit(()->{
+                for(String line : list){
+                    String word = StringUtils.split(line,"\uF8F5")[0];
+                    try{
+                        Document document = Jsoup.connect("http://dict.cn/"+word).timeout(50000).get();
+                        Elements elements = document.select(".dict-basic-ul");
+                        for (Element e : elements) {
+                            Elements lis = e.select("li");
+                            int size = lis.size() - 1;
+                            String  translation = "";
+                            for (int i = 0; i < size; i++) {
+                                Elements span = lis.get(i).select("span");
+                                Elements strong = lis.get(i).select("strong");
+                                String end = (i == size-1) ? "":"<br>";
+                                translation += span.html()+strong.html()+end;
+                            }
+                            alphaMapper.insert(word,translation);
+                            log.info("加载成功:word={},translation={}", word,translation);
+                        }
+                    }catch (Exception e){
+                        log.warn("加载失败:word={}",word);
+                    }
+                }
+            });
+        });
+
+
+    }
+
+
 
 }

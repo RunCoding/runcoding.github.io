@@ -36,7 +36,7 @@ var json2table = function (json, classes) {
             } 
             rowInfo = rowInfo   || row[colName];
             if(index == 0){
-               bodyRows += '<td onmouseover="alphaPlay(this,false)" onclick="alphaPlay(this,true)">' + rowInfo + '</td>';
+               bodyRows += '<td onmouseover="alphaPlay(\''+ rowInfo +'\',false)" onclick="alphaPlay(\''+ rowInfo +'\',true)"><a href="http://dict.cn/'+ rowInfo +'" target="_blank">' + rowInfo + '</a></td>';
             }else {
                 bodyRows += '<td>' + rowInfo + '</td>';
             }
@@ -68,9 +68,9 @@ var alphaPlay =function (e,isFemale) {
         //baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
         return;
     }
-    var src = baseUrl+'/alpha/translate/'+ e.innerHTML+'.mp3';
+    var src = baseUrl+'/alpha/translate/'+ e+'.mp3';
     if(isFemale){
-        src = baseUrl+'/alpha/female/'+ e.innerHTML+'.mp3'
+        src = baseUrl+'/alpha/female/'+ e+'.mp3'
     }
     var sound = new Howl({
         src: [src],
