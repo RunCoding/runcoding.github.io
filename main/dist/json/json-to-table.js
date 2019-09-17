@@ -66,8 +66,7 @@ var alphaPlay =function (e,isFemale) {
     var baseUrl = '';
     if(window.location.host.indexOf("localhost") == -1){
         //读取远程
-        //baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
-        return;
+        baseUrl = 'https://raw.githubusercontent.com/runcoding/static/master/wiki';
     }
     var src = baseUrl+'/alpha/translate/'+ e+'.mp3';
     if(isFemale){
