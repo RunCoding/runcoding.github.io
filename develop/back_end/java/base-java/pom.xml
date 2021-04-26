@@ -14,7 +14,7 @@
         <com.alibaba.fastjson.version>1.2.32</com.alibaba.fastjson.version>
         <!-- slf4j -->
         <slf4j.version>1.7.5</slf4j.version>
-        <commons.io.version>2.4</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <jmh.version>1.21</jmh.version>
     </properties>
 
